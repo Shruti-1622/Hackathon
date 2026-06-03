@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "AI FOR IMPACT",
+    "organizer": "Google",
+    "category": "ai",
+    "location": "Bangalore",
+    "duration": "48 Hours",
+    "prize": "₹5,00,000",
+    "date": "June 18, 2026",
+    "image": "assets/hackathon events/google.jpeg",
+    "link": "https://devfolio.co"
+  },
+  {
+    "id": 2,
+    "title": "BHARTIYA ANTARIKSHA",
+    "organizer": "ISRO",
+    "category": "space",
+    "location": "Hyderabad",
+    "duration": "36 Hours",
+    "prize": "₹3,00,000",
+    "date": "July 02, 2026",
+    "image": "assets/hackathon events/bharat.jpeg",
+    "link": "https://unstop.com"
+  },
+  {
+    "id": 3,
+    "title": "DEVFUSION 2026",
+    "organizer": "Devfolio",
+    "category": "web",
+    "location": "Mumbai",
+    "duration": "72 Hours",
+    "prize": "₹7,50,000",
+    "date": "August 14, 2026",
+    "image": "assets/hackathon events/techfest.jpeg",
+    "link": "https://devpost.com"
+  },
+  {
+    "id": 4,
+    "title": "CLOUDFEST",
+    "organizer": "Microsoft",
+    "category": "cloud",
+    "location": "Pune",
+    "duration": "24 Hours",
+    "prize": "₹2,00,000",
+    "date": "September 05, 2026",
+    "image": "assets/hackathon events/cloud.jpeg",
+    "link": "https://unstop.com"
+  },
+  {
+    "id": 5,
+    "title": "WEB3 BUILDATHON",
+    "organizer": "Polygon",
+    "category": "web3",
+    "location": "Delhi",
+    "duration": "72 Hours",
+    "prize": "₹10,00,000",
+    "date": "October 12, 2026",
+    "image": "assets/hackathon events/web3.jpeg",
+    "link": "https://ethglobal.com"
+  }
+]

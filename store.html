@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - HackHub</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/store-page.css">
+</head>
+<body>
+
+    <!-- NAV -->
+
+    <nav class="nav">
+
+        <div class="nav-logo">
+            <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hackathon.html">Hackathons</a></li>
+            <li><a href="teamfinder.html">Find Teams</a></li>
+            <li><a href="gallery.html">Hall of Fame</a></li>
+            <li><a href="store.html">Swag Store</a></li>
+            
+        </ul>
+
+        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="store-hero">
+        <div class="store-hero-content">
+            <h1>HackHub <span>Merchandise</span></h1>
+            <p>Gear up for your next hackathon with exclusive HackHub branded merchandise</p>
+            <button class="primary-btn store-hero-btn">Shop Now</button>
+        </div>
+        <div class="orb orb-purple"></div>
+        <div class="orb orb-blue"></div>
+    </section>
+
+    <!-- Featured Product Banner -->
+    <section class="featured-banner">
+        <div class="banner-content">
+            <div class="banner-text">
+                <h3>New Collection</h3>
+                <h2>Ultimate Hacker Bundle</h2>
+                <p>Get everything you need at a special price. Limited time offer!</p>
+                <button class="secondary-btn">Explore Bundle</button>
+            </div>
+            <div class="banner-image">
+                <div class="bundle-showcase">
+                    <div class="showcase-item">🎒</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="store-filters">
+        <div class="filters-container">
+            <h3>Filter by Category</h3>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="apparel">Apparel</button>
+                <button class="filter-btn" data-filter="accessories">Accessories</button>
+                <button class="filter-btn" data-filter="bundle">Bundle Deals</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="store-products">
+        <div class="products-container">
+            
+            <!-- Product 1: T-Shirt -->
+            <div class="product-card" data-category="apparel">
+                <div class="product-image">
+                    <div class="product-visual tshirt-visual">
+                        👕
+                    </div>
+                    <div class="product-badge">Popular</div>
+                </div>
+                <div class="product-info">
+                    <h3>Classic HackHub T-Shirt</h3>
+                    <p class="product-desc">Premium quality cotton tee with embroidered HackHub logo</p>
+                    <div class="product-specs">
+                        <span class="spec">Multiple colors</span>
+                        <span class="spec">All sizes</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">₹499</span>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2: Cap -->
+            <div class="product-card" data-category="apparel">
+                <div class="product-image">
+                    <div class="product-visual cap-visual">
+                        🧢
+                    </div>
+                    <div class="product-badge">Trending</div>
+                </div>
+                <div class="product-info">
+                    <h3>Adjustable HackHub Cap</h3>
+                    <p class="product-desc">Stylish baseball cap with curved brim and adjustable strap</p>
+                    <div class="product-specs">
+                        <span class="spec">Curved visor</span>
+                        <span class="spec">One size fits all</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">₹349</span>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3: Hoodie -->
+            <div class="product-card" data-category="apparel">
+                <div class="product-image">
+                    <div class="product-visual hoodie-visual">
+                        🧥
+                    </div>
+                    <div class="product-badge">Best Seller</div>
+                </div>
+                <div class="product-info">
+                    <h3>Premium HackHub Hoodie</h3>
+                    <p class="product-desc">Cozy fleece-lined hoodie perfect for late-night coding sessions</p>
+                    <div class="product-specs">
+                        <span class="spec">Fleece-lined</span>
+                        <span class="spec">Kangaroo pockets</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">₹1,299</span>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4: Water Bottle -->
+            <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                    <div class="product-visual bottle-visual">
+                        🍾
+                    </div>
+                    <div class="product-badge">Hydrate</div>
+                </div>
+                <div class="product-info">
+                    <h3>Stainless Steel Bottle</h3>
+                    <p class="product-desc">Insulated water bottle keeps drinks hot/cold for 24 hours</p>
+                    <div class="product-specs">
+                        <span class="spec">750ml capacity</span>
+                        <span class="spec">Insulated design</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">₹699</span>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5: Backpack -->
+            <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                    <div class="product-visual bag-visual">
+                        🎒
+                    </div>
+                    <div class="product-badge">Must Have</div>
+                </div>
+                <div class="product-info">
+                    <h3>Tech Backpack</h3>
+                    <p class="product-desc">Spacious backpack with laptop compartment and USB charging port</p>
+                    <div class="product-specs">
+                        <span class="spec">Laptop compartment</span>
+                        <span class="spec">USB port</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price">₹2,299</span>
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6: Ultimate Bundle -->
+            <div class="product-card" data-category="bundle">
+                <div class="product-image bundle-card">
+                    <div class="product-visual bundle-visual">
+                        📦
+                    </div>
+                    <div class="product-badge-premium">SPECIAL</div>
+                </div>
+                <div class="product-info">
+                    <h3>Ultimate Hacker Bundle</h3>
+                    <p class="product-desc">Complete package: Hoodie + Cap + T-Shirt + Bottle + Bag</p>
+                    <div class="product-specs">
+                        <span class="spec">5 products</span>
+                        <span class="spec">Save ₹500</span>
+                    </div>
+                    <div class="product-footer">
+                        <span class="price bundle-price">₹5,045 <span class="original-price">₹5,545</span></span>
+                        <button class="add-to-cart-btn bundle-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="why-choose">
+        <h2>Why Choose HackHub Merchandise?</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>High-quality materials built to last through all your hackathons</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🚚</div>
+                <h3>Fast Shipping</h3>
+                <p>Quick delivery across India with free shipping on orders above ₹2000</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">💯</div>
+                <h3>100% Authentic</h3>
+                <p>Official HackHub merchandise with authentic branding</p>
+            </div>
+            <div class="why-card">
+                <div class="why-icon">🎁</div>
+                <h3>Special Discounts</h3>
+                <p>Members get exclusive discounts and early access to new products</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="newsletter-content">
+            <h2>Stay Updated</h2>
+            <p>Get notified about new products, exclusive deals, and limited-time offers</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                <button class="primary-btn">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+            </div>
+            <p class="footer-copy mono">© 2026 HackHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/store.js"></script>
+
+</body>
+</html>

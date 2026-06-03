@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathons - HackHub</title>
+    <meta name="description" content="Discover and register for top hackathons from leading companies. Find AI, Web3, Mobile, and Cloud hackathons all in one place.">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hackathon-page.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+
+    <nav class="nav">
+
+        <div class="nav-logo">
+            <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hackathon.html">Hackathons</a></li>
+            <li><a href="teamfinder.html">Find Teams</a></li>
+            <li><a href="gallery.html">Hall of Fame</a></li>
+            <li><a href="store.html">Swag Store</a></li>
+        </ul>
+
+        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+
+    </nav>
+
+    <!-- HERO -->
+    <section class="hackathon-hero">
+        <div class="hackathon-hero-content">
+            <div class="hero-tag">
+                <span class="dot"></span> Compete. Build. Win.
+            </div>
+            <h1>Discover <span>Hackathons</span></h1>
+            <p>Find the perfect hackathon to showcase your skills, build amazing projects, and win incredible prizes.</p>
+        </div>
+        <div class="orb orb-purple"></div>
+        <div class="orb orb-blue"></div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="search-filter-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search hackathons by name, theme...">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <div class="filter-pills">
+            <button class="filter-pill active">All Events</button>
+            <button class="filter-pill">AI &amp; ML</button>
+            <button class="filter-pill">Web3</button>
+            <button class="filter-pill">Mobile</button>
+            <button class="filter-pill">Cloud</button>
+            <button class="filter-pill">IoT</button>
+        </div>
+    </section>
+
+    <!-- FEATURED SECTION -->
+    <section class="featured-section">
+
+        <div class="section-heading">
+            <span>FEATURED</span>
+            <h2>Featured <span>Hackathons</span></h2>
+            <p>Hand-picked opportunities from top companies.</p>
+        </div>
+
+        <div class="featured-layout">
+
+            <!-- BIG CARD -->
+            <article class="featured-main">
+
+                <img src="assets/hackathon events/adobefire.png" alt="Adobe HackOn">
+
+                <div class="featured-overlay">
+
+                    <p class="company">Amazon</p>
+
+                    <h3>Amazon HackOn 2026</h3>
+
+                    <div class="featured-meta">
+                        <span>Bangalore</span>
+                        <span>48 Hours</span>
+                        <span>₹5,00,000 Prize</span>
+                    </div>
+
+                    <a
+                        href="https://unstop.com/blog/hackon-with-amazon"
+                        target="_blank"
+                        class="featured-btn"
+                    >
+                        Register Now →
+                    </a>
+
+                </div>
+
+            </article>
+
+            <!-- SIDE CARDS -->
+            <div class="featured-side">
+
+                <article class="side-card">
+
+                    <img src="assets/hackathon events/build.jpeg" alt="Adobe">
+
+                    <div class="side-content">
+
+                        <p>Adobe</p>
+
+                        <h4>Adobe India Hackathon</h4>
+
+                        <a
+                            href="https://unstop.com/blog/adobe-india-hackathon-2025-your-big-break"
+                            target="_blank"
+                        >
+                            Register →
+                        </a>
+
+                    </div>
+
+                </article>
+
+                <article class="side-card">
+
+                    <img src="assets/hackathon events/microsoft.jpeg" alt="Microsoft">
+
+                    <div class="side-content">
+
+                        <p>Microsoft</p>
+
+                        <h4>Microsoft Buildathon</h4>
+
+                        <a
+                            href="https://ethglobal.com"
+                            target="_blank"
+                        >
+                            Register →
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- UPCOMING SECTION -->
+    <section class="upcoming-events">
+
+        <div class="section-heading">
+            <span>UPCOMING</span>
+            <h2>Upcoming <span>Events</span></h2>
+            <p>Don't miss your next opportunity to build something great.</p>
+        </div>
+
+        <div class="event-list">
+            <!-- Events will be populated here -->
+        </div>
+
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Build Something <span>Amazing?</span></h2>
+            <p>Join thousands of developers competing and creating at HackHub</p>
+            <div class="cta-buttons">
+                <button class="secondary-btn" onclick="window.location.href='teamfinder.html'">Form a Team →</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+            </div>
+            <p class="footer-copy mono">© 2026 HackHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+    </script>
+    <script src="js/hackathon.js"></script>
+</body>
+</html>
+

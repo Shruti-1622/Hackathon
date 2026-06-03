@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackHub - Sign Up</title>
+    <link rel="stylesheet" href="css/signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="brand-section">
+            <div class="logo">Hack<span>Hub</span></div>
+            <div class="brand-content">
+                <h1>Build the <span>Future.</span> </h1>
+                <span><p>Join the most innovative minds and create world-changing digital products in 48 hours. Minimal constraints, maximum impact.</p></span> 
+            </div>
+            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="Tech Background" class="brand-image">
+        </div>
+
+        <div class="form-section">
+            <div class="form-wrapper">
+                <h2>Create an account</h2>
+                <p class="subtitle">Enter your details to get started on your journey.</p>
+
+               
+
+                <div class="divider">
+                    <span>Every Step matters!</span>
+                </div>
+
+                <form id="signupForm">
+                    <div class="input-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="e.g. John Doe" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" placeholder="Create a strong password" required>
+                            <button type="button" class="toggle-password" id="togglePassword">Show</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Get Started</button>
+                </form>
+
+                <p class="login-prompt">Already have an account? <a href="#">Log in</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

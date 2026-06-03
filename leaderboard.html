@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeaderBoard - HackHub</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/leaderboard-page.css">
+</head>
+<body>
+
+    <!-- NAV -->
+
+    <nav class="nav">
+
+        <div class="nav-logo">
+            <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hackathon.html">Hackathons</a></li>
+            <li><a href="teamfinder.html">Find Teams</a></li>
+            <li><a href="gallery.html">Hall of Fame</a></li>
+            <li><a href="store.html">Swag Store</a></li>
+           
+        </ul>
+
+        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="leaderboard-hero">
+        <div class="leaderboard-hero-content">
+            <h1>Leaderboard</h1>
+            <p>Celebrate the top builders and innovators in the HackHub community</p>
+        </div>
+        <div class="orb orb-purple"></div>
+        <div class="orb orb-blue"></div>
+    </section>
+
+    <!-- Top 3 Section -->
+    <section class="top-three-section">
+        <h2>Top 3 Builders</h2>
+        <div class="top-three-container">
+            <!-- 2nd Place -->
+            <div class="top-card second-place">
+                <div class="rank-badge">2</div>
+                <div class="medal">🥈</div>
+                <img src="https://i.pravatar.cc/150?img=45" alt="User">
+                <h3>Sarah Chen</h3>
+                <p class="xp-display">8,450 XP</p>
+                <div class="badges">
+                    <span class="badge">🔥</span>
+                    <span class="badge">⭐</span>
+                    <span class="badge">💡</span>
+                </div>
+            </div>
+
+            <!-- 1st Place -->
+            <div class="top-card first-place">
+                <div class="rank-badge">1</div>
+                <div class="medal">🥇</div>
+                <img src="https://i.pravatar.cc/150?img=44" alt="User">
+                <h3>Alex Johnson</h3>
+                <p class="xp-display">10,250 XP</p>
+                <div class="badges">
+                    <span class="badge">🚀</span>
+                    <span class="badge">👑</span>
+                    <span class="badge">⚡</span>
+                </div>
+            </div>
+
+            <!-- 3rd Place -->
+            <div class="top-card third-place">
+                <div class="rank-badge">3</div>
+                <div class="medal">🥉</div>
+                <img src="https://i.pravatar.cc/150?img=46" alt="User">
+                <h3>Raj Patel</h3>
+                <p class="xp-display">7,820 XP</p>
+                <div class="badges">
+                    <span class="badge">🎯</span>
+                    <span class="badge">💻</span>
+                    <span class="badge">🏆</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Leaderboard -->
+    <section class="leaderboard-section">
+        <h2>Full Rankings</h2>
+        
+        <div class="leaderboard-filters">
+            <button class="filter-btn active">All Time</button>
+            <button class="filter-btn">This Month</button>
+            <button class="filter-btn">This Week</button>
+        </div>
+
+        <div class="leaderboard-table-wrapper">
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th class="rank-col">Rank</th>
+                        <th class="user-col">Developer</th>
+                        <th class="xp-col">XP Points</th>
+                        <th class="wins-col">Wins</th>
+                        <th class="badges-col">Badges</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="rank-row top-3">
+                        <td class="rank"><span class="rank-num">1</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=44" alt="User">
+                            <span>Alex Johnson</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">10,250</span></td>
+                        <td class="wins">45</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🥇</span>
+                            <span class="mini-badge">⚡</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row top-3">
+                        <td class="rank"><span class="rank-num">2</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=45" alt="User">
+                            <span>Sarah Chen</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">8,450</span></td>
+                        <td class="wins">38</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🥈</span>
+                            <span class="mini-badge">👑</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row top-3">
+                        <td class="rank"><span class="rank-num">3</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=46" alt="User">
+                            <span>Raj Patel</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">7,820</span></td>
+                        <td class="wins">35</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🥉</span>
+                            <span class="mini-badge">🎯</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">4</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=47" alt="User">
+                            <span>Emma Wilson</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">7,200</span></td>
+                        <td class="wins">32</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">💡</span>
+                            <span class="mini-badge">🔥</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">5</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=48" alt="User">
+                            <span>Marcus Lee</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">6,950</span></td>
+                        <td class="wins">30</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">💻</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">6</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=49" alt="User">
+                            <span>Lisa Anderson</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">6,720</span></td>
+                        <td class="wins">28</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🚀</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">7</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=50" alt="User">
+                            <span>David Kim</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">6,450</span></td>
+                        <td class="wins">26</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">⭐</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">8</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=51" alt="User">
+                            <span>Priya Sharma</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">6,180</span></td>
+                        <td class="wins">24</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🏆</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">9</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=52" alt="User">
+                            <span>James Miller</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">5,920</span></td>
+                        <td class="wins">22</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🎨</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">10</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=53" alt="User">
+                            <span>Nina Patel</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">5,680</span></td>
+                        <td class="wins">20</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">✨</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">11</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=54" alt="User">
+                            <span>Chris Brown</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">5,450</span></td>
+                        <td class="wins">18</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🔧</span>
+                        </td>
+                    </tr>
+                    <tr class="rank-row">
+                        <td class="rank"><span class="rank-num">12</span></td>
+                        <td class="user">
+                            <img src="https://i.pravatar.cc/150?img=55" alt="User">
+                            <span>Zara Ahmed</span>
+                        </td>
+                        <td class="xp"><span class="xp-value">5,220</span></td>
+                        <td class="wins">16</td>
+                        <td class="badge-cells">
+                            <span class="mini-badge">🎯</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="leaderboard-pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">→</button>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <h2>Community Stats</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">👥</div>
+                <p class="stat-number">5,420</p>
+                <p class="stat-label">Active Builders</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🏆</div>
+                <p class="stat-number">12.5M</p>
+                <p class="stat-label">Total XP Earned</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🎊</div>
+                <p class="stat-number">2,850</p>
+                <p class="stat-label">Hackathons Won</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">⚡</div>
+                <p class="stat-number">45K+</p>
+                <p class="stat-label">Projects Built</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+            </div>
+            <p class="footer-copy mono">© 2026 HackHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/leaderboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathons - HackHub</title>
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hackathon-page.css">
+</head>
+
+<body>
+
+    <!-- NAV -->
+
+    <nav class="nav">
+
+        <div class="nav-logo">
+            <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hackathon.html">Hackathons</a></li>
+            <li><a href="teamfinder.html">Find Teams</a></li>
+            <li><a href="gallery.html">Hall of Fame</a></li>
+            <li><a href="store.html">Swag Store</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+
+        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <button class="hamburger" id="hamburger">&#9776;</button>
+
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hackathon-hero">
+        <div class="hackathon-hero-content">
+            <h1>Discover <span>Hackathons</span></h1>
+            <p>Find the perfect hackathon to showcase your skills and build amazing projects</p>
+        </div>
+        <div class="orb orb-purple"></div>
+        <div class="orb orb-blue"></div>
+    </section>
+
+    <!-- Search & Filter Section -->
+    <section class="search-filter-section">
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search hackathons by name, theme...">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <div class="filter-pills">
+            <button class="filter-pill active">All Events</button>
+            <button class="filter-pill">AI & ML</button>
+            <button class="filter-pill">Web3</button>
+            <button class="filter-pill">Mobile</button>
+            <button class="filter-pill">Cloud</button>
+            <button class="filter-pill">IoT</button>
+        </div>
+    </section>
+
+    <!-- Featured Hackathons Section -->
+    <section class="featured-section">
+        <h2>Featured Events</h2>
+        <div class="featured-cards">
+            <!-- Featured Card 1 -->
+            <div class="featured-event-card">
+                <div class="event-ribbon">Featured</div>
+                <div class="event-meta">
+                    <span class="event-date">July 24</span>
+                    <span class="event-prize">₹5L Prize Pool</span>
+                </div>
+                <h3>CloudFest 26</h3>
+                <p class="event-org">by Google Cloud</p>
+                <p class="event-desc">48-hour AI & Web3 hackathon</p>
+                <div class="event-tags">
+                    <span class="tag">AI</span>
+                    <span class="tag">Web3</span>
+                    <span class="tag">Cloud</span>
+                </div>
+                <button class="register-btn">Register Now</button>
+            </div>
+
+            <!-- Featured Card 2 -->
+            <div class="featured-event-card">
+                <div class="event-ribbon">Trending</div>
+                <div class="event-meta">
+                    <span class="event-date">Aug 15</span>
+                    <span class="event-prize">₹3L Prize Pool</span>
+                </div>
+                <h3>DevHack Summit</h3>
+                <p class="event-org">by Microsoft</p>
+                <p class="event-desc">Full-stack development challenge</p>
+                <div class="event-tags">
+                    <span class="tag">Web</span>
+                    <span class="tag">Backend</span>
+                </div>
+                <button class="register-btn">Register Now</button>
+            </div>
+
+            <!-- Featured Card 3 -->
+            <div class="featured-event-card">
+                <div class="event-ribbon">Hot</div>
+                <div class="event-meta">
+                    <span class="event-date">Sep 08</span>
+                    <span class="event-prize">₹2.5L Prize Pool</span>
+                </div>
+                <h3>InnovateMobile</h3>
+                <p class="event-org">by Meta</p>
+                <p class="event-desc">Build next-gen mobile experiences</p>
+                <div class="event-tags">
+                    <span class="tag">Mobile</span>
+                    <span class="tag">UI/UX</span>
+                </div>
+                <button class="register-btn">Register Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="upcoming-section">
+        <h2>Upcoming Events</h2>
+        <div class="upcoming-cards-container">
+            <!-- Upcoming Event 1 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">24</div>
+                        <div class="month">JUL</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>CloudFest 26</h3>
+                    <p class="organizer">📍 by Google Cloud • Bangalore</p>
+                    <p class="description">AI & Cloud hackathon with mentorship from industry experts</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 48 hours</span>
+                        <span class="info-item">💰 ₹5L</span>
+                        <span class="info-item">👥 500+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">AI</span>
+                        <span class="tag-small">Cloud</span>
+                        <span class="tag-small">ML</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+
+            <!-- Upcoming Event 2 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">15</div>
+                        <div class="month">AUG</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>DevHack Summit</h3>
+                    <p class="organizer">📍 by Microsoft • Delhi</p>
+                    <p class="description">Full-stack web development with Azure integration</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 36 hours</span>
+                        <span class="info-item">💰 ₹3L</span>
+                        <span class="info-item">👥 400+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">Web</span>
+                        <span class="tag-small">Backend</span>
+                        <span class="tag-small">Azure</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+
+            <!-- Upcoming Event 3 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">08</div>
+                        <div class="month">SEP</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>InnovateMobile</h3>
+                    <p class="organizer">📍 by Meta • Hyderabad</p>
+                    <p class="description">React Native and mobile app development challenge</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 48 hours</span>
+                        <span class="info-item">💰 ₹2.5L</span>
+                        <span class="info-item">👥 350+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">Mobile</span>
+                        <span class="tag-small">React</span>
+                        <span class="tag-small">UI/UX</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+
+            <!-- Upcoming Event 4 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">22</div>
+                        <div class="month">SEP</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>BlockchainBuild</h3>
+                    <p class="organizer">📍 by Polygon • Mumbai</p>
+                    <p class="description">Smart contracts and blockchain dApp development</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 48 hours</span>
+                        <span class="info-item">💰 ₹4L</span>
+                        <span class="info-item">👥 300+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">Web3</span>
+                        <span class="tag-small">Smart Contracts</span>
+                        <span class="tag-small">Solidity</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+
+            <!-- Upcoming Event 5 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">10</div>
+                        <div class="month">OCT</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>GameDevFest</h3>
+                    <p class="organizer">📍 by Unity • Pune</p>
+                    <p class="description">Create games and interactive experiences</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 72 hours</span>
+                        <span class="info-item">💰 ₹2L</span>
+                        <span class="info-item">👥 250+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">GameDev</span>
+                        <span class="tag-small">Unity</span>
+                        <span class="tag-small">Graphics</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+
+            <!-- Upcoming Event 6 -->
+            <div class="upcoming-event-card">
+                <div class="upcoming-left">
+                    <div class="upcoming-date">
+                        <div class="day">25</div>
+                        <div class="month">OCT</div>
+                    </div>
+                </div>
+                <div class="upcoming-right">
+                    <h3>IoT Innovators</h3>
+                    <p class="organizer">📍 by Arduino • Chennai</p>
+                    <p class="description">Build smart IoT solutions for real-world problems</p>
+                    <div class="event-info-row">
+                        <span class="info-item">⏱️ 48 hours</span>
+                        <span class="info-item">💰 ₹1.5L</span>
+                        <span class="info-item">👥 200+ Participants</span>
+                    </div>
+                    <div class="upcoming-tags">
+                        <span class="tag-small">IoT</span>
+                        <span class="tag-small">Embedded</span>
+                        <span class="tag-small">Hardware</span>
+                    </div>
+                </div>
+                <button class="register-btn-small">Register</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         TRENDING SECTION
+    =========================== -->
+
+    <section class="trending-section">
+
+        <h2>Trending Now</h2>
+
+        <div class="trending-grid">
+            <!-- Trending Card 1 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">🔥 Trending</span>
+                    <span class="participants">523 joined</span>
+                </div>
+                <h3>AI for Social Good</h3>
+                <p class="trend-org">by UN Development Programme</p>
+                <p class="trend-desc">Build AI solutions to solve social challenges</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹50L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">72hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Global</span>
+                        <span class="stat-label">Scope</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+
+            <!-- Trending Card 2 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">⭐ Popular</span>
+                    <span class="participants">412 joined</span>
+                </div>
+                <h3>Startup Weekend</h3>
+                <p class="trend-org">by Techstars</p>
+                <p class="trend-desc">From idea to pitch in 54 hours</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹30L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">54hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Mentorship</span>
+                        <span class="stat-label">Focus</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+
+            <!-- Trending Card 3 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">🚀 New</span>
+                    <span class="participants">298 joined</span>
+                </div>
+                <h3>FinTech Revolution</h3>
+                <p class="trend-org">by Razorpay & Stripe</p>
+                <p class="trend-desc">Build next-gen financial applications</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹20L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">48hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">VC Funding</span>
+                        <span class="stat-label">Opportunity</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+
+            <!-- Trending Card 4 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">💡 Beginner</span>
+                    <span class="participants">156 joined</span>
+                </div>
+                <h3>First Hack</h3>
+                <p class="trend-org">by Google Developer Groups</p>
+                <p class="trend-desc">Perfect for first-time hackers</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹5L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">24hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Learning</span>
+                        <span class="stat-label">Focus</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+
+            <!-- Trending Card 5 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">🌍 Global</span>
+                    <span class="participants">678 joined</span>
+                </div>
+                <h3>Hack the Climate</h3>
+                <p class="trend-org">by Global Climate Action</p>
+                <p class="trend-desc">Build solutions for climate change</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹40L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">60hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Impact Focus</span>
+                        <span class="stat-label">Category</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+
+            <!-- Trending Card 6 -->
+            <div class="trending-card">
+                <div class="trending-header">
+                    <span class="trend-badge">🎯 Corporate</span>
+                    <span class="participants">821 joined</span>
+                </div>
+                <h3>Amazon Hackathon</h3>
+                <p class="trend-org">by Amazon</p>
+                <p class="trend-desc">Build for AWS and get hired</p>
+                <div class="trend-stats">
+                    <div class="stat">
+                        <span class="stat-value">₹15L</span>
+                        <span class="stat-label">Prize Pool</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">48hrs</span>
+                        <span class="stat-label">Duration</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">Job Offers</span>
+                        <span class="stat-label">Bonus</span>
+                    </div>
+                </div>
+                <button class="register-btn">Learn More</button>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ===========================
+         COMMUNITY SECTION
+    =========================== -->
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Build Something Amazing?</h2>
+            <p>Join thousands of developers competing and creating at HackHub</p>
+            <div class="cta-buttons">
+                <button class="primary-btn">Start Exploring</button>
+                <button class="secondary-btn">Form a Team</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="nav-logo">
+                <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
+            </div>
+            <p class="footer-copy mono">© 2026 HackHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/hackathon.js"></script>
+
+</body>
+
+</html>
+
