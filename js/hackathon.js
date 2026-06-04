@@ -22,28 +22,45 @@ fetch('./data/hackathon.json')
         allHackathons = data;
         
         data.forEach(hackathon => {
-            eventList.innerHTML += `
-            <article class="event-row" data-category="${hackathon.category}">
-                <div class="event-content">
-                    <span class="event-date">
-                        ${hackathon.date}
-                    </span>
-                    <h3>
-                        ${hackathon.title}
-                    </h3>
-                    <p>
-                        ${hackathon.location} • ${hackathon.duration} • ${hackathon.prize}
-                    </p>
-                    <a href="${hackathon.link}" target="_blank">
-                        Register →
-                    </a>
-                </div>
-                <div class="event-image">
-                    <img src="${hackathon.image}" alt="${hackathon.title}">
-                </div>
-            </article>
-            `;
-        });
+    eventList.innerHTML += `
+    <div class="event-card-wrap">
+      <article class="event-row" data-category="${hackathon.category}">
+
+        <div class="event-image">
+          <img src="${hackathon.image}" alt="${hackathon.title}"
+            onerror="this.src='https://placehold.co/700x400/1f1f23/D9A441?text=POSTER'">
+          <span class="event-badge">${hackathon.badge || 'OPEN'}</span>
+        </div>
+
+        <div class="event-content">
+          <div class="event-date-row">
+            <div class="event-date-block">
+              <span class="date-month">${hackathon.month}</span>
+              <span class="date-day">${hackathon.day}</span>
+            </div>
+            <div class="event-location">
+              <span class="event-status-dot"></span>
+              ${hackathon.location}
+            </div>
+          </div>
+
+          <h3>${hackathon.title}</h3>
+
+          <div class="event-meta">
+            <span class="prize">🏆 ${hackathon.prize}</span>
+            <span>⏱ ${hackathon.duration}</span>
+          </div>
+
+          <p>${hackathon.description || hackathon.location + ' • ' + hackathon.duration}</p>
+
+          <a class="event-register-btn" href="${hackathon.link}" target="_blank">
+            REGISTER NOW <span class="btn-arrow">→</span>
+          </a>
+        </div>
+
+      </article>
+    </div>`;
+});
         
         // Setup filter and search listeners after cards are loaded
         setupFiltersAndSearch();

@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hackathons - HackHub</title>
     <meta name="description" content="Discover and register for top hackathons from leading companies. Find AI, Web3, Mobile, and Cloud hackathons all in one place.">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/hackathon-page.css">
+    <link rel="stylesheet" href="css/fix-event-card.css">
 </head>
 
 <body>
@@ -39,7 +40,12 @@
             <div class="hero-tag">
                 <span class="dot"></span> Compete. Build. Win.
             </div>
-            <h1>Discover <span>Hackathons</span></h1>
+
+            <h1 class="hero-title">
+                DISCOVER
+                <span class="line accent-line">HACKATHONS</span>
+            </h1>
+
             <p>Find the perfect hackathon to showcase your skills, build amazing projects, and win incredible prizes.</p>
         </div>
         <div class="orb orb-purple"></div>
@@ -155,19 +161,25 @@
     </section>
 
     <!-- UPCOMING SECTION -->
-    <section class="upcoming-events">
+    <div class="event-row">
+        <section class="upcoming-events">
 
-        <div class="section-heading">
-            <span>UPCOMING</span>
-            <h2>Upcoming <span>Events</span></h2>
-            <p>Don't miss your next opportunity to build something great.</p>
-        </div>
+            <div class="section-heading">
+                <span>UPCOMING</span>
+                <h2>Upcoming <span>Events</span></h2>
+                <p>Don't miss your next opportunity to build something great.</p>
+            </div>
 
-        <div class="event-list">
-            <!-- Events will be populated here -->
-        </div>
+            <div class="event-list">
+                <!-- Events will be populated here -->
+            </div>
 
-    </section>
+        </section>
+    </div>
+
+    <div class="event-card-wrap">
+        <div class="event-row"> ... </div>
+    </div>
 
     <!-- CTA Section -->
     <section class="cta-section">

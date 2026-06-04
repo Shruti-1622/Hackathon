@@ -7,20 +7,22 @@
     "location": "Bangalore",
     "duration": "48 Hours",
     "prize": "₹5,00,000",
-    "date": "June 18, 2026",
-    "image": "assets/hackathon events/google.jpeg",
+    "month": "July",
+    "day": "18",
+    "image": "assets/hackathon events/googleh.png",
     "link": "https://devfolio.co"
   },
   {
     "id": 2,
-    "title": "BHARTIYA ANTARIKSHA",
+    "title": "VIBEATHON",
     "organizer": "ISRO",
     "category": "space",
     "location": "Hyderabad",
     "duration": "36 Hours",
     "prize": "₹3,00,000",
-    "date": "July 02, 2026",
-    "image": "assets/hackathon events/bharat.jpeg",
+    "month": "July",
+    "day": "02",
+    "image": "assets/hackathon events/red.png",
     "link": "https://unstop.com"
   },
   {
@@ -31,8 +33,9 @@
     "location": "Mumbai",
     "duration": "72 Hours",
     "prize": "₹7,50,000",
-    "date": "August 14, 2026",
-    "image": "assets/hackathon events/techfest.jpeg",
+    "month": "Aug",
+    "day": "14",
+    "image": "assets/hackathon events/blue.jpg",
     "link": "https://devpost.com"
   },
   {
@@ -43,8 +46,9 @@
     "location": "Pune",
     "duration": "24 Hours",
     "prize": "₹2,00,000",
-    "date": "September 05, 2026",
-    "image": "assets/hackathon events/cloud.jpeg",
+    "month": "Sept",
+    "day": "05",
+    "image": "assets/hackathon events/cloudf.jpg",
     "link": "https://unstop.com"
   },
   {
@@ -55,8 +59,22 @@
     "location": "Delhi",
     "duration": "72 Hours",
     "prize": "₹10,00,000",
-    "date": "October 12, 2026",
-    "image": "assets/hackathon events/web3.jpeg",
+    "month": "Oct",
+    "day": "02",
+    "image": "assets/hackathon events/ethokyo.png",
+    "link": "https://ethglobal.com"
+  },
+  {
+    "id": 6,
+    "title": "ENIGMA",
+    "organizer": "IIT (BHU)",
+    "category": "ML",
+    "location": "Delhi",
+    "duration": "60 Hours",
+    "prize": "₹50,000",
+    "month": "Oct",
+    "day": "02",
+    "image": "assets/hackathon events/en.jpeg",
     "link": "https://ethglobal.com"
   }
 ]
