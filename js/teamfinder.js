@@ -1,348 +1,514 @@
-// Team Finder & Creation Interactivity (localStorage based)
+(function () {
 
-// Default seed data for active hackathon teams
-const defaultTeams = [
+  const AVATARS = [
+    'assets/avatar/a1.avif',
+    'assets/avatar/a2.avif',
+    'assets/avatar/a3.jpeg',
+    'assets/avatar/a4.jpg',
+    'assets/avatar/a5.jpeg',
+    'assets/avatar/a6.jpg',
+    'assets/avatar/a7.jpeg',
+    'assets/avatar/a8.png'
+  ];
+
+  /* ── TEAM DATA ── */
+  const TEAMS = [
     {
-        id: "team-1",
-        name: "AI Innovators",
-        leader: "Sarah Chen",
-        hackathon: "AI for Social Good",
-        totalParticipants: 4,
-        joinedCount: 2,
-        roles: ["ML Engineer", "Frontend"],
-        description: "Building a localized AI companion assistant to help senior citizens track prescriptions and connect with care supervisors."
+      id: 1,
+      team: 'Alpha Builders',
+      name: 'HackIndia 2026',
+      avatar: AVATARS[0],
+      theme: 'AI for Healthcare',
+      description: 'Building an AI-powered diagnostic tool for rural healthcare. We need passionate builders who care about real-world impact.',
+      deadline: '2026-08-15',
+      creationDate: '2026-06-01',
+      totalSpots: 5,
+      experienceLevel: 'Intermediate',
+      techStack: ['Python', 'TensorFlow', 'React', 'FastAPI'],
+      members: [
+        { n: 'Aarav S',  r: 'Team Lead'   },
+        { n: 'Priya K',  r: 'ML Engineer' },
+      ],
+      roles: [
+        { n: 'UX Designer',  o: true  },
+        { n: 'Backend Dev',  o: true  },
+        { n: 'Data Analyst', o: false },
+      ],
+      applied: false,
     },
     {
-        id: "team-2",
-        name: "Web3 Wizards",
-        leader: "Alex Johnson",
-        hackathon: "BlockchainBuild",
-        totalParticipants: 3,
-        joinedCount: 1,
-        roles: ["Web3 Developer", "UI/UX"],
-        description: "Creating a secure decentralized micro-lending protocol on Layer-2 with group guarantees and low interest rates."
+      id: 2,
+      team: 'FinForce',
+      name: 'BharatHacks 2026',
+      avatar: AVATARS[1],
+      theme: 'FinTech Innovation',
+      description: "Reimagining financial inclusion for Bharat. We're building a micro-lending platform powered by alternative credit scoring.",
+      deadline: '2026-09-01',
+      creationDate: '2026-06-05',
+      totalSpots: 4,
+      experienceLevel: 'All Levels',
+      techStack: ['Node.js', 'PostgreSQL', 'React Native', 'Stripe'],
+      members: [
+        { n: 'Rohit M', r: 'Frontend Dev' },
+      ],
+      roles: [
+        { n: 'Product Manager', o: true },
+        { n: 'UI Designer',     o: true },
+        { n: 'Backend Dev',     o: true },
+      ],
+      applied: false,
     },
     {
-        id: "team-3",
-        name: "Cloud Sentinels",
-        leader: "Raj Patel",
-        hackathon: "DevHack Summit",
-        totalParticipants: 5,
-        joinedCount: 3,
-        roles: ["Backend", "DevOps"],
-        description: "Developing a containerized resource monitoring mesh that optimizes cluster load metrics on a per-second schedule."
+      id: 3,
+      team: 'GreenStack',
+      name: 'GreenCode Jam',
+      avatar: AVATARS[2],
+      theme: 'Climate Tech',
+      description: 'Using IoT and data science to build a real-time carbon footprint tracker for Indian cities. Join us to build something that matters.',
+      deadline: '2026-07-30',
+      creationDate: '2026-05-28',
+      totalSpots: 6,
+      experienceLevel: 'Beginner Friendly',
+      techStack: ['Arduino', 'Python', 'MongoDB', 'Next.js'],
+      members: [
+        { n: 'Sneha R', r: 'Full Stack'  },
+        { n: 'Karan J', r: 'ML Engineer' },
+        { n: 'Nisha P', r: 'Designer'    },
+      ],
+      roles: [
+        { n: 'IoT Engineer',   o: true  },
+        { n: 'Data Scientist', o: true  },
+        { n: 'UX Researcher',  o: false },
+      ],
+      applied: false,
     },
     {
-        id: "team-4",
-        name: "Nexus Mobile",
-        leader: "Emma Wilson",
-        hackathon: "InnovateMobile",
-        totalParticipants: 4,
-        joinedCount: 2,
-        roles: ["Frontend", "UI/UX"],
-        description: "Creating a cross-platform localized mobile marketplace app for peer-to-peer textbook and tool rentals."
-    }
-];
+      id: 4,
+      team: 'Web3 Wolves',
+      name: 'ETHIndia 2026',
+      avatar: AVATARS[3],
+      theme: 'DeFi & DAOs',
+      description: 'Building a decentralized autonomous organization toolkit for Indian startups. Solidity wizards and frontend devs needed.',
+      deadline: '2026-10-12',
+      creationDate: '2026-06-07',
+      totalSpots: 5,
+      experienceLevel: 'Advanced',
+      techStack: ['Solidity', 'Hardhat', 'ethers.js', 'Next.js'],
+      members: [
+        { n: 'Dev P',   r: 'Smart Contracts' },
+        { n: 'Arjun T', r: 'Blockchain Dev'  },
+      ],
+      roles: [
+        { n: 'Frontend Dev',     o: true },
+        { n: 'Security Auditor', o: true },
+        { n: 'UI Designer',      o: true },
+      ],
+      applied: false,
+    },
+    {
+      id: 5,
+      team: 'Cloud9 Crew',
+      name: 'AWS Build-On India',
+      avatar: AVATARS[4],
+      theme: 'Cloud Infrastructure',
+      description: 'Automating DevOps pipelines for startups using serverless AWS. Looking for someone who loves infra as much as we do.',
+      deadline: '2026-08-20',
+      creationDate: '2026-06-03',
+      totalSpots: 4,
+      experienceLevel: 'Intermediate',
+      techStack: ['AWS Lambda', 'Terraform', 'Docker', 'Go'],
+      members: [
+        { n: 'Vikram S', r: 'DevOps Lead' },
+        { n: 'Meera L',  r: 'Backend Dev' },
+        { n: 'Tarun B',  r: 'Cloud Infra' },
+      ],
+      roles: [
+        { n: 'Backend Dev',  o: true  },
+        { n: 'SRE Engineer', o: false },
+      ],
+      applied: false,
+    },
+    {
+      id: 6,
+      team: 'MindBridge',
+      name: 'GenAI Hackathon',
+      avatar: AVATARS[7],
+      theme: 'Mental Health Tech',
+      description: 'Creating an LLM-powered mental wellness companion for college students. Empathy and engineering in equal measure.',
+      deadline: '2026-09-15',
+      creationDate: '2026-06-06',
+      totalSpots: 5,
+      experienceLevel: 'All Levels',
+      techStack: ['OpenAI API', 'LangChain', 'Flutter', 'Supabase'],
+      members: [
+        { n: 'Ananya R', r: 'AI Engineer' },
+      ],
+      roles: [
+        { n: 'Mobile Dev',   o: true },
+        { n: 'Psychologist', o: true },
+        { n: 'UI Designer',  o: true },
+        { n: 'ML Engineer',  o: true },
+      ],
+      applied: false,
+    },
+  ];
 
-// Helper functions for LocalStorage management
-function getTeams() {
-    const saved = localStorage.getItem("hackhub_teams");
-    if (!saved) {
-        localStorage.setItem("hackhub_teams", JSON.stringify(defaultTeams));
-        return defaultTeams;
-    }
-    return JSON.parse(saved);
-}
+  /* ── HELPERS ── */
 
-function saveTeams(teams) {
-    localStorage.setItem("hackhub_teams", JSON.stringify(teams));
-}
+  /** Format an ISO date string to a short human-readable label, e.g. "Aug 15, 2026" */
+  function formatDate(iso) {
+    if (!iso) return 'TBD';
+    const d = new Date(iso);
+    if (isNaN(d)) return iso;
+    return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
 
-function getAppliedTeams() {
-    const saved = localStorage.getItem("applied_teams");
-    return saved ? JSON.parse(saved) : [];
-}
+  /* ── LOCALSTORAGE ── */
+  function save() {
+    try {
+      localStorage.setItem(
+        'hk_tm_v2',
+        JSON.stringify(TEAMS.map(t => ({ id: t.id, applied: t.applied })))
+      );
+    } catch {}
+  }
 
-function saveAppliedTeams(applied) {
-    localStorage.setItem("applied_teams", JSON.stringify(applied));
-}
-
-// Render dynamic team cards in the main section grid
-function renderTeams() {
-    const teamsGrid = document.getElementById("teams-grid");
-    if (!teamsGrid) return;
-
-    const teams = getTeams();
-    const appliedTeams = getAppliedTeams();
-
-    // Get current filter/search values
-    const query = document.querySelector('.search-input')?.value.toLowerCase() || "";
-    const selectedRole = document.getElementById("filter-role")?.value || "";
-    const selectedHackathon = document.getElementById("filter-hackathon")?.value || "";
-    const selectedSpots = document.getElementById("filter-spots")?.value || "";
-
-    teamsGrid.innerHTML = "";
-
-    const filteredTeams = teams.filter(team => {
-        // Search query check
-        const matchQuery = team.name.toLowerCase().includes(query) ||
-            team.leader.toLowerCase().includes(query) ||
-            team.hackathon.toLowerCase().includes(query) ||
-            team.description.toLowerCase().includes(query) ||
-            team.roles.some(r => r.toLowerCase().includes(query));
-
-        // Role check
-        const matchRole = !selectedRole || team.roles.includes(selectedRole);
-
-        // Hackathon check
-        const matchHackathon = !selectedHackathon || team.hackathon === selectedHackathon;
-
-        // Spots check
-        const slotsLeft = team.totalParticipants - team.joinedCount;
-        let matchSpots = true;
-        if (selectedSpots === "open") {
-            matchSpots = slotsLeft > 0;
-        } else if (selectedSpots === "full") {
-            matchSpots = slotsLeft <= 0;
-        }
-
-        return matchQuery && matchRole && matchHackathon && matchSpots;
-    });
-
-    if (filteredTeams.length === 0) {
-        teamsGrid.innerHTML = `
-            <div style="grid-column: 1 / -1; text-align: center; padding: 60px 40px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px);">
-                <p style="color: #94A3B8; font-size: 1.1rem; margin-bottom: 0;">No active teams match your search filters.</p>
-            </div>
-        `;
-        return;
-    }
-
-    filteredTeams.forEach(team => {
-        const slotsLeft = team.totalParticipants - team.joinedCount;
-        const hasApplied = appliedTeams.includes(team.id);
-        const isFull = slotsLeft <= 0;
-
-        const skillsMarkup = team.roles.map(r => `<span class="skill">${r}</span>`).join('');
-
-        // Button state CSS & content styling
-        let btnText = "Apply to Team";
-        let btnStyle = "";
-        let btnDisabled = "";
-
-        if (hasApplied) {
-            btnText = "✓ Applied";
-            btnStyle = "background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #10B981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.15); pointer-events: none;";
-            btnDisabled = "disabled";
-        } else if (isFull) {
-            btnText = "Team Full";
-            btnStyle = "background: rgba(148, 163, 184, 0.06); border: 1px solid rgba(148, 163, 184, 0.15); color: #94A3B8; pointer-events: none;";
-            btnDisabled = "disabled";
-        }
-
-        const card = document.createElement("div");
-        card.className = "developer-card";
-        card.style.minHeight = "360px";
-        card.style.display = "flex";
-        card.style.flexDirection = "column";
-        card.innerHTML = `
-            <div class="dev-status ${isFull ? 'offline' : 'online'}"></div>
-            <div class="dev-content" style="padding: 25px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; box-sizing: border-box;">
-                <div>
-                    <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.2px; color: #8B5CF6; font-weight: 800; display: block; margin-bottom: 8px;">
-                        🏆 ${team.hackathon}
-                    </span>
-                    <h3 style="margin-bottom: 6px; font-size: 1.35rem; color: #F8FAFC;">${team.name}</h3>
-                    <p class="dev-role" style="font-size: 0.88rem; margin-bottom: 12px; font-weight: 600; color: #94A3B8;">
-                        Leader: <span style="color: #CBD5E1;">${team.leader}</span>
-                    </p>
-                    <p class="dev-bio" style="font-size: 0.9rem; line-height: 1.55; color: #CBD5E1; margin-bottom: 18px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; height: 4.6em;">
-                        ${team.description}
-                    </p>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 18px;">
-                        <span style="font-size: 0.85rem; color: #94A3B8;">Slots Available:</span>
-                        <span style="font-size: 0.88rem; font-weight: 700; color: ${isFull ? '#E11D48' : '#10B981'};">
-                            👥 ${team.joinedCount} / ${team.totalParticipants} Joined (${isFull ? 'Full' : slotsLeft + ' left'})
-                        </span>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="dev-skills" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 8px;">
-                        ${skillsMarkup}
-                    </div>
-                    <button class="connect-btn" ${btnDisabled} style="width: 100%; transition: all 0.3s; ${btnStyle}" onclick="applyTeam('${team.id}')">
-                        ${btnText}
-                    </button>
-                </div>
-            </div>
-        `;
-        teamsGrid.appendChild(card);
-    });
-}
-
-// Click Apply handler
-window.applyTeam = function (teamId) {
-    const applied = getAppliedTeams();
-    if (!applied.includes(teamId)) {
-        applied.push(teamId);
-        saveAppliedTeams(applied);
-        renderTeams();
-
-        // Show sleek modern notification
-        const notice = document.createElement("div");
-        notice.style.position = "fixed";
-        notice.style.bottom = "24px";
-        notice.style.right = "24px";
-        notice.style.background = "rgba(16, 185, 129, 0.92)";
-        notice.style.color = "white";
-        notice.style.padding = "16px 24px";
-        notice.style.borderRadius = "12px";
-        notice.style.backdropFilter = "blur(12px)";
-        notice.style.boxShadow = "0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(16, 185, 129, 0.4)";
-        notice.style.zIndex = "3000";
-        notice.style.fontWeight = "600";
-        notice.style.fontSize = "0.95rem";
-        notice.style.transition = "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
-        notice.style.opacity = "0";
-        notice.style.transform = "translateY(20px)";
-        notice.innerText = "✓ Application successfully sent to the team leader!";
-
-        document.body.appendChild(notice);
-        setTimeout(() => {
-            notice.style.opacity = "1";
-            notice.style.transform = "translateY(0)";
-        }, 50);
-
-        setTimeout(() => {
-            notice.style.opacity = "0";
-            notice.style.transform = "translateY(20px)";
-            setTimeout(() => {
-                notice.remove();
-            }, 500);
-        }, 3000);
-    }
-};
-
-// Modal trigger handling
-const openModalBtn = document.getElementById("open-create-modal-btn");
-const closeModalBtn = document.getElementById("close-modal-btn");
-const modal = document.getElementById("create-team-modal");
-
-if (openModalBtn && modal) {
-    openModalBtn.addEventListener("click", () => {
-        modal.style.display = "flex";
-        document.body.style.overflow = "hidden"; // block background scroll
-    });
-}
-
-if (closeModalBtn && modal) {
-    closeModalBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-        document.body.style.overflow = "";
-    });
-
-    // Close on overlay backing click
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) {
-            modal.style.display = "none";
-            document.body.style.overflow = "";
-        }
-    });
-}
-
-// Form Submission handling
-const createTeamForm = document.getElementById("create-team-form");
-if (createTeamForm) {
-    createTeamForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const teamName = document.getElementById("modal-team-name").value.trim();
-        const leaderName = document.getElementById("modal-leader-name").value.trim();
-        const hackathon = document.getElementById("modal-hackathon").value;
-        const totalParticipants = parseInt(document.getElementById("modal-total-participants").value) || 4;
-        const joinedCount = parseInt(document.getElementById("modal-joined-count").value) || 1;
-        const description = document.getElementById("modal-description").value.trim() || "Building a high-impact solution and shooting for the top podium places!";
-
-        // Fetch selected roles
-        const checkedRoles = [];
-        document.querySelectorAll(".role-checkbox:checked").forEach(checkbox => {
-            checkedRoles.push(checkbox.value);
+  function load() {
+    try {
+      const d = JSON.parse(localStorage.getItem('hk_tm_v2'));
+      if (Array.isArray(d)) {
+        d.forEach(item => {
+          const t = TEAMS.find(x => x.id === item.id);
+          if (t) t.applied = item.applied;
         });
+      }
+    } catch {}
+  }
 
-        if (checkedRoles.length === 0) {
-            checkedRoles.push("Developer"); // Default fallback
-        }
+  /* ── RENDER CARDS ── */
+  function renderGrid(list) {
+    const grid = document.getElementById('teams-grid');
+    if (!grid) return;
 
-        const newTeam = {
-            id: "team-" + Date.now(),
-            name: teamName,
-            leader: leaderName,
-            hackathon: hackathon,
-            totalParticipants: totalParticipants,
-            joinedCount: joinedCount,
-            roles: checkedRoles,
-            description: description
-        };
+    if (!list.length) {
+      grid.innerHTML = '<div class="tm-empty">No teams found. Try a different search.</div>';
+      return;
+    }
 
-        const teams = getTeams();
-        teams.unshift(newTeam); // prepend newly created team
-        saveTeams(teams);
+    grid.innerHTML = list.map(t => {
+      const openCount = t.roles.filter(r => r.o).length;
+      const filled    = t.members.length;
+      const chips     = t.roles.slice(0, 3)
+        .map(r => `<span class="tm-chip">${r.n}</span>`)
+        .join('');
 
-        // Reset form inputs & close active overlay modal
-        createTeamForm.reset();
-        modal.style.display = "none";
-        document.body.style.overflow = "";
+      return `
+        <div class="tm-card">
 
-        // Update teams list view instantly
-        renderTeams();
+          <!-- Floating Avatar -->
+          <div class="tm-avatar-wrap">
+            <div class="tm-avatar">
+              <img src="${t.avatar}" alt="${t.team}" style="width:100%;height:100%;object-fit:cover;border-radius:14px;">
+            </div>
+          </div>
 
-        // Display sleek custom success toast banner
-        const toast = document.createElement("div");
-        toast.style.position = "fixed";
-        toast.style.bottom = "24px";
-        toast.style.right = "24px";
-        toast.style.background = "linear-gradient(90deg, #8B5CF6, #3B82F6)";
-        toast.style.color = "white";
-        toast.style.padding = "16px 24px";
-        toast.style.borderRadius = "12px";
-        toast.style.backdropFilter = "blur(12px)";
-        toast.style.boxShadow = "0 10px 30px rgba(139, 92, 246, 0.3), 0 0 20px rgba(59, 130, 246, 0.4)";
-        toast.style.zIndex = "3000";
-        toast.style.fontWeight = "700";
-        toast.style.fontSize = "0.95rem";
-        toast.style.transition = "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(20px)";
-        toast.innerText = "🚀 Your team has been successfully launched and listed!";
+          <!-- Card Body -->
+          <div class="tm-card-body">
+            <div class="tm-team">${t.team}</div>
+            <div class="tm-hackname">${t.name}</div>
 
-        document.body.appendChild(toast);
-        setTimeout(() => {
-            toast.style.opacity = "1";
-            toast.style.transform = "translateY(0)";
-        }, 50);
+            <div class="tm-status-row">
+              <span class="tm-size">${filled}/${t.totalSpots} Members</span>
+              <div class="tm-dot-wrap">
+                <div class="tm-dot ${openCount > 0 ? 'open' : 'full'}"></div>
+                <span class="tm-dot-label">${openCount > 0 ? 'Open' : 'Full'}</span>
+              </div>
+            </div>
 
-        setTimeout(() => {
-            toast.style.opacity = "0";
-            toast.style.transform = "translateY(20px)";
-            setTimeout(() => {
-                toast.remove();
-            }, 500);
-        }, 3000);
+            <div class="tm-divider"></div>
+            <div class="tm-roles-label">Roles needed</div>
+            <div class="tm-roles">${chips}</div>
+
+            <div class="tm-footer">
+              <button class="tm-view-btn"
+                onclick="event.stopPropagation(); TMCards.openDrawer(${t.id})">
+                View Details
+              </button>
+              <button
+                class="tm-apply-btn ${t.applied ? 'applied' : ''}"
+                onclick="event.stopPropagation(); TMCards.applyCard(${t.id}, this)"
+                ${t.applied ? 'disabled' : ''}>
+                ${t.applied ? '✓ Applied' : 'Apply'}
+              </button>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  /* ── OPEN DRAWER ── */
+  function openDrawer(id) {
+    const t = TEAMS.find(x => x.id === id);
+    if (!t) return;
+
+    const filled = t.members.length;
+    const needed = Math.max(0, t.totalSpots - filled);
+    const lead   = t.members[0] || null;
+
+    /* Members HTML */
+    const membersHTML = t.members.length
+      ? t.members.map(m => `
+          <div class="tm-d-member">
+            <div>
+              <div class="tm-d-m-name">${m.n}</div>
+              <div class="tm-d-m-role">${m.r}</div>
+            </div>
+          </div>`).join('')
+      : '<span style="font-size:.8rem; color:var(--fg-muted)">No members yet</span>';
+
+    /* Roles HTML */
+    const rolesHTML = t.roles.map(r => `
+      <div class="tm-d-role">
+        <div class="${r.o ? 'dot-o' : 'dot-f'}"></div>
+        <span>${r.n}</span>
+        <span class="tm-d-role-status">${r.o ? 'open' : 'filled'}</span>
+      </div>`).join('');
+
+    /* Tech stack HTML */
+    const stackHTML = (t.techStack || [])
+      .map(s => `<span class="tm-d-tag">${s}</span>`)
+      .join('');
+
+    /* Team lead HTML */
+    const leadHTML = lead
+      ? `<div class="tm-d-lead">
+           <div class="tm-d-lead-av">
+             <img src="${t.avatar}" alt="${lead.n}" style="width:100%;height:100%;object-fit:cover;border-radius:8px;">
+           </div>
+           <div>
+             <div class="tm-d-lead-name">${lead.n}</div>
+             <div class="tm-d-lead-badge">Team Lead</div>
+           </div>
+         </div>`
+      : '<span style="font-size:.8rem; color:var(--fg-muted)">TBD</span>';
+
+    document.getElementById('tm-drawer-inner').innerHTML = `
+
+      <!-- Header -->
+      <div class="tm-d-header">
+        <div class="tm-d-header-left">
+          <div class="tm-d-avatar" style="overflow:hidden; border-radius:16px;">
+            <img src="${t.avatar}" alt="${t.team}" style="width:100%;height:100%;object-fit:cover;display:block;">
+          </div>
+          <div>
+            <div class="tm-d-hackname">${t.name}</div>
+            <div class="tm-d-teamname">${t.team}</div>
+            <div class="tm-d-theme">${t.theme}</div>
+          </div>
+        </div>
+        <button class="tm-d-close" onclick="TMCards.close()">✕</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="tm-d-stats">
+        <div class="tm-d-stat">
+          <div class="tm-d-stat-n">${t.totalSpots}</div>
+          <div class="tm-d-stat-l">Max</div>
+        </div>
+        <div class="tm-d-stat">
+          <div class="tm-d-stat-n">${filled}</div>
+          <div class="tm-d-stat-l">Filled</div>
+        </div>
+        <div class="tm-d-stat">
+          <div class="tm-d-stat-n">${needed}</div>
+          <div class="tm-d-stat-l">Open</div>
+        </div>
+      </div>
+
+      <!-- Info Grid -->
+      <div class="tm-d-info-grid">
+        <div class="tm-d-info-item">
+          <div class="tm-d-info-key">Experience</div>
+          <div class="tm-d-info-val">${t.experienceLevel || 'Any'}</div>
+        </div>
+        <div class="tm-d-info-item">
+          <div class="tm-d-info-key">Deadline</div>
+          <div class="tm-d-info-val">${formatDate(t.deadline)}</div>
+        </div>
+        <div class="tm-d-info-item">
+          <div class="tm-d-info-key">Created</div>
+          <div class="tm-d-info-val">${formatDate(t.creationDate)}</div>
+        </div>
+        <div class="tm-d-info-item">
+          <div class="tm-d-info-key">Status</div>
+          <div class="tm-d-info-val" style="color:${needed > 0 ? '#10B981' : '#71717a'}">
+            ${needed > 0 ? 'Recruiting' : 'Team Full'}
+          </div>
+        </div>
+      </div>
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Description -->
+      <div class="tm-d-label">About</div>
+      <div class="tm-d-desc">${t.description}</div>
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Team Lead -->
+      <div class="tm-d-label">Team Lead</div>
+      ${leadHTML}
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Members -->
+      <div class="tm-d-label">Members</div>
+      <div class="tm-d-members">${membersHTML}</div>
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Roles -->
+      <div class="tm-d-label">Roles Required</div>
+      <div class="tm-d-roles">${rolesHTML}</div>
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Tech Stack -->
+      <div class="tm-d-label">Tech Stack</div>
+      <div class="tm-d-stack">${stackHTML}</div>
+
+      <div class="tm-d-divider"></div>
+
+      <!-- Apply -->
+      <button
+        class="tm-d-apply ${t.applied ? 'applied' : ''}"
+        id="tm-d-apply-btn"
+        onclick="${t.applied ? '' : 'TMCards.applyDrawer(' + t.id + ')'}"
+        ${t.applied ? 'disabled' : ''}>
+        ${t.applied ? '✓ Applied — All the best!' : 'Apply to Join'}
+      </button>`;
+
+    document.getElementById('tm-overlay').classList.add('open');
+    document.getElementById('tm-drawer').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* ── CLOSE DRAWER ── */
+  function close() {
+    document.getElementById('tm-overlay').classList.remove('open');
+    document.getElementById('tm-drawer').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* Close on Escape */
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  /* ── APPLY FROM CARD ── */
+  function applyCard(id, btn) {
+    const t = TEAMS.find(x => x.id === id);
+    if (!t || t.applied) return;
+    t.applied = true;
+    save();
+    btn.textContent = '✓ Applied';
+    btn.classList.add('applied');
+    btn.disabled = true;
+  }
+
+  /* ── APPLY FROM DRAWER ── */
+  function applyDrawer(id) {
+    const t = TEAMS.find(x => x.id === id);
+    if (!t || t.applied) return;
+    t.applied = true;
+    save();
+    const btn = document.getElementById('tm-d-apply-btn');
+    if (btn) {
+      btn.textContent = '✓ Applied — All the best!';
+      btn.classList.add('applied');
+      btn.disabled = true;
+      btn.onclick = null;
+    }
+    renderGrid(getCurrentList());
+  }
+
+  /* ── SEARCH + FILTER ── */
+  let _query  = '';
+  let _filter = 'All Events';
+
+  function getCurrentList() {
+    return TEAMS.filter(t => {
+      const q      = _query.toLowerCase();
+      const matchQ = !q ||
+        t.team.toLowerCase().includes(q)  ||
+        t.name.toLowerCase().includes(q)  ||
+        t.theme.toLowerCase().includes(q);
+      const matchF = _filter === 'All Events' ||
+        t.theme.toLowerCase().includes(_filter.toLowerCase().split(' ')[0].toLowerCase());
+      return matchQ && matchF;
     });
-}
+  }
 
-// Live Search & Filter input triggers
-document.querySelector('.search-input')?.addEventListener('input', renderTeams);
-document.getElementById('filter-role')?.addEventListener('change', renderTeams);
-document.getElementById('filter-hackathon')?.addEventListener('change', renderTeams);
-document.getElementById('filter-spots')?.addEventListener('change', renderTeams);
+  function setupSearch() {
+    const input = document.querySelector('.search-input');
+    const pills = document.querySelectorAll('.filter-pill');
 
-// Run initial rendering pass when loaded
-document.addEventListener("DOMContentLoaded", () => {
-    renderTeams();
-});
+    if (input) {
+      input.addEventListener('input', e => {
+        _query = e.target.value;
+        renderGrid(getCurrentList());
+      });
+    }
 
-console.log("Interactive Teams Directory initialized successfully.");
+    pills.forEach(p => {
+      p.addEventListener('click', () => {
+        pills.forEach(x => x.classList.remove('active'));
+        p.classList.add('active');
+        _filter = p.textContent.trim();
+        renderGrid(getCurrentList());
+      });
+    });
+  }
 
+  function loadUserCreatedTeams() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
+      if (Array.isArray(saved)) {
+        let needsSave = false;
+        saved.forEach(t => {
+          // If a team was saved without an avatar (old data), assign one now and persist it
+          if (!t.avatar) {
+            t.avatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
+            needsSave = true;
+          }
+          TEAMS.push(t);
+        });
+        // Persist avatar fix back to localStorage so avatar stays stable across refreshes
+        if (needsSave) {
+          localStorage.setItem('hk_user_teams', JSON.stringify(saved));
+        }
+      }
+    } catch {}
+  }
+
+  function getRandomAvatar() {
+    return AVATARS[Math.floor(Math.random() * AVATARS.length)];
+  }
+
+  function addTeam(newTeam) {
+    // Guarantee the team has an avatar before it touches the grid
+    if (!newTeam.avatar) {
+      newTeam.avatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
+    }
+    TEAMS.push(newTeam);
+    renderGrid(getCurrentList());
+  }
+
+  /* ── INIT ── */
+  loadUserCreatedTeams();
+  load();
+  renderGrid(TEAMS);
+  setupSearch();
+
+  window.TMCards = { openDrawer, close, applyCard, applyDrawer, getRandomAvatar, addTeam };
+  
+
+})();

@@ -135,12 +135,12 @@ function applyFiltersAndSearch() {
         const matchesFilter = currentFilter === 'all' || category === currentFilter;
         
         if (matchesSearch && matchesFilter) {
-            card.style.display = 'flex';
+           card.closest('.event-card-wrap').style.display = 'block';
             card.style.opacity = '1';
             card.style.animation = 'fadeIn 0.3s ease-in';
             visibleCount++;
         } else {
-            card.style.display = 'none';
+           card.closest('.event-card-wrap').style.display = 'none';
             card.style.opacity = '0';
         }
     });

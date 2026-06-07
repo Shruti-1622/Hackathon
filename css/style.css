@@ -10,6 +10,7 @@
   --fg:          #f4f4f5;
   --fg-muted:    #a1a1aa;
   --accent:      #D9A441;
+  /* --accent:      #fbbf24; */
   --accent-hover : #b07d2e;
   --border:      rgba(220, 38, 38, 0.2);
   --border-dim:  rgba(255,255,255,0.06);
@@ -20,7 +21,7 @@
   --blue:   #00c8ff;
   --orange: #ffaa00;
   --green:  #00ff88;
-  --cardbg:     #060612;
+  --cardbg:     #c5cb6a;
   --grid:   rgba(255, 255, 255, 0.03);
 }
 

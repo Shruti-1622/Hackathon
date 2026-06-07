@@ -26,6 +26,7 @@
   flex-direction: column;
   transform: none !important;
   box-shadow: none !important;
+  /* padding: 30px; */
   clip-path: polygon(
     16px 0%, calc(100% - 16px) 0%,
     100% 16px, 100% calc(100% - 16px),

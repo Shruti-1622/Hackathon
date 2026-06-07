@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Teams - HackHub</title>
-
+    <title>Hackathons - HackHub</title>
+    <meta name="description" content="Discover and register for top hackathons from leading companies. Find AI, Web3, Mobile, and Cloud hackathons all in one place.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hackathon-page.css">
     <link rel="stylesheet" href="css/teamfinder-page.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/create-team-modal.css">
 </head>
 
 <body>
@@ -34,182 +35,73 @@
 
     </nav>
 
-    <!-- Hero Section -->
-    <section class="teamfinder-hero">
-        <div class="teamfinder-hero-content">
-            <h1>Find Your <span>Squad</span></h1>
+    <!-- HERO -->
+    <section class="hackathon-hero">
+        <div class="hackathon-hero-content">
+            <div class="hero-tag">
+                <span class="dot"></span> Compete. Build. Win.
+            </div>
+
+            <h1 class="hero-title">
+                FIND YOUR
+                <span class="line accent-line">SQUAD</span>
+            </h1>
+
             <p>Browse active teams looking for contributors, apply to open roles, or launch your own team!</p>
         </div>
         <div class="orb orb-purple"></div>
         <div class="orb orb-blue"></div>
-    </section>
 
-    <!-- Search & Filter Section -->
-    <section class="teamfinder-search">
-        <div class="search-wrapper">
+        <div class="search-filter-section">
             <div class="search-container">
-                <input type="text" class="search-input"
-                    placeholder="Search teams by name, leader, hackathon, or roles...">
+                <input type="text" class="search-input" placeholder="Search hackathons by name, theme...">
                 <span class="search-icon">🔍</span>
             </div>
 
-            <div class="filter-options">
-                <select class="filter-select" id="filter-role">
-                    <option value="">All Roles Needed</option>
-                    <option value="Frontend">Frontend Developer</option>
-                    <option value="Backend">Backend Developer</option>
-                    <option value="UI/UX">UI/UX Designer</option>
-                    <option value="DevOps">DevOps Engineer</option>
-                    <option value="ML Engineer">ML Engineer</option>
-                    <option value="Web3 Developer">Web3 Developer</option>
-                </select>
+            <div class="filter-pills">
+                <button class="filter-pill active">All Events</button>
+                <button class="filter-pill">AI &amp; ML</button>
+                <button class="filter-pill">Web3</button>
+                <button class="filter-pill">Mobile</button>
+                <button class="filter-pill">Cloud</button>
+                <button class="filter-pill">IoT</button>
+            </div>
+        </div>
 
-                <select class="filter-select" id="filter-hackathon">
-                    <option value="">All Hackathons</option>
-                    <option value="CloudFest 26">CloudFest 26</option>
-                    <option value="DevHack Summit">DevHack Summit</option>
-                    <option value="BlockchainBuild">BlockchainBuild</option>
-                    <option value="InnovateMobile">InnovateMobile</option>
-                    <option value="AI for Social Good">AI for Social Good</option>
-                    <option value="FinTech Revolution">FinTech Revolution</option>
-                </select>
+    </section>
 
-                <select class="filter-select" id="filter-spots">
-                    <option value="">Slots Available</option>
-                    <option value="open">Open Teams</option>
-                    <option value="full">Full Teams</option>
-                </select>
+
+    <!--TEAMS CARD-->
+
+   
+<!-- TEAMS SECTION -->
+<section class="teams-section">
+  <div class="section-heading">
+    <h2>Active <span>Teams</span></h2>
+    <p>Don't miss your next opportunity to build something great.</p>
+  </div>
+  <div class="teams-grid" id="teams-grid"></div>
+</section>
+ 
+<!-- RIGHT DRAWER OVERLAY -->
+<div class="tm-overlay" id="tm-overlay" onclick="TMCards.close()"></div>
+ 
+<!-- RIGHT DRAWER PANEL -->
+<aside class="tm-drawer" id="tm-drawer">
+  <div class="tm-drawer-inner" id="tm-drawer-inner">
+    <!-- content injected by JS -->
+  </div>
+</aside>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>CAN'T FIND YOUR<span>TEAM?</span></h2>
+            <p>Take the lead and create your perfect team!</p>
+            <div class="cta-buttons">
+                <button class="secondary-btn" onclick=" CreateTeamModal.open()">Create a Team →</button>
             </div>
         </div>
     </section>
-
-    <!-- Teams Grid Section -->
-    <section class="developers-section">
-        <h2 id="teams-section-heading">Active Teams</h2>
-        <div class="developers-grid" id="teams-grid">
-            <!-- Dynamic Team Cards Rendered via JS -->
-        </div>
-    </section>
-
-    <!-- Can't find a team? Create yours Section -->
-    <section class="teamfinder-cta">
-        <div class="cta-content">
-            <h2>Can't find a team?</h2>
-            <p>Take the lead! Create your own team, specify the roles you need, and find the perfect partners to win.
-            </p>
-            <button class="primary-btn" id="open-create-modal-btn">Create Your Team</button>
-        </div>
-    </section>
-
-    <!-- Create Team Modal -->
-    <div id="create-team-modal" class="modal-overlay"
-        style="display: none; position: fixed; inset: 0; background: rgba(5, 8, 22, 0.85); backdrop-filter: blur(12px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
-        <div class="modal-content"
-            style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 40px; width: 100%; max-width: 550px; position: relative; box-shadow: 0 0 50px rgba(139, 92, 246, 0.15); box-sizing: border-box;">
-            <button id="close-modal-btn"
-                style="position: absolute; right: 24px; top: 24px; background: none; border: none; color: #94A3B8; font-size: 1.8rem; cursor: pointer; line-height: 1; transition: color 0.2s;">&times;</button>
-
-            <h3
-                style="font-size: 1.8rem; font-weight: 800; background: linear-gradient(90deg, #8B5CF6, #3B82F6); -webkit-background-clip: text; color: transparent; margin-bottom: 25px; text-align: center;">
-                Launch Your Team</h3>
-
-            <form id="create-team-form" style="display: flex; flex-direction: column; gap: 16px;">
-                <div>
-                    <label
-                        style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Team
-                        Name</label>
-                    <input type="text" id="modal-team-name" required placeholder="e.g. Cyber Knights"
-                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; box-sizing: border-box;">
-                </div>
-                <div>
-                    <label
-                        style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Leader
-                        Name</label>
-                    <input type="text" id="modal-leader-name" required placeholder="Your Name"
-                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; box-sizing: border-box;">
-                </div>
-                <div>
-                    <label
-                        style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Target
-                        Hackathon</label>
-                    <select id="modal-hackathon" required
-                        style="width: 100%; padding: 12px; background: #0a0a0f; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; box-sizing: border-box;">
-                        <option value="CloudFest 26">CloudFest 26</option>
-                        <option value="DevHack Summit">DevHack Summit</option>
-                        <option value="BlockchainBuild">BlockchainBuild</option>
-                        <option value="InnovateMobile">InnovateMobile</option>
-                        <option value="AI for Social Good">AI for Social Good</option>
-                        <option value="FinTech Revolution">FinTech Revolution</option>
-                    </select>
-                </div>
-                <div style="display: flex; gap: 15px;">
-                    <div style="flex: 1;">
-                        <label
-                            style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Total
-                            Participants</label>
-                        <input type="number" id="modal-total-participants" min="2" max="6" value="4" required
-                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; box-sizing: border-box;">
-                    </div>
-                    <div style="flex: 1;">
-                        <label
-                            style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Already
-                            Joined</label>
-                        <input type="number" id="modal-joined-count" min="1" max="5" value="1" required
-                            style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; box-sizing: border-box;">
-                    </div>
-                </div>
-                <div>
-                    <label
-                        style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Roles
-                        Needed</label>
-                    <div
-                        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px;">
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="Frontend" class="role-checkbox"
-                                style="accent-color: #8B5CF6;"> Frontend
-                        </label>
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="Backend" class="role-checkbox" style="accent-color: #8B5CF6;">
-                            Backend
-                        </label>
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="UI/UX" class="role-checkbox" style="accent-color: #8B5CF6;">
-                            UI/UX
-                        </label>
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="DevOps" class="role-checkbox" style="accent-color: #8B5CF6;">
-                            DevOps
-                        </label>
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="ML Engineer" class="role-checkbox"
-                                style="accent-color: #8B5CF6;"> ML Engineer
-                        </label>
-                        <label
-                            style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #CBD5E1; cursor: pointer;">
-                            <input type="checkbox" value="Web3 Developer" class="role-checkbox"
-                                style="accent-color: #8B5CF6;"> Web3 Dev
-                        </label>
-                    </div>
-                </div>
-                <div>
-                    <label
-                        style="color: #CBD5E1; font-weight: 600; display: block; margin-bottom: 6px; font-size: 0.9rem;">Team/Project
-                        Description</label>
-                    <textarea id="modal-description" placeholder="Describe your project idea and expectations..."
-                        rows="2"
-                        style="width: 100%; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; outline: none; font-size: 0.95rem; resize: none; font-family: inherit; box-sizing: border-box;"></textarea>
-                </div>
-
-                <button type="submit" class="primary-btn"
-                    style="width: 100%; margin-top: 10px; font-weight: 700;">Create Team</button>
-            </form>
-        </div>
-    </div>
 
     <!-- FOOTER -->
     <footer class="footer">
@@ -221,14 +113,14 @@
         </div>
     </footer>
 
-    <script src="js/teamfinder.js"></script>
-
     <script>
         // Hamburger toggle
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.querySelector('.nav-links');
         hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     </script>
+    <script src="/hackathon copy/js/teamfinder.js"></script>
+    <script src="js/create-team-modal.js"></script>
 </body>
-
 </html>
+

@@ -76,5 +76,44 @@
     "day": "02",
     "image": "assets/hackathon events/en.jpeg",
     "link": "https://ethglobal.com"
-  }
+  },
+  {
+  "id": 7,
+  "title": "MIDNIGHT CODEFEST",
+  "organizer": "GitHub",
+  "category": "web",
+  "location": "Hyderabad",
+  "duration": "36 Hours",
+  "prize": "₹3,50,000",
+  "month": "Nov",
+  "day": "05",
+  "image": "assets/hackathon events/github.png",
+  "link": "https://github.com"
+},
+{
+  "id": 8,
+  "title": "CYBER NEXUS",
+  "organizer": "Cisco",
+  "category": "cybersecurity",
+  "location": "Bangalore",
+  "duration": "48 Hours",
+  "prize": "₹6,00,000",
+  "month": "Nov",
+    "day": "09",
+  "image": "assets/hackathon events/cisco.jpeg",
+  "link": "https://www.cisco.com"
+},
+{
+  "id": 9,
+  "title": "NEURALVERSE AI",
+  "organizer": "NVIDIA",
+  "category": "ai",
+  "location": "Mumbai",
+  "duration": "72 Hours",
+  "prize": "₹8,00,000",
+  "month": "Dec",
+    "day": "30",
+  "image": "assets/hackathon events/nvidia.png",
+  "link": "https://www.nvidia.com"
+}
 ]
