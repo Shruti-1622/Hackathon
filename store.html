@@ -27,7 +27,10 @@
             
         </ul>
 
-        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-signup-btn" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
+        <a href="#" id="auth-profile-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Profile</a>
+        <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Logout</a>
         <button class="hamburger" id="hamburger">&#9776;</button>
 
     </nav>
@@ -262,6 +265,18 @@
     </footer>
 
     <script src="js/store.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      // Gate all Add to Cart buttons on this page
+      document.querySelectorAll('.add-to-cart-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          if (!Auth.isLoggedIn()) {
+            e.stopImmediatePropagation();
+            Auth.showLoginRequired();
+          }
+        }, true);
+      });
+    </script>
 
 </body>
 </html>

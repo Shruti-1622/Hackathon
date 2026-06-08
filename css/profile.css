@@ -1,0 +1,766 @@
+/* =============================================
+   PROFILE PAGE — css/profile.css
+   Drop after style.css
+   ============================================= */
+
+/* ── PAGE WRAPPER ── */
+.pf-page {
+  background: var(--bg, #0d0d0d);
+  min-height: 100vh;
+  padding-top: 80px;
+}
+
+.pf-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 32px 80px;
+}
+
+/* ── PROFILE CARD ── */
+.pf-profile-card {
+  background: #161616;
+  border: 1px solid #242424;
+  border-radius: 16px;
+  padding: 28px 30px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 20px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.pf-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #c9a227;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0d0d0d;
+  flex-shrink: 0;
+  letter-spacing: 1px;
+}
+
+.pf-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-info h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.pf-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #c9a227;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pf-bio {
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.pf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.pf-meta span,
+.pf-meta a {
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.pf-meta a {
+  color: #c9a227;
+}
+
+.pf-meta a:hover {
+  color: #f0c040;
+}
+
+.pf-icon {
+  font-style: normal;
+  font-size: 13px;
+}
+
+.pf-skills-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.pf-skill-chip {
+  background: rgba(201,162,39,0.1);
+  border: 1px solid rgba(201,162,39,0.25);
+  color: #c9a227;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+/* ── EDIT BUTTON ── */
+.pf-edit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.pf-edit-btn:hover {
+  border-color: #c9a227;
+  color: #c9a227;
+}
+
+/* ── EDIT MODAL (inline) ── */
+.pf-edit-modal {
+  display: none;
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  animation: pf-slide-down 0.25s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.pf-edit-modal.open {
+  display: block;
+}
+
+@keyframes pf-slide-down {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pf-edit-inner {
+  padding: 0;
+}
+
+.pf-edit-header {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #1e1e1e;
+}
+
+.pf-edit-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #c9a227;
+}
+
+.pf-edit-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.pf-edit-body {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pf-edit-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.pf-edit-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pf-edit-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.pf-edit-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  padding: 10px 13px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pf-edit-input::placeholder {
+  color: #444;
+}
+
+.pf-edit-input:focus {
+  border-color: rgba(201,162,39,0.5);
+  box-shadow: 0 0 0 3px rgba(201,162,39,0.08);
+  background: rgba(255,255,255,0.05);
+}
+
+.pf-edit-textarea {
+  resize: vertical;
+  min-height: 72px;
+  line-height: 1.55;
+}
+
+.pf-add-btn {
+  background: rgba(201,162,39,0.1);
+  border: 1px solid rgba(201,162,39,0.3);
+  color: #c9a227;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.pf-add-btn:hover {
+  background: rgba(201,162,39,0.18);
+  border-color: #c9a227;
+}
+
+.pf-edit-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+  min-height: 10px;
+}
+
+.pf-edit-skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,162,39,0.08);
+  border: 1px solid rgba(201,162,39,0.25);
+  color: #c9a227;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px 4px 10px;
+  border-radius: 5px;
+  animation: pf-tag-pop 0.16s ease both;
+}
+
+@keyframes pf-tag-pop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.pf-edit-skill-tag button {
+  background: none;
+  border: none;
+  color: rgba(201,162,39,0.4);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+
+.pf-edit-skill-tag button:hover {
+  color: #c9a227;
+}
+
+.pf-edit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 24px 20px;
+  border-top: 1px solid #1e1e1e;
+}
+
+.pf-cancel-btn {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.pf-cancel-btn:hover {
+  border-color: #555;
+  color: #aaa;
+}
+
+.pf-save-btn {
+  background: #c9a227;
+  color: #000;
+  border: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.pf-save-btn:hover {
+  background: #f0c040;
+  transform: translateY(-1px);
+}
+
+/* ── STATS ── */
+.pf-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.pf-stat-card {
+  background: #161616;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+
+.pf-stat-card:hover {
+  border-color: rgba(201,162,39,0.3);
+}
+
+.pf-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pf-stat-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.pf-stat-sub {
+  font-size: 11px;
+  color: #555;
+  margin-top: 5px;
+}
+
+.pf-green { color: #3fc980 !important; }
+.pf-gold  { color: #c9a227 !important; }
+
+/* ── TWO COLUMN SECTIONS ── */
+.pf-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.pf-section-card {
+  background: #161616;
+  border: 1px solid #242424;
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+
+.pf-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #c9a227;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── TEAM ROW BUTTONS ── */
+.pf-team-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Syne', sans-serif;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.pf-team-btn:last-child { margin-bottom: 0; }
+
+.pf-team-btn:hover {
+  border-color: rgba(201,162,39,0.35);
+  background: rgba(201,162,39,0.03);
+}
+
+.pf-team-btn.active {
+  border-color: rgba(201,162,39,0.55);
+  background: rgba(201,162,39,0.05);
+}
+
+.pf-t-name {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.pf-t-sub {
+  font-size: 11px;
+  color: #666;
+}
+
+/* ── BADGES ── */
+.pf-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.pf-b-pending  { background: #1e1700; color: #c9a227; border: 1px solid rgba(201,162,39,0.3); }
+.pf-b-accepted { background: #0a1e12; color: #3fc980; border: 1px solid rgba(63,201,128,0.3); }
+.pf-b-rejected { background: #1e0a0a; color: #e05050; border: 1px solid rgba(224,80,80,0.3); }
+.pf-b-open     { background: #0a1220; color: #4a9edd; border: 1px solid rgba(74,158,221,0.3); }
+.pf-b-recruiting { background: #1e1700; color: #c9a227; border: 1px solid rgba(201,162,39,0.3); }
+
+/* ── EMPTY STATE ── */
+.pf-empty {
+  text-align: center;
+  padding: 28px 0;
+  color: #444;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.pf-empty svg {
+  display: block;
+  margin: 0 auto 10px;
+  opacity: 0.25;
+}
+
+/* ── DETAIL PANEL ── */
+.pf-detail-panel {
+  background: #111;
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  padding: 24px 26px;
+  margin-top: 0;
+  margin-bottom: 18px;
+  animation: pf-slide-down 0.22s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.pf-back-btn {
+  background: transparent;
+  border: none;
+  color: #c9a227;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+
+.pf-back-btn:hover { opacity: 0.7; }
+
+/* detail info */
+.pf-detail-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.pf-detail-hackathon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #c9a227;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pf-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pf-detail-item {
+  background: #161616;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.pf-detail-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.pf-detail-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ddd;
+}
+
+.pf-detail-desc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 8px;
+  border: 1px solid #1e1e1e;
+}
+
+.pf-detail-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 14px;
+}
+
+.pf-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.pf-tech-chip {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid #2a2a2a;
+  color: #aaa;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+/* ── APPLICANT ROWS in created team detail ── */
+.pf-applicant-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.pf-applicant-row:last-child { border-bottom: none; }
+
+.pf-app-info {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.pf-app-av {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #1e1e1e;
+  border: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: #c9a227;
+  flex-shrink: 0;
+}
+
+.pf-app-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ddd;
+}
+
+.pf-app-role {
+  font-size: 11px;
+  color: #666;
+  margin-top: 1px;
+}
+
+.pf-action-btns {
+  display: flex;
+  gap: 7px;
+}
+
+.pf-btn-approve {
+  background: rgba(63,201,128,0.08);
+  color: #3fc980;
+  border: 1px solid rgba(63,201,128,0.25);
+  padding: 5px 13px;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pf-btn-approve:hover { background: rgba(63,201,128,0.15); }
+
+.pf-btn-reject {
+  background: rgba(224,80,80,0.08);
+  color: #e05050;
+  border: 1px solid rgba(224,80,80,0.25);
+  padding: 5px 13px;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.pf-btn-reject:hover { background: rgba(224,80,80,0.15); }
+
+.pf-decided {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── CHEVRON ── */
+.pf-chevron {
+  font-size: 11px;
+  color: #444;
+  transition: transform 0.2s, color 0.2s;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.pf-team-btn.active .pf-chevron {
+  transform: rotate(180deg);
+  color: #c9a227;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .pf-sections {
+    grid-template-columns: 1fr;
+  }
+  .pf-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pf-main { padding: 20px 16px 60px; }
+  .pf-profile-card { flex-direction: column; align-items: flex-start; }
+  .pf-edit-btn { position: static; margin-top: 12px; }
+  .pf-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .pf-edit-row { grid-template-columns: 1fr; }
+  .pf-detail-grid { grid-template-columns: 1fr 1fr; }
+}

@@ -29,7 +29,10 @@
             <li><a href="store.html">Swag Store</a></li>
         </ul>
 
-        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-signup-btn" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
+        <a href="#" id="auth-profile-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Profile</a>
+        <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Logout</a>
         <button class="hamburger" id="hamburger">&#9776;</button>
 
     </nav>
@@ -207,6 +210,19 @@
         hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     </script>
     <script src="js/hackathon.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      // Gate: all Register / Register Now links on this page
+      document.querySelectorAll('.featured-btn, .side-content a, .register-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          if (!Auth.isLoggedIn()) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            Auth.showLoginRequired();
+          }
+        }, true);
+      });
+    </script>
 </body>
 </html>
 

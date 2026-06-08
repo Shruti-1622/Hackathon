@@ -30,7 +30,10 @@
             <li><a href="store.html">Swag Store</a></li>
         </ul>
 
-        <a href="signup.html" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-signup-btn" class="btn-primary nav-cta">Sign up!</a>
+        <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
+        <a href="#" id="auth-profile-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Profile</a>
+        <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Logout</a>
         <button class="hamburger" id="hamburger">&#9776;</button>
 
     </nav>
@@ -121,6 +124,30 @@
     </script>
     <script src="/hackathon copy/js/teamfinder.js"></script>
     <script src="js/create-team-modal.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+      // Gate: Apply buttons (rendered dynamically — intercept via event delegation)
+      document.getElementById('teams-grid').addEventListener('click', function(e) {
+        var btn = e.target.closest('.tm-apply-btn');
+        if (btn && !btn.disabled) {
+          if (!Auth.isLoggedIn()) {
+            e.stopImmediatePropagation();
+            Auth.showLoginRequired();
+          }
+        }
+      }, true);
+
+      // Gate: Create Team button in CTA section
+      var createTeamBtn = document.querySelector('.secondary-btn');
+      if (createTeamBtn) {
+        createTeamBtn.addEventListener('click', function(e) {
+          if (!Auth.isLoggedIn()) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+            Auth.showLoginRequired();
+          }
+        }, true);
+      }
+    </script>
 </body>
 </html>
-

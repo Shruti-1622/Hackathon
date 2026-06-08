@@ -8,7 +8,10 @@
     'assets/avatar/a5.jpeg',
     'assets/avatar/a6.jpg',
     'assets/avatar/a7.jpeg',
-    'assets/avatar/a8.png'
+    'assets/avatar/a8.png',
+    'assets/avatar/a9.png',
+    'assets/avatar/a10.png',
+    'assets/avatar/a11.avif'
   ];
 
   /* ── TEAM DATA ── */
@@ -86,7 +89,7 @@
       id: 4,
       team: 'Web3 Wolves',
       name: 'ETHIndia 2026',
-      avatar: AVATARS[3],
+      avatar: AVATARS[10],
       theme: 'DeFi & DAOs',
       description: 'Building a decentralized autonomous organization toolkit for Indian startups. Solidity wizards and frontend devs needed.',
       deadline: '2026-10-12',

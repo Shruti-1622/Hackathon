@@ -22,7 +22,7 @@
   --orange: #ffaa00;
   --green:  #00ff88;
   --cardbg:     #c5cb6a;
-  --grid:   rgba(255, 255, 255, 0.03);
+  /* --grid:   rgba(255, 255, 255, 0.03); */
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
