@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile - HackHub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -19,10 +23,13 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="hackathon.html">Hackathons</a></li>
       <li><a href="teamfinder.html">Find Teams</a></li>
-      <li><a href="gallery.html">Hall of Fame</a></li>
-      <li><a href="store.html">Swag Store</a></li>
+      <li><a href="gallery.html" class="active">Hall of Fame</a></li>
     </ul>
-    <a href="#" id="auth-logout-btn" class="btn-primary nav-cta">Logout</a>
+    <a href="#" id="auth-signup-btn" class="btn-primary nav-cta">Sign up!</a>
+    <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
+    <a href="profile.html" id="auth-profile-btn" class="btn-primary nav-cta"
+      style="display:none;margin-left:.5rem;">Profile</a>
+    <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Logout</a>
     <button class="hamburger" id="hamburger">&#9776;</button>
   </nav>
 
@@ -32,23 +39,39 @@
 
       <!-- PROFILE CARD -->
       <div class="pf-profile-card" id="pfCard">
-        <div class="pf-avatar" id="pfAvatar">HR</div>
+        <div class="pf-avatar" id="pfAvatar">
+          
+        </div>
+
         <div class="pf-info">
+
           <h2 id="pfName">Harish Ramachandran</h2>
+
           <div class="pf-role" id="pfRole">UI/UX Designer</div>
+
           <div class="pf-bio" id="pfBio">Passionate about crafting intuitive design experiences.</div>
+
           <div class="pf-meta" id="pfMeta">
-            <span><i class="pf-icon">📍</i><span id="pfCity">Hyderabad</span></span>
-            <span><i class="pf-icon">📞</i><span id="pfPhone">+91 76661875209</span></span>
-            <a id="pfLinkedinLink" href="#" target="_blank"><i class="pf-icon">🔗</i><span id="pfLinkedinText">LinkedIn</span></a>
-            <a id="pfGithubLink" href="#" target="_blank"><i class="pf-icon">🐙</i><span id="pfGithubText">GitHub</span></a>
+
+            <span><i class="pf-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></i><span id="pfCity">Hyderabad</span></span>
+            <span><i class="pf-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></i><span id="pfPhone">+91 76661875209</span></span>
+            <a id="pfLinkedinLink" href="#" target="_blank"><i class="pf-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></i><span
+                id="pfLinkedinText">LinkedIn</span></a>
+            <a id="pfGithubLink" href="#" target="_blank"><i class="pf-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></i><span
+                id="pfGithubText">GitHub</span></a>
+                
           </div>
           <div class="pf-skills-display" id="pfSkillsDisplay"></div>
         </div>
+
         <button class="pf-edit-btn" id="pfEditBtn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+          </svg>
           Edit Profile
         </button>
+
       </div>
 
       <!-- EDIT PROFILE MODAL (inline, not fixed) -->
@@ -71,7 +94,26 @@
             </div>
             <div class="pf-edit-field">
               <label class="pf-edit-label">Bio</label>
-              <textarea class="pf-edit-input pf-edit-textarea" id="inpBio" placeholder="Short intro about yourself..." maxlength="200"></textarea>
+              <textarea class="pf-edit-input pf-edit-textarea" id="inpBio" placeholder="Short intro about yourself..."
+                maxlength="200"></textarea>
+            </div>
+            <div class="pf-edit-field">
+              <label class="pf-edit-label">Profile Image</label>
+            <div style="display:flex; gap:16px; align-items:center; margin-top:8px;">
+                <div class="pf-avatar" id="pfEditAvatarPreview"
+                  style="width:60px; height:60px; border-radius:50%; background:#c9a227; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                  <img src="assets/avatar/shruti.webp" id="imgEditAvatarPreview"
+                    style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div style="flex:1;">
+                  <input type="file" id="inpAvatarFile" accept="image/*" style="display:none;">
+                  <button type="button" class="btn-primary" id="btnUploadAvatar"
+                    style="padding:8px 16px; font-size:12px; background:#c9a227; color:#0d0d0d; border:none; border-radius:8px; cursor:pointer; font-family:'Orbitron',sans-serif; font-weight:700; transition:opacity 0.2s;">Upload
+                    Image</button>
+                  <div style="font-size:11px; color:#888; margin-top:6px; font-family:'JetBrains Mono',monospace;">Max
+                    size: 2MB</div>
+                </div>
+              </div>
             </div>
             <div class="pf-edit-row">
               <div class="pf-edit-field">
@@ -94,9 +136,11 @@
               </div>
             </div>
             <div class="pf-edit-field">
-              <label class="pf-edit-label">Skills <span style="color:#555;font-size:10px;letter-spacing:0">(press Enter to add)</span></label>
+              <label class="pf-edit-label">Skills <span style="color:#555;font-size:10px;letter-spacing:0">(press Enter
+                  to add)</span></label>
               <div style="display:flex;gap:8px;">
-                <input class="pf-edit-input" id="inpSkill" type="text" placeholder="e.g. Figma, React..." maxlength="30" style="flex:1">
+                <input class="pf-edit-input" id="inpSkill" type="text" placeholder="e.g. Figma, React..." maxlength="30"
+                  style="flex:1">
                 <button class="pf-add-btn" id="pfAddSkillBtn">+ Add</button>
               </div>
               <div class="pf-edit-skills-list" id="editSkillsList"></div>
@@ -139,7 +183,11 @@
         <!-- APPLIED TEAMS -->
         <div class="pf-section-card">
           <div class="pf-section-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13" />
+              <polygon points="22 2 15 22 11 13 2 9 22 2" />
+            </svg>
             Teams I Applied To
           </div>
           <div id="appliedTeamsList"></div>
@@ -148,7 +196,11 @@
         <!-- CREATED TEAMS -->
         <div class="pf-section-card">
           <div class="pf-section-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              aria-hidden="true">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg>
             Teams I Created
           </div>
           <div id="createdTeamsList"></div>
@@ -173,18 +225,61 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="nav-logo"><span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span></div>
-      <p class="footer-copy mono">© 2026 HackHub. All rights reserved.</p>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="nav-logo"><span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span></div>
+        <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social-link" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+            </svg></a>
+          <a href="#" class="footer-social-link" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+            </svg></a>
+          <a href="#" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect x="2" y="9" width="4" height="12" />
+              <circle cx="4" cy="4" r="2" />
+            </svg></a>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <div class="footer-nav-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="hackathon.html">Hackathons</a></li>
+            <li><a href="teamfinder.html">Find Teams</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 HackHub. All rights reserved.</p>
+      <p class="footer-built">Built with <svg width="10" height="10" viewBox="0 0 24 24" fill="#ff4444" stroke="#ff4444" stroke-width="2" style="vertical-align: middle; margin: 0 2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> for hackers</p>
     </div>
   </footer>
 
   <script>
     const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.querySelector('.nav-links');
+    const navLinks = document.querySelector('.nav-links');
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
   </script>
   <script src="js/profile.js"></script>
   <script src="js/auth.js"></script>
 </body>
+
 </html>

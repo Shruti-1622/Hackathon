@@ -1,5 +1,33 @@
 // Hackathon Page Interactivity
 
+
+
+// new code
+
+
+
+
+  (function () {
+    const targets = document.querySelectorAll(
+      '.spotlight-header, .spotlight-stage, .upcoming-row-wrap'
+    );
+    if (!targets.length) return;
+ 
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('sl-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+ 
+    targets.forEach(t => io.observe(t));
+  })();
+
+
+// end ocde
+
 let allHackathons = [];
 let currentFilter = 'all';
 
@@ -165,7 +193,17 @@ function applyFiltersAndSearch() {
     }
 }
 
+const video = document.getElementById("spotlightVideo");
 
+if(video){
+    video.addEventListener("timeupdate", () => {
+
+        if(video.currentTime >= 30){
+            video.pause();
+        }
+
+    });
+}
 
 
 console.log('Hackathon page loaded');

@@ -29,12 +29,12 @@
       experienceLevel: 'Intermediate',
       techStack: ['Python', 'TensorFlow', 'React', 'FastAPI'],
       members: [
-        { n: 'Aarav S',  r: 'Team Lead'   },
-        { n: 'Priya K',  r: 'ML Engineer' },
+        { n: 'Aarav S', r: 'Team Lead' },
+        { n: 'Priya K', r: 'ML Engineer' },
       ],
       roles: [
-        { n: 'UX Designer',  o: true  },
-        { n: 'Backend Dev',  o: true  },
+        { n: 'UX Designer', o: true },
+        { n: 'Backend Dev', o: true },
         { n: 'Data Analyst', o: false },
       ],
       applied: false,
@@ -56,8 +56,8 @@
       ],
       roles: [
         { n: 'Product Manager', o: true },
-        { n: 'UI Designer',     o: true },
-        { n: 'Backend Dev',     o: true },
+        { n: 'UI Designer', o: true },
+        { n: 'Backend Dev', o: true },
       ],
       applied: false,
     },
@@ -74,14 +74,14 @@
       experienceLevel: 'Beginner Friendly',
       techStack: ['Arduino', 'Python', 'MongoDB', 'Next.js'],
       members: [
-        { n: 'Sneha R', r: 'Full Stack'  },
+        { n: 'Sneha R', r: 'Full Stack' },
         { n: 'Karan J', r: 'ML Engineer' },
-        { n: 'Nisha P', r: 'Designer'    },
+        { n: 'Nisha P', r: 'Designer' },
       ],
       roles: [
-        { n: 'IoT Engineer',   o: true  },
-        { n: 'Data Scientist', o: true  },
-        { n: 'UX Researcher',  o: false },
+        { n: 'IoT Engineer', o: true },
+        { n: 'Data Scientist', o: true },
+        { n: 'UX Researcher', o: false },
       ],
       applied: false,
     },
@@ -98,13 +98,13 @@
       experienceLevel: 'Advanced',
       techStack: ['Solidity', 'Hardhat', 'ethers.js', 'Next.js'],
       members: [
-        { n: 'Dev P',   r: 'Smart Contracts' },
-        { n: 'Arjun T', r: 'Blockchain Dev'  },
+        { n: 'Dev P', r: 'Smart Contracts' },
+        { n: 'Arjun T', r: 'Blockchain Dev' },
       ],
       roles: [
-        { n: 'Frontend Dev',     o: true },
+        { n: 'Frontend Dev', o: true },
         { n: 'Security Auditor', o: true },
-        { n: 'UI Designer',      o: true },
+        { n: 'UI Designer', o: true },
       ],
       applied: false,
     },
@@ -122,11 +122,11 @@
       techStack: ['AWS Lambda', 'Terraform', 'Docker', 'Go'],
       members: [
         { n: 'Vikram S', r: 'DevOps Lead' },
-        { n: 'Meera L',  r: 'Backend Dev' },
-        { n: 'Tarun B',  r: 'Cloud Infra' },
+        { n: 'Meera L', r: 'Backend Dev' },
+        { n: 'Tarun B', r: 'Cloud Infra' },
       ],
       roles: [
-        { n: 'Backend Dev',  o: true  },
+        { n: 'Backend Dev', o: true },
         { n: 'SRE Engineer', o: false },
       ],
       applied: false,
@@ -147,10 +147,10 @@
         { n: 'Ananya R', r: 'AI Engineer' },
       ],
       roles: [
-        { n: 'Mobile Dev',   o: true },
+        { n: 'Mobile Dev', o: true },
         { n: 'Psychologist', o: true },
-        { n: 'UI Designer',  o: true },
-        { n: 'ML Engineer',  o: true },
+        { n: 'UI Designer', o: true },
+        { n: 'ML Engineer', o: true },
       ],
       applied: false,
     },
@@ -173,7 +173,7 @@
         'hk_tm_v2',
         JSON.stringify(TEAMS.map(t => ({ id: t.id, applied: t.applied })))
       );
-    } catch {}
+    } catch { }
   }
 
   function load() {
@@ -185,7 +185,7 @@
           if (t) t.applied = item.applied;
         });
       }
-    } catch {}
+    } catch { }
   }
 
   /* ── RENDER CARDS ── */
@@ -200,8 +200,8 @@
 
     grid.innerHTML = list.map(t => {
       const openCount = t.roles.filter(r => r.o).length;
-      const filled    = t.members.length;
-      const chips     = t.roles.slice(0, 3)
+      const filled = t.members.length;
+      const chips = t.roles.slice(0, 3)
         .map(r => `<span class="tm-chip">${r.n}</span>`)
         .join('');
 
@@ -239,8 +239,7 @@
               </button>
               <button
                 class="tm-apply-btn ${t.applied ? 'applied' : ''}"
-                onclick="event.stopPropagation(); TMCards.applyCard(${t.id}, this)"
-                ${t.applied ? 'disabled' : ''}>
+                onclick="event.stopPropagation(); TMCards.applyCard(${t.id}, this)">
                 ${t.applied ? '✓ Applied' : 'Apply'}
               </button>
             </div>
@@ -256,7 +255,7 @@
 
     const filled = t.members.length;
     const needed = Math.max(0, t.totalSpots - filled);
-    const lead   = t.members[0] || null;
+    const lead = t.members[0] || null;
 
     /* Members HTML */
     const membersHTML = t.members.length
@@ -386,8 +385,7 @@
       <button
         class="tm-d-apply ${t.applied ? 'applied' : ''}"
         id="tm-d-apply-btn"
-        onclick="${t.applied ? '' : 'TMCards.applyDrawer(' + t.id + ')'}"
-        ${t.applied ? 'disabled' : ''}>
+        onclick="TMCards.applyDrawer(${t.id})">
         ${t.applied ? '✓ Applied — All the best!' : 'Apply to Join'}
       </button>`;
 
@@ -406,43 +404,91 @@
   /* Close on Escape */
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
+  /* ── CUSTOM CONFIRM MODAL ── */
+  function showConfirm() {
+    return new Promise(function (resolve) {
+      var overlay = document.getElementById('tm-confirm-overlay');
+      var yesBtn  = document.getElementById('tm-confirm-yes');
+      var noBtn   = document.getElementById('tm-confirm-cancel');
+      overlay.classList.add('open');
+
+      function cleanup(result) {
+        overlay.classList.remove('open');
+        yesBtn.removeEventListener('click', onYes);
+        noBtn.removeEventListener('click', onNo);
+        overlay.removeEventListener('click', onBg);
+        resolve(result);
+      }
+      function onYes() { cleanup(true); }
+      function onNo()  { cleanup(false); }
+      function onBg(e) { if (e.target === overlay) cleanup(false); }
+
+      yesBtn.addEventListener('click', onYes);
+      noBtn.addEventListener('click', onNo);
+      overlay.addEventListener('click', onBg);
+    });
+  }
+
   /* ── APPLY FROM CARD ── */
   function applyCard(id, btn) {
     const t = TEAMS.find(x => x.id === id);
-    if (!t || t.applied) return;
-    t.applied = true;
-    save();
-    btn.textContent = '✓ Applied';
-    btn.classList.add('applied');
-    btn.disabled = true;
+    if (!t) return;
+
+    if (t.applied) {
+      showConfirm().then(function (yes) {
+        if (!yes) return;
+        t.applied = false;
+        save();
+        btn.textContent = 'Apply';
+        btn.classList.remove('applied');
+      });
+    } else {
+      t.applied = true;
+      save();
+      btn.textContent = '✓ Applied';
+      btn.classList.add('applied');
+    }
   }
 
   /* ── APPLY FROM DRAWER ── */
   function applyDrawer(id) {
     const t = TEAMS.find(x => x.id === id);
-    if (!t || t.applied) return;
-    t.applied = true;
-    save();
-    const btn = document.getElementById('tm-d-apply-btn');
-    if (btn) {
-      btn.textContent = '✓ Applied — All the best!';
-      btn.classList.add('applied');
-      btn.disabled = true;
-      btn.onclick = null;
+    if (!t) return;
+
+    if (t.applied) {
+      showConfirm().then(function (yes) {
+        if (!yes) return;
+        t.applied = false;
+        save();
+        const btn = document.getElementById('tm-d-apply-btn');
+        if (btn) {
+          btn.textContent = 'Apply to Join';
+          btn.classList.remove('applied');
+        }
+        renderGrid(getCurrentList());
+      });
+    } else {
+      t.applied = true;
+      save();
+      const btn = document.getElementById('tm-d-apply-btn');
+      if (btn) {
+        btn.textContent = '✓ Applied — All the best!';
+        btn.classList.add('applied');
+      }
+      renderGrid(getCurrentList());
     }
-    renderGrid(getCurrentList());
   }
 
   /* ── SEARCH + FILTER ── */
-  let _query  = '';
+  let _query = '';
   let _filter = 'All Events';
 
   function getCurrentList() {
     return TEAMS.filter(t => {
-      const q      = _query.toLowerCase();
+      const q = _query.toLowerCase();
       const matchQ = !q ||
-        t.team.toLowerCase().includes(q)  ||
-        t.name.toLowerCase().includes(q)  ||
+        t.team.toLowerCase().includes(q) ||
+        t.name.toLowerCase().includes(q) ||
         t.theme.toLowerCase().includes(q);
       const matchF = _filter === 'All Events' ||
         t.theme.toLowerCase().includes(_filter.toLowerCase().split(' ')[0].toLowerCase());
@@ -489,7 +535,7 @@
           localStorage.setItem('hk_user_teams', JSON.stringify(saved));
         }
       }
-    } catch {}
+    } catch { }
   }
 
   function getRandomAvatar() {
@@ -512,6 +558,6 @@
   setupSearch();
 
   window.TMCards = { openDrawer, close, applyCard, applyDrawer, getRandomAvatar, addTeam };
-  
+
 
 })();

@@ -48,6 +48,7 @@
     phone:    '+91 76661875209',
     linkedin: '',
     github:   '',
+    avatar:   'assets/avatar/shruti.webp',
     skills:   ['Figma', 'UI/UX', 'Prototyping'],
   };
 
@@ -55,6 +56,7 @@
   let approvals    = {};  // { [teamId_appIndex]: 'approve' | 'reject' }
   let activeAppliedId  = null;
   let activeCreatedId  = null;
+  let tempAvatar       = null;
 
   /* ────────────────────────────────────────────
      LOCALSTORAGE HELPERS
@@ -109,10 +111,10 @@
      RENDER PROFILE CARD
   ──────────────────────────────────────────── */
   function renderProfile() {
-    const initials = (profile.name || 'U')
-      .split(' ').map(w => w[0] || '').join('').toUpperCase().slice(0, 2);
+    const avatarEl = document.getElementById('pfAvatar');
+    const avatarUrl = profile.avatar || 'assets/avatar/shruti.webp';
+    avatarEl.innerHTML = `<img src="${esc(avatarUrl)}" alt="${esc(profile.name)}">`;
 
-    document.getElementById('pfAvatar').textContent = initials;
     document.getElementById('pfName').textContent   = profile.name   || '';
     document.getElementById('pfRole').textContent   = profile.role   || '';
     document.getElementById('pfBio').textContent    = profile.bio    || '';
@@ -387,6 +389,14 @@
     document.getElementById('inpPhone').value    = profile.phone    || '';
     document.getElementById('inpLinkedin').value = profile.linkedin || '';
     document.getElementById('inpGithub').value   = profile.github   || '';
+    
+    // Set preview image and store in tempAvatar
+    tempAvatar = profile.avatar || 'assets/avatar/shruti.webp';
+    const previewImg = document.getElementById('imgEditAvatarPreview');
+    if (previewImg) {
+      previewImg.src = tempAvatar;
+    }
+
     editSkills = [...(profile.skills || [])];
     renderEditSkills();
     document.getElementById('pfEditModal').classList.add('open');
@@ -405,9 +415,15 @@
     profile.phone    = document.getElementById('inpPhone').value.trim()    || profile.phone;
     profile.linkedin = document.getElementById('inpLinkedin').value.trim();
     profile.github   = document.getElementById('inpGithub').value.trim();
+    if (tempAvatar) {
+      profile.avatar = tempAvatar;
+    }
     profile.skills   = [...editSkills];
     saveProfile();
     renderProfile();
+    if (window.Auth && typeof window.Auth.updateNav === 'function') {
+      window.Auth.updateNav();
+    }
     closeEditModal();
   }
 
@@ -466,6 +482,30 @@
      BIND DOM EVENTS
   ──────────────────────────────────────────── */
   function bindEvents() {
+    const uploadBtn = document.getElementById('btnUploadAvatar');
+    const fileInp = document.getElementById('inpAvatarFile');
+    if (uploadBtn && fileInp) {
+      uploadBtn.addEventListener('click', () => fileInp.click());
+      fileInp.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (file) {
+          if (file.size > 2 * 1024 * 1024) {
+            alert('Image size should be less than 2MB');
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            tempAvatar = evt.target.result;
+            const previewImg = document.getElementById('imgEditAvatarPreview');
+            if (previewImg) {
+              previewImg.src = tempAvatar;
+            }
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
     document.getElementById('pfEditBtn')
       .addEventListener('click', openEditModal);
 

@@ -41,7 +41,7 @@
       <div id="auth-gate-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
         <div style="background:#0f0f1a;border:1px solid rgba(255,100,100,0.2);border-radius:16px;padding:2rem;width:min(380px,90vw);position:relative;box-shadow:0 0 40px rgba(255,100,100,0.06);text-align:center;">
           <button id="auth-gate-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#aaa;font-size:1.2rem;cursor:pointer;line-height:1;">✕</button>
-          <div style="font-size:2rem;margin-bottom:.8rem;">🔒</div>
+          <div style="margin-bottom:.8rem; display:flex; justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
           <div style="font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Login Required</div>
           <p style="color:#aaa;font-size:.85rem;line-height:1.6;margin-bottom:1.5rem;">Please sign in to continue.<br>You need an account to perform this action.</p>
           <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;">
@@ -141,7 +141,7 @@
               color:#fca5a5 !important;
             }
           </style>
-          <a href="#" id="auth-dd-profile">
+          <a href="profile.html" id="auth-dd-profile">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
             Profile
           </a>
@@ -159,7 +159,7 @@
   /* ── MOVE PROFILE WRAP INTO NAV (next to sign-up btn) ── */
   function mountProfileInNav() {
     const signupBtn = document.getElementById('auth-signup-btn');
-    const wrap      = document.getElementById('auth-profile-wrap');
+    const wrap = document.getElementById('auth-profile-wrap');
     if (signupBtn && wrap) {
       signupBtn.parentNode.insertBefore(wrap, signupBtn.nextSibling);
     }
@@ -197,11 +197,11 @@
 
   /* ── UPDATE NAV ── */
   function updateNav() {
-    var signupBtn  = document.getElementById('auth-signup-btn');
+    var signupBtn = document.getElementById('auth-signup-btn');
     var profileWrap = document.getElementById('auth-profile-wrap');
 
     // Always keep the old extra buttons hidden (they live in HTML but are not used)
-    ['auth-dashboard-btn','auth-profile-btn','auth-logout-btn'].forEach(function(id) {
+    ['auth-dashboard-btn', 'auth-profile-btn', 'auth-logout-btn'].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.style.display = 'none';
     });
@@ -211,12 +211,41 @@
     if (isLoggedIn()) {
       signupBtn.style.display = 'none';
       if (profileWrap) profileWrap.style.display = 'flex';
+
+      // Load profile info and set avatar button image/initials
+      var avatarBtn = document.getElementById('auth-avatar-btn');
+      if (avatarBtn) {
+        var savedProfile = null;
+        try {
+          var saved = localStorage.getItem('hk_profile');
+          if (saved) savedProfile = JSON.parse(saved);
+        } catch (e) {}
+
+        var avatarUrl = '';
+        var initials = '';
+        if (savedProfile) {
+          if (savedProfile.avatar) avatarUrl = savedProfile.avatar;
+          if (savedProfile.name) {
+            initials = savedProfile.name.split(' ').map(function(w) { return w[0] || ''; }).join('').toUpperCase().slice(0, 2);
+          }
+        }
+
+        if (avatarUrl) {
+          avatarBtn.innerHTML = '<img src="' + avatarUrl + '" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">';
+        } else if (initials) {
+          avatarBtn.innerHTML = '<span style="color:#c9a84c;font-family:\'Syne\',sans-serif;font-size:0.85rem;font-weight:700;">' + initials + '</span>';
+        } else {
+          avatarBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
+        }
+      }
     } else {
-      signupBtn.style.display = '';
+      signupBtn.style.display = 'inline-flex';
       if (profileWrap) profileWrap.style.display = 'none';
       closeDrop();
     }
+    document.body.classList.add('auth-ready');
   }
+  document.body.style.visibility = 'visible';
 
   /* ── LOGOUT ── */
   function logout() {
@@ -239,9 +268,27 @@
     document.getElementById('auth-signup-form')
       ?.addEventListener('submit', function (e) {
         e.preventDefault();
+        var nameVal = document.getElementById('auth-name')?.value.trim() || 'User';
         localStorage.setItem('isLoggedIn', 'true');
+
+        // Save sign-up name/avatar to hk_profile if none exists or updating
+        try {
+          var existingProfile = localStorage.getItem('hk_profile');
+          var p = existingProfile ? JSON.parse(existingProfile) : {};
+          p.name = nameVal;
+          if (!p.avatar) {
+            p.avatar = 'assets/avatar/shruti.webp'; // Default avatar for Shruti Gupta
+          }
+          localStorage.setItem('hk_profile', JSON.stringify(p));
+        } catch(err) {}
+
         hideSignUp();
         updateNav();
+
+        // If on profile.html, reload the page to refresh profile cards
+        if (window.location.pathname.indexOf('profile.html') !== -1) {
+          window.location.reload();
+        }
       });
 
     // Login Required modal — buttons
@@ -287,10 +334,9 @@
         _dropOpen ? closeDrop() : openDrop();
       });
 
-    // Dropdown — Profile link (no-op for now, just closes)
+    // Dropdown — Profile link
     document.getElementById('auth-dd-profile')
       ?.addEventListener('click', function (e) {
-        e.preventDefault();
         closeDrop();
       });
 
@@ -331,6 +377,6 @@
   }
 
   /* ── PUBLIC API ── */
-  window.Auth = { requireLogin, showSignUp, showLoginRequired, isLoggedIn };
+  window.Auth = { requireLogin, showSignUp, showLoginRequired, isLoggedIn, updateNav };
 
 })();
