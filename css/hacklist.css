@@ -216,3 +216,10 @@
     gap: 20px;
   }
 }
+
+/* Card Meta & Modal Stat SVGs Accent Color */
+.hs-card-meta svg,
+.event-meta svg,
+.hm-stat-icon svg {
+  color: var(--accent, var(--gold, #D9A441)) !important;
+}

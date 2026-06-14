@@ -1020,18 +1020,25 @@ body::before {
   transform: translateY(-4px);
 }
 
-.mentor-avatar img {
+.mentor-avatar {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  overflow: hidden;
   background: linear-gradient(135deg, var(--accent), #7f1d1d);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  color: #fff;
   margin: 0 auto 1rem;
+}
+
+.mentor-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.mentor-card:last-child .mentor-avatar img {
+  transform: scale(1.35); /* Zoom in to make face clearer */
+  transform-origin: 50% 38%; /* Focus on the face coordinates */
 }
 
 .mentor-card h3 {
@@ -3220,4 +3227,11 @@ body.light-mode .pf-app-name {
 
 body.light-mode .pf-app-role {
   color: var(--fg-muted);
+}
+
+/* Card Meta & Modal Stat SVGs Accent Color */
+.hs-card-meta svg,
+.event-meta svg,
+.hm-stat-icon svg {
+  color: var(--accent, var(--gold, #D9A441)) !important;
 }
