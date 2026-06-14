@@ -155,7 +155,7 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   padding: 8px 14px;
-  border-radius: 7px;
+  border-radius: 50px;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }
@@ -288,7 +288,7 @@
   font-weight: 700;
   letter-spacing: 1px;
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: 50px;
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s, border-color 0.2s;
@@ -370,7 +370,7 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   padding: 10px 20px;
-  border-radius: 7px;
+  border-radius: 50px;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
 }
@@ -390,7 +390,7 @@
   letter-spacing: 1.5px;
   text-transform: uppercase;
   padding: 10px 24px;
-  border-radius: 7px;
+  border-radius: 50px;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
 }
@@ -755,7 +755,7 @@
   color: #3fc980;
   border: 1px solid rgba(63, 201, 128, 0.25);
   padding: 5px 13px;
-  border-radius: 5px;
+  border-radius: 50px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   font-weight: 700;
@@ -774,7 +774,7 @@
   color: #e05050;
   border: 1px solid rgba(224, 80, 80, 0.25);
   padding: 5px 13px;
-  border-radius: 5px;
+  border-radius: 50px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
   font-weight: 700;
@@ -817,7 +817,7 @@
   background: rgba(224, 80, 80, 0.08);
   border: 1px solid rgba(224, 80, 80, 0.25);
   color: #e05050;
-  border-radius: 8px;
+  border-radius: 50px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   font-weight: 700;
@@ -937,7 +937,7 @@
   font-size: 0.875rem;
   font-weight: 600;
   padding: 13px 24px;
-  border-radius: 10px;
+  border-radius: 50px;
   cursor: pointer;
   transition: all 0.25s ease;
   outline: none;

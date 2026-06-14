@@ -50,7 +50,7 @@
     card.setAttribute('aria-label', `${h.title} — click for details`);
 
     card.innerHTML = `
-      <img class="hs-card-img" src="${h.image}" alt="${h.title}" loading="lazy" />
+      <img class="hs-card-img" src="${h.image}" alt="${h.title}" loading="lazy" decoding="async"/>
       <div class="hs-card-scrim"></div>
       <button class="hs-like-btn liked" data-stop aria-label="Unlike this hackathon">
         <svg class="hs-like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

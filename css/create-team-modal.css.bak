@@ -89,7 +89,7 @@
 .ctm-close {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: transparent;
   color: rgba(255, 255, 255, 0.4);
@@ -252,7 +252,7 @@
   padding: 10px 14px;
   background: rgba(217, 164, 65, 0.1);
   border: 1px solid rgba(217, 164, 65, 0.3);
-  border-radius: 50px;
+  border-radius: 10px;
   color: #d9a441;
   font-family: var(--font-mono);
   font-size: 0.7rem;
@@ -352,7 +352,7 @@
   background: #d9a441;
   color: #000;
   border: none;
-  border-radius: 50px;
+  border-radius: 10px;
   font-family: var(--font-mono);
   font-size: 0.73rem;
   font-weight: 800;

@@ -76,11 +76,11 @@
 .hacklist-page .hs-card:nth-child(n+6) { animation-delay: 0.3s; }
 
 .hacklist-page .hs-card-btn {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50px !important; /* Strict 50px pill shape constraint */
 }
 
 .hacklist-page .hs-like-btn {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50% !important; /* Circular like button */
 }
 
 /* Modal and related elements */
@@ -89,11 +89,11 @@
 }
 
 .hacklist-page .hm-register {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50px !important; /* Premium rounded pill shape */
 }
 
 .hacklist-page .hm-close {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50% !important; /* Circular close button */
 }
 
 .hacklist-page .hm-stat {
@@ -104,7 +104,7 @@
 .hacklist-page .btn-primary,
 .hacklist-page .nav-cta,
 .hacklist-page .btn-primary.nav-cta {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50px !important; /* Premium rounded pill shape */
 }
 
 /* ── EMPTY STATE ── */
@@ -161,7 +161,7 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 50px !important; /* Premium rounded pill shape */
   text-decoration: none;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   border: none;

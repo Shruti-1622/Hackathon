@@ -69,7 +69,7 @@
       theme: 'Climate Tech',
       description: 'Using IoT and data science to build a real-time carbon footprint tracker for Indian cities. Join us to build something that matters.',
       deadline: '2026-07-30',
-      creationDate: '2025-05-28',
+      creationDate: '2026-05-28',
       totalSpots: 6,
       experienceLevel: 'Beginner Friendly',
       techStack: ['Arduino', 'Python', 'MongoDB', 'Next.js'],
@@ -558,5 +558,6 @@
   setupSearch();
 
   window.TMCards = { openDrawer, close, applyCard, applyDrawer, getRandomAvatar, addTeam };
+
 
 })();

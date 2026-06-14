@@ -324,7 +324,7 @@ form {
     padding: 1.1rem;
     background: var(--accent-gradient);
     border: none;
-    border-radius: 14px;
+    border-radius: 50px;
     color: #000000;
     font-family: var(--font-outfit);
     font-size: 1rem;

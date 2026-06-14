@@ -255,7 +255,7 @@
       if (el) el.selectedIndex = 0;
     });
 
-    // Show success, show form
+    // Hide success, show form
     const formBody = document.getElementById('ctm-form-body');
     const success  = document.getElementById('ctm-success');
     const footer   = document.getElementById('ctm-footer');

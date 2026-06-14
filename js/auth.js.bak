@@ -131,9 +131,16 @@
     window.location.href = 'signup.html?mode=signup&redirect=' + encodeURIComponent(window.location.href);
   }
 
-  /* ── SHOW LOGIN REQUIRED ── */
+  function hideSignUp() {
+    // modal overlay is deprecated, redirect handles it
+  }
+
   function showLoginRequired() {
     window.location.href = 'signup.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
+  }
+
+  function hideLoginRequired() {
+    // modal overlay is deprecated, redirect handles it
   }
 
   /* ── DROPDOWN TOGGLE ── */

@@ -218,7 +218,7 @@
   letter-spacing: .1em; text-transform: uppercase;
   text-decoration: none !important;
   cursor: pointer; width: 100%;
-  clip-path: polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);
+  border-radius: 50px;
   transition: background .2s, color .2s, border-color .2s;
   border-bottom: none !important;
 }
