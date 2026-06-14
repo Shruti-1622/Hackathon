@@ -13,7 +13,7 @@ window.HACKATHONS = [
     prize: "₹5,00,000",
     month: "July",
     day: "18",
-    image: "assets/hackathon events/googleh.png",
+    image: "assets/hackathon events/googleh.webp",
     link: "https://devfolio.co"
   },
   {
@@ -26,7 +26,7 @@ window.HACKATHONS = [
     prize: "₹3,00,000",
     month: "July",
     day: "02",
-    image: "assets/hackathon events/red.png",
+    image: "assets/hackathon events/red.webp",
     link: "https://unstop.com"
   },
   {
@@ -39,7 +39,7 @@ window.HACKATHONS = [
     prize: "₹7,50,000",
     month: "Aug",
     day: "14",
-    image: "assets/hackathon events/blue.jpg",
+    image: "assets/hackathon events/blue.webp",
     link: "https://devpost.com"
   },
   {
@@ -52,7 +52,7 @@ window.HACKATHONS = [
     prize: "₹2,00,000",
     month: "Sept",
     day: "05",
-    image: "assets/hackathon events/cloudf.jpg",
+    image: "assets/hackathon events/cloudf.webp",
     link: "https://unstop.com"
   },
   {
@@ -65,7 +65,7 @@ window.HACKATHONS = [
     prize: "₹10,00,000",
     month: "Oct",
     day: "02",
-    image: "assets/hackathon events/ethokyo.png",
+    image: "assets/hackathon events/ethokyo.webp",
     link: "https://ethglobal.com"
   },
   {
@@ -78,7 +78,7 @@ window.HACKATHONS = [
     prize: "₹50,000",
     month: "Oct",
     day: "02",
-    image: "assets/hackathon events/en.jpeg",
+    image: "assets/hackathon events/en.webp",
     link: "https://ethglobal.com"
   },
   {
@@ -91,7 +91,7 @@ window.HACKATHONS = [
     prize: "₹3,50,000",
     month: "Nov",
     day: "05",
-    image: "assets/hackathon events/github.png",
+    image: "assets/hackathon events/github.webp",
     link: "https://github.com"
   },
   {
@@ -104,7 +104,7 @@ window.HACKATHONS = [
     prize: "₹6,00,000",
     month: "Nov",
     day: "09",
-    image: "assets/hackathon events/cisco.jpeg",
+    image: "assets/hackathon events/cisco.webp",
     link: "https://www.cisco.com"
   },
   {
@@ -117,7 +117,7 @@ window.HACKATHONS = [
     prize: "₹8,00,000",
     month: "Dec",
     day: "30",
-    image: "assets/hackathon events/nvidia.png",
+    image: "assets/hackathon events/nvidia.webp",
     link: "https://www.nvidia.com"
   }
 ];

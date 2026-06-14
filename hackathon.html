@@ -17,8 +17,7 @@
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="css/carousel.css">
-
-
+  <link rel="icon" href="data:;base64,=">
 </head>
 
 <body>
@@ -47,6 +46,8 @@
 
   </nav>
 
+  <main>
+
 
 
   <!-- //new code -->
@@ -67,9 +68,9 @@
       <!-- LEFT: video card -->
       <div class="spotlight-video-card">
         <video id="spotlightVideo" class="spotlight-video" autoplay muted loop playsinline
-          poster="assets/hackathon events/office.jpg">
+          poster="assets/hackathon events/office.webp">
           <!-- swap src for a real promo .mp4 if you have one -->
-          <source src="assets/hackathon events/adobe video.mp4" type="video/mp4">
+          <source data-src="assets/hackathon events/adobe video.mp4" type="video/mp4">
         </video>
 
         <!-- always-on dark scrim -->
@@ -118,7 +119,7 @@
 
         <div class="feat-side-card">
 
-          <img src="assets/hackathon events/microsoftt.jpeg" alt="Microsoft Imagine Cup">
+          <img src="assets/hackathon events/microsoftt.webp" alt="Microsoft Imagine Cup">
 
           <div class="feat-card-overlay">
             <h3>Imagine Cup 2026</h3>
@@ -167,7 +168,7 @@
 
   <!-- ── MODAL OVERLAY ── -->
   <div class="hm-overlay" id="hmOverlay">
-    <div class="hm-modal" id="hmModal" role="dialog" aria-modal="true">
+    <div class="hm-modal" id="hmModal" role="dialog" aria-modal="true" aria-labelledby="hmTitle">
       <button class="hm-close" id="hmClose" aria-label="Close">✕</button>
 
       <div class="hm-img-wrap">
@@ -203,6 +204,8 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-main">
@@ -230,7 +233,7 @@
       </div>
       <nav class="footer-nav">
         <div class="footer-nav-col">
-          <h4>Platform</h4>
+          <h3>Platform</h3>
           <ul>
             <li><a href="hackathon.html">Hackathons</a></li>
             <li><a href="teamfinder.html">Find Teams</a></li>
@@ -239,7 +242,7 @@
           </ul>
         </div>
         <div class="footer-nav-col">
-          <h4>Account</h4>
+          <h3>Account</h3>
           <ul>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="signup.html">Sign Up</a></li>
@@ -280,6 +283,16 @@
           }
         }, true);
       });
+
+      // Lazy load spotlight video to prevent LCP / payload weight block
+      var video = document.getElementById('spotlightVideo');
+      if (video) {
+        var source = video.querySelector('source');
+        if (source && source.dataset.src) {
+          source.src = source.dataset.src;
+          video.load();
+        }
+      }
     });
   </script>
 </body>

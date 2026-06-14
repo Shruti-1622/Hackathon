@@ -36,7 +36,6 @@ function buildCard(h) {
   card.dataset.id = h.id;
   card.setAttribute('role', 'button');
   card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `${h.title} — click for details`);
 
   const liked = getLikedEvents();
   const isLiked = liked.includes(h.id);
