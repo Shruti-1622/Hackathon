@@ -92,7 +92,18 @@
             <div class="ctm-row">
               <div class="ctm-field">
                 <label class="ctm-label" for="ctm-spots">Max Team Size *</label>
-                <input class="ctm-input" id="ctm-spots" type="number" min="2" max="12" placeholder="e.g. 5">
+                <input class="ctm-input" id="ctm-spots" type="number" min="2" max="12" placeholder="e.g. 7">
+              </div>
+              <div class="ctm-field">
+                <label class="ctm-label" for="ctm-current-members">Current Members *</label>
+                <input class="ctm-input" id="ctm-current-members" type="number" min="1" max="12" placeholder="e.g. 5">
+              </div>
+            </div>
+
+            <div class="ctm-row">
+              <div class="ctm-field">
+                <label class="ctm-label" for="ctm-lead">Your Name *</label>
+                <input class="ctm-input" id="ctm-lead" type="text" placeholder="Team lead name" maxlength="40" autocomplete="off">
               </div>
               <div class="ctm-field">
                 <label class="ctm-label" for="ctm-exp">Experience Level</label>
@@ -107,10 +118,6 @@
               <div class="ctm-field">
                 <label class="ctm-label" for="ctm-deadline">Application Deadline</label>
                 <input class="ctm-input" id="ctm-deadline" type="date">
-              </div>
-              <div class="ctm-field">
-                <label class="ctm-label" for="ctm-lead">Your Name *</label>
-                <input class="ctm-input" id="ctm-lead" type="text" placeholder="Team lead name" maxlength="40" autocomplete="off">
               </div>
             </div>
 
@@ -163,6 +170,16 @@
     document.body.insertAdjacentHTML('beforeend', html);
   }
 
+  function updateCurrentMembersCount() {
+    const spotsEl = document.getElementById('ctm-spots');
+    const currentEl = document.getElementById('ctm-current-members');
+    if (!spotsEl || !currentEl) return;
+    const spots = parseInt(spotsEl.value) || 0;
+    if (spots > 0) {
+      currentEl.value = Math.max(1, spots - roles.length);
+    }
+  }
+
   /* ── RENDER ROLE TAGS ── */
   function renderRoles() {
     const list = document.getElementById('ctm-roles-list');
@@ -172,6 +189,7 @@
         ${r.n}
         <button type="button" aria-label="Remove" onclick="CreateTeamModal._removeRole(${i})">✕</button>
       </span>`).join('');
+    updateCurrentMembersCount();
   }
 
   /* ── RENDER STACK TAGS ── */
@@ -227,7 +245,7 @@
 
     // Reset form fields
     ['ctm-team-name','ctm-theme','ctm-desc','ctm-lead',
-     'ctm-role-input','ctm-stack-input','ctm-spots','ctm-deadline']
+     'ctm-role-input','ctm-stack-input','ctm-spots','ctm-current-members','ctm-deadline']
       .forEach(id => {
         const el = document.getElementById(id);
         if (el) el.value = '';
@@ -257,18 +275,19 @@
 
   /* ── SUBMIT ── */
   function submit() {
-    const teamName = (document.getElementById('ctm-team-name')?.value || '').trim();
-    const hackathon= document.getElementById('ctm-hackathon')?.value || '';
-    const theme    = (document.getElementById('ctm-theme')?.value    || '').trim();
-    const desc     = (document.getElementById('ctm-desc')?.value     || '').trim();
-    const lead     = (document.getElementById('ctm-lead')?.value     || '').trim();
-    const spots    = parseInt(document.getElementById('ctm-spots')?.value) || 4;
-    const exp      = document.getElementById('ctm-exp')?.value  || 'All Levels';
-    const deadline = document.getElementById('ctm-deadline')?.value || '';
+    const teamName      = (document.getElementById('ctm-team-name')?.value || '').trim();
+    const hackathon     = document.getElementById('ctm-hackathon')?.value || '';
+    const theme         = (document.getElementById('ctm-theme')?.value    || '').trim();
+    const desc          = (document.getElementById('ctm-desc')?.value     || '').trim();
+    const lead          = (document.getElementById('ctm-lead')?.value     || '').trim();
+    const spots         = parseInt(document.getElementById('ctm-spots')?.value) || 4;
+    const currentMembersRaw = parseInt(document.getElementById('ctm-current-members')?.value);
+    const currentMembers    = isNaN(currentMembersRaw) ? 1 : Math.max(1, Math.min(currentMembersRaw, spots));
+    const exp           = document.getElementById('ctm-exp')?.value  || 'All Levels';
+    const deadline      = document.getElementById('ctm-deadline')?.value || '';
 
     // Basic validation
     if (!teamName || !hackathon || !theme || !desc || !lead) {
-      // Shake the submit button
       const btn = document.getElementById('ctm-submit-btn');
       btn.style.transition = 'transform 0.08s';
       btn.style.transform  = 'translateX(-4px)';
@@ -276,6 +295,29 @@
       setTimeout(() => btn.style.transform = 'translateX(-3px)', 160);
       setTimeout(() => btn.style.transform = 'translateX(0)',    240);
       return;
+    }
+
+    // Validate: current members must be less than total spots
+    if (currentMembers >= spots) {
+      const btn = document.getElementById('ctm-submit-btn');
+      btn.style.transition = 'transform 0.08s';
+      btn.style.transform  = 'translateX(-4px)';
+      setTimeout(() => btn.style.transform = 'translateX(4px)',  80);
+      setTimeout(() => btn.style.transform = 'translateX(-3px)', 160);
+      setTimeout(() => btn.style.transform = 'translateX(0)',    240);
+      // Highlight the offending fields
+      const spotsEl   = document.getElementById('ctm-spots');
+      const curEl     = document.getElementById('ctm-current-members');
+      [spotsEl, curEl].forEach(el => {
+        if (el) { el.style.borderColor = '#ef4444'; setTimeout(() => el.style.borderColor = '', 1500); }
+      });
+      return;
+    }
+
+    // Build members array: lead + (currentMembers - 1) placeholder members
+    const membersArr = [{ n: lead, r: 'Team Lead' }];
+    for (let i = 1; i < currentMembers; i++) {
+      membersArr.push({ n: `Member ${i + 1}`, r: 'Member' });
     }
 
     // Build new team object
@@ -296,7 +338,7 @@
       totalSpots:      spots,
       experienceLevel: exp,
       techStack:       stack.slice(),
-      members:         [{ n: lead, r: 'Team Lead' }],
+      members:         membersArr,
       roles:           roles.map(r => ({ n: r.n, o: true })),
       applied:         false,
       userCreated:     true,
@@ -454,6 +496,10 @@
         close();
       }
     });
+
+    // Auto-calculate members count
+    document.getElementById('ctm-spots')
+      ?.addEventListener('input', updateCurrentMembersCount);
 
     // Add role on button click
     document.getElementById('ctm-add-role-btn')

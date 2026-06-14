@@ -26,8 +26,9 @@
       <li><a href="hackathon.html">Hackathons</a></li>
       <li><a href="teamfinder.html">Find Teams</a></li>
       <li><a href="gallery.html" class="active">Hall of Fame</a></li>
+      <li><a href="hacklist.html">Hacklist</a></li>
     </ul>
-    <a href="#" id="auth-signup-btn" class="btn-primary nav-cta">Sign up!</a>
+    <a href="signup.html" id="auth-signup-btn" class="btn-primary nav-cta">Get Started</a>
     <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
     <a href="profile.html" id="auth-profile-btn" class="btn-primary nav-cta"
       style="display:none;margin-left:.5rem;">Profile</a>
@@ -64,7 +65,15 @@
           <div class="hof-spotlight-glow"></div>
         </div>
         <div class="hof-spotlight-info">
-          <div class="hof-winner-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 6px;"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path><path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"></path></svg>Grand Champion</div>
+          <div class="hof-winner-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffd700"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              style="vertical-align: middle; margin-right: 6px;">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+              <path d="M4 22h16"></path>
+              <path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path>
+              <path d="M12 2a5 5 0 0 0-5 5v3a5 5 0 0 0 10 0V7a5 5 0 0 0-5-5z"></path>
+            </svg>Grand Champion</div>
           <h2 class="hof-spotlight-title">NeuralBridge</h2>
           <p class="hof-spotlight-team">by <strong>Team Singularity</strong> — Aarav Mehta, Diya Krishnan, Rohan Iyer
           </p>
@@ -130,23 +139,23 @@
           <div class="hof-moment-overlay"><span>CloudFest 26 · Opening Night</span></div>
         </div>
         <div class="hof-moment-item">
-          <img src="/hackathon copy/assets/bts/sleep.webp" alt="Team coding">
+          <img src="assets/bts/sleep.webp" alt="Team coding">
           <div class="hof-moment-overlay"><span>48hr Coding Sprint</span></div>
         </div>
         <div class="hof-moment-item">
-          <img src="/hackathon copy/assets/bts/winner.webp" alt="Awards stage">
+          <img src="assets/bts/winner.webp" alt="Awards stage">
           <div class="hof-moment-overlay"><span>Awards Night · 2025</span></div>
         </div>
         <div class="hof-moment-item hof-wide">
-          <img src="/hackathon copy/assets/bts/organisation.webp" alt="Group photo">
+          <img src="assets/bts/organisation.webp" alt="Group photo">
           <div class="hof-moment-overlay"><span>All 200+ Hackers · 2026</span></div>
         </div>
         <div class="hof-moment-item">
-          <img src="/hackathon copy/assets/bts/mentor.webp" alt="Mentors">
+          <img src="assets/bts/mentor.webp" alt="Mentors">
           <div class="hof-moment-overlay"><span>Mentor Sessions</span></div>
         </div>
         <div class="hof-moment-item hof-tall">
-          <img src="/hackathon copy/assets/bts/second.webp" alt="Demo day">
+          <img src="assets/bts/second.webp" alt="Demo day">
           <div class="hof-moment-overlay"><span>Demo Day · Amazon 26</span></div>
         </div>
       </div>
@@ -199,11 +208,16 @@
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 HackHub. All rights reserved.</p>
-      <p class="footer-built">Built with <svg width="10" height="10" viewBox="0 0 24 24" fill="#ff4444" stroke="#ff4444" stroke-width="2" style="vertical-align: middle; margin: 0 2px;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> for hackers</p>
+      <p class="footer-built">Built with <svg width="10" height="10" viewBox="0 0 24 24" fill="#ff4444" stroke="#ff4444"
+          stroke-width="2" style="vertical-align: middle; margin: 0 2px;">
+          <path
+            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+          </path>
+        </svg> for hackers</p>
     </div>
   </footer>
 
-  <script src="js/auth.js"></script>
+  <script src="js/auth.js?v=1.1"></script>
   <script>
     // Hamburger
     document.getElementById('hamburger').addEventListener('click', () => {
@@ -259,8 +273,8 @@
       grid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     }
 
-    // Fetch winners from winner.json
-    fetch('projects.json')
+    // Fetch winners from data/projects.json
+    fetch('data/projects.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to load winner.json');

@@ -3,125 +3,31 @@
    Infinite-scroll hackathon cards — pause on hover, modal on click
    ============================================================ */
 
-const HACKATHONS = [
-  {
-    id: 1,
-    title: "AI FOR IMPACT",
-    organizer: "Google",
-    category: "AI",
-    location: "Bangalore",
-    duration: "48 Hours",
-    prize: "₹5,00,000",
-    month: "July",
-    day: "18",
-    image: "assets/hackathon events/googleh.png",
-    link: "https://devfolio.co"
-  },
-  {
-    id: 2,
-    title: "VIBEATHON",
-    organizer: "ISRO",
-    category: "Space",
-    location: "Hyderabad",
-    duration: "36 Hours",
-    prize: "₹3,00,000",
-    month: "July",
-    day: "02",
-    image: "assets/hackathon events/red.png",
-    link: "https://unstop.com"
-  },
-  {
-    id: 3,
-    title: "DEVFUSION 2026",
-    organizer: "Devfolio",
-    category: "Web",
-    location: "Mumbai",
-    duration: "72 Hours",
-    prize: "₹7,50,000",
-    month: "Aug",
-    day: "14",
-    image: "assets/hackathon events/blue.jpg",
-    link: "https://devpost.com"
-  },
-  {
-    id: 4,
-    title: "CLOUDFEST",
-    organizer: "Microsoft",
-    category: "Cloud",
-    location: "Pune",
-    duration: "24 Hours",
-    prize: "₹2,00,000",
-    month: "Sept",
-    day: "05",
-    image: "assets/hackathon events/cloudf.jpg",
-    link: "https://unstop.com"
-  },
-  {
-    id: 5,
-    title: "WEB3 BUILDATHON",
-    organizer: "Polygon",
-    category: "Web3",
-    location: "Delhi",
-    duration: "72 Hours",
-    prize: "₹10,00,000",
-    month: "Oct",
-    day: "02",
-    image: "assets/hackathon events/ethokyo.png",
-    link: "https://ethglobal.com"
-  },
-  {
-    id: 6,
-    title: "ENIGMA",
-    organizer: "IIT (BHU)",
-    category: "ML",
-    location: "Delhi",
-    duration: "60 Hours",
-    prize: "₹50,000",
-    month: "Oct",
-    day: "02",
-    image: "assets/hackathon events/en.jpeg",
-    link: "https://ethglobal.com"
-  },
-  {
-    id: 7,
-    title: "MIDNIGHT CODEFEST",
-    organizer: "GitHub",
-    category: "Web",
-    location: "Hyderabad",
-    duration: "36 Hours",
-    prize: "₹3,50,000",
-    month: "Nov",
-    day: "05",
-    image: "assets/hackathon events/github.png",
-    link: "https://github.com"
-  },
-  {
-    id: 8,
-    title: "CYBER NEXUS",
-    organizer: "Cisco",
-    category: "Cybersecurity",
-    location: "Bangalore",
-    duration: "48 Hours",
-    prize: "₹6,00,000",
-    month: "Nov",
-    day: "09",
-    image: "assets/hackathon events/cisco.jpeg",
-    link: "https://www.cisco.com"
-  },
-  {
-    id: 9,
-    title: "NEURALVERSE AI",
-    organizer: "NVIDIA",
-    category: "AI",
-    location: "Mumbai",
-    duration: "72 Hours",
-    prize: "₹8,00,000",
-    month: "Dec",
-    day: "30",
-    image: "assets/hackathon events/nvidia.png",
-    link: "https://www.nvidia.com"
+const HACKATHONS = window.HACKATHONS || [];
+
+/* ── LIKED EVENTS HELPERS ── */
+function getLikedEvents() {
+  try {
+    return JSON.parse(localStorage.getItem('hk_liked_events') || '[]');
+  } catch (e) {
+    return [];
   }
-];
+}
+
+function toggleLikeEvent(id) {
+  try {
+    let liked = getLikedEvents();
+    if (liked.includes(id)) {
+      liked = liked.filter(x => x !== id);
+    } else {
+      liked.push(id);
+    }
+    localStorage.setItem('hk_liked_events', JSON.stringify(liked));
+    return liked.includes(id);
+  } catch (e) {
+    return false;
+  }
+}
 
 /* ── BUILD CARDS ── */
 function buildCard(h) {
@@ -132,9 +38,17 @@ function buildCard(h) {
   card.setAttribute('tabindex', '0');
   card.setAttribute('aria-label', `${h.title} — click for details`);
 
+  const liked = getLikedEvents();
+  const isLiked = liked.includes(h.id);
+
   card.innerHTML = `
     <img class="hs-card-img" src="${h.image}" alt="${h.title}" loading="lazy" />
     <div class="hs-card-scrim"></div>
+    <button class="hs-like-btn ${isLiked ? 'liked' : ''}" data-stop aria-label="Like this hackathon">
+      <svg class="hs-like-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    </button>
     <span class="hs-card-cat">${h.category}</span>
     <div class="hs-card-body">
       <span class="hs-card-organizer">${h.organizer}</span>
@@ -144,18 +58,47 @@ function buildCard(h) {
         <span>📍 ${h.location}</span>
       </div>
       <a class="hs-card-btn" href="${h.link}" target="_blank" rel="noopener"
-         data-stop>Register</a>
+         data-stop data-register-link>Register</a>
     </div>
   `;
 
-  /* open modal on card click (not the register btn) */
+  /* Register button — require login before navigating */
+  const registerBtn = card.querySelector('[data-register-link]');
+  registerBtn.addEventListener('click', function (e) {
+    if (window.Auth && !window.Auth.isLoggedIn()) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      window.Auth.showLoginRequired();
+    }
+  }, true);
+
+  /* Like button click handler */
+  const likeBtn = card.querySelector('.hs-like-btn');
+  likeBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const active = toggleLikeEvent(h.id);
+    // update all clones of this card in the track
+    const allButtonsForId = document.querySelectorAll(`.hs-card[data-id="${h.id}"] .hs-like-btn`);
+    allButtonsForId.forEach(btn => {
+      if (active) {
+        btn.classList.add('liked');
+      } else {
+        btn.classList.remove('liked');
+      }
+    });
+  });
+
+  /* open modal on card click (not the register btn or like btn) */
   card.addEventListener('click', (e) => {
-    if (e.target.closest('[data-stop]')) return; // let register btn navigate
+    if (e.target.closest('[data-stop]')) return; // let register / like btn handle navigation/clicks
     openModal(h);
   });
 
   card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') openModal(h);
+    if (e.key === 'Enter' || e.key === ' ') {
+      if (e.target.closest('[data-stop]')) return;
+      openModal(h);
+    }
   });
 
   return card;
@@ -202,7 +145,15 @@ function openModal(h) {
   hmCategory.textContent = h.category;
   hmOrg.textContent      = h.organizer;
   hmTitle.textContent    = h.title;
-  hmReg.href             = h.link;
+  hmReg.href = h.link;
+
+  /* Gate: intercept Register Now click if not logged in */
+  hmReg.onclick = function (e) {
+    if (window.Auth && !window.Auth.isLoggedIn()) {
+      e.preventDefault();
+      window.Auth.showLoginRequired();
+    }
+  };
 
   hmStats.innerHTML = `
     <div class="hm-stat">

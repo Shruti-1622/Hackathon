@@ -13,45 +13,6 @@
   /* ── INJECT MODALS + PROFILE AVATAR ── */
   function injectUI() {
     const html = `
-      <!-- SIGN UP MODAL -->
-      <div id="auth-modal-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-        <div style="background:#0f0f1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;width:min(420px,90vw);position:relative;box-shadow:0 0 40px rgba(0,200,255,0.08);">
-          <button id="auth-modal-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#aaa;font-size:1.2rem;cursor:pointer;line-height:1;">✕</button>
-          <div style="font-family:'Orbitron',sans-serif;font-size:.7rem;letter-spacing:.1em;color:#00c8ff;margin-bottom:.4rem;">NEW ACCOUNT</div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:1.5rem;">Create Your Squad</div>
-          <form id="auth-signup-form" autocomplete="off">
-            <div style="margin-bottom:1rem;">
-              <label style="display:block;font-size:.75rem;color:#aaa;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;">Name</label>
-              <input id="auth-name" type="text" placeholder="Your name" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:.7rem 1rem;color:#fff;font-size:.9rem;outline:none;">
-            </div>
-            <div style="margin-bottom:1rem;">
-              <label style="display:block;font-size:.75rem;color:#aaa;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;">Email</label>
-              <input id="auth-email" type="email" placeholder="you@example.com" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:.7rem 1rem;color:#fff;font-size:.9rem;outline:none;">
-            </div>
-            <div style="margin-bottom:1.5rem;">
-              <label style="display:block;font-size:.75rem;color:#aaa;margin-bottom:.4rem;font-family:'JetBrains Mono',monospace;">Password</label>
-              <input id="auth-password" type="password" placeholder="••••••••" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:.7rem 1rem;color:#fff;font-size:.9rem;outline:none;">
-            </div>
-            <button type="submit" style="width:100%;padding:.8rem;background:linear-gradient(135deg,#00c8ff,#0077ff);border:none;border-radius:8px;color:#000;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.06em;cursor:pointer;">CREATE ACCOUNT →</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- LOGIN REQUIRED MODAL -->
-      <div id="auth-gate-overlay" style="display:none;position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
-        <div style="background:#0f0f1a;border:1px solid rgba(255,100,100,0.2);border-radius:16px;padding:2rem;width:min(380px,90vw);position:relative;box-shadow:0 0 40px rgba(255,100,100,0.06);text-align:center;">
-          <button id="auth-gate-close" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:#aaa;font-size:1.2rem;cursor:pointer;line-height:1;">✕</button>
-          <div style="margin-bottom:.8rem; display:flex; justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff6464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
-          <div style="font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem;">Login Required</div>
-          <p style="color:#aaa;font-size:.85rem;line-height:1.6;margin-bottom:1.5rem;">Please sign in to continue.<br>You need an account to perform this action.</p>
-          <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;">
-            <button id="auth-gate-login" style="padding:.65rem 1.4rem;background:linear-gradient(135deg,#00c8ff,#0077ff);border:none;border-radius:8px;color:#000;font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.06em;cursor:pointer;">Login</button>
-            <button id="auth-gate-signup" style="padding:.65rem 1.4rem;background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:8px;color:#fff;font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.06em;cursor:pointer;">Sign Up</button>
-            <button id="auth-gate-cancel" style="padding:.65rem 1.4rem;background:transparent;border:1px solid rgba(255,255,255,0.08);border-radius:8px;color:#777;font-family:'Orbitron',sans-serif;font-size:.7rem;cursor:pointer;">Cancel</button>
-          </div>
-        </div>
-      </div>
-
       <!-- PROFILE AVATAR + DROPDOWN (injected next to sign-up btn) -->
       <div id="auth-profile-wrap" style="display:none;position:relative;">
 
@@ -167,19 +128,19 @@
 
   /* ── SHOW / HIDE MODALS ── */
   function showSignUp() {
-    document.getElementById('auth-modal-overlay').style.display = 'flex';
+    window.location.href = 'signup.html?mode=signup&redirect=' + encodeURIComponent(window.location.href);
   }
 
   function hideSignUp() {
-    document.getElementById('auth-modal-overlay').style.display = 'none';
+    // modal overlay is deprecated, redirect handles it
   }
 
   function showLoginRequired() {
-    document.getElementById('auth-gate-overlay').style.display = 'flex';
+    window.location.href = 'signup.html?mode=login&redirect=' + encodeURIComponent(window.location.href);
   }
 
   function hideLoginRequired() {
-    document.getElementById('auth-gate-overlay').style.display = 'none';
+    // modal overlay is deprecated, redirect handles it
   }
 
   /* ── DROPDOWN TOGGLE ── */
@@ -256,66 +217,21 @@
 
   /* ── BIND EVENTS ── */
   function bindEvents() {
-    // Sign Up modal — close
-    document.getElementById('auth-modal-close')
-      ?.addEventListener('click', hideSignUp);
-    document.getElementById('auth-modal-overlay')
-      ?.addEventListener('click', function (e) {
-        if (e.target === this) hideSignUp();
-      });
-
-    // Sign Up form — submit
-    document.getElementById('auth-signup-form')
-      ?.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var nameVal = document.getElementById('auth-name')?.value.trim() || 'User';
-        localStorage.setItem('isLoggedIn', 'true');
-
-        // Save sign-up name/avatar to hk_profile if none exists or updating
-        try {
-          var existingProfile = localStorage.getItem('hk_profile');
-          var p = existingProfile ? JSON.parse(existingProfile) : {};
-          p.name = nameVal;
-          if (!p.avatar) {
-            p.avatar = 'assets/avatar/shruti.webp'; // Default avatar for Shruti Gupta
-          }
-          localStorage.setItem('hk_profile', JSON.stringify(p));
-        } catch(err) {}
-
-        hideSignUp();
-        updateNav();
-
-        // If on profile.html, reload the page to refresh profile cards
-        if (window.location.pathname.indexOf('profile.html') !== -1) {
-          window.location.reload();
+    // Global click interceptor for registration gating
+    document.addEventListener('click', function (e) {
+      var target = e.target.closest('.event-card, .feat-register-btn, .event-register-btn, .register-btn, .hm-register');
+      if (target) {
+        if (!isLoggedIn()) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          showLoginRequired();
         }
-      });
+      }
+    }, true);
 
-    // Login Required modal — buttons
-    document.getElementById('auth-gate-close')
-      ?.addEventListener('click', hideLoginRequired);
-    document.getElementById('auth-gate-cancel')
-      ?.addEventListener('click', hideLoginRequired);
-    document.getElementById('auth-gate-overlay')
-      ?.addEventListener('click', function (e) {
-        if (e.target === this) hideLoginRequired();
-      });
-    document.getElementById('auth-gate-login')
-      ?.addEventListener('click', function () {
-        hideLoginRequired();
-        showSignUp();
-      });
-    document.getElementById('auth-gate-signup')
-      ?.addEventListener('click', function () {
-        hideLoginRequired();
-        showSignUp();
-      });
-
-    // Escape closes everything
+    // Escape closes dropdown
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') {
-        hideSignUp();
-        hideLoginRequired();
         closeDrop();
       }
     });

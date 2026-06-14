@@ -57,6 +57,7 @@
   let activeAppliedId  = null;
   let activeCreatedId  = null;
   let tempAvatar       = null;
+  let withdrawTeamId   = null;
 
   /* ────────────────────────────────────────────
      LOCALSTORAGE HELPERS
@@ -234,7 +235,22 @@
       </div>
       <div class="pf-detail-label">About</div>
       <div class="pf-detail-desc">${esc(t.description || '—')}</div>
-      ${stack ? `<div class="pf-detail-label">Tech Stack</div><div class="pf-tech-chips">${stack}</div>` : ''}`;
+      ${stack ? `<div class="pf-detail-label">Tech Stack</div><div class="pf-tech-chips" style="margin-bottom: 20px;">${stack}</div>` : ''}
+      <button class="pf-unapply-btn" id="btnUnapply" data-id="${t.id}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="8.5" cy="7" r="4"/>
+          <line x1="23" y1="11" x2="17" y2="11"/>
+        </svg>
+        Withdraw Application
+      </button>`;
+
+    const btnUnapply = document.getElementById('btnUnapply');
+    if (btnUnapply) {
+      btnUnapply.addEventListener('click', () => {
+        showConfirmModal(t.id);
+      });
+    }
 
     panel.style.display = 'block';
     setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60);
@@ -453,6 +469,18 @@
     renderEditSkills();
   }
 
+  function showConfirmModal(teamId) {
+    withdrawTeamId = teamId;
+    const overlay = document.getElementById('tm-confirm-overlay');
+    if (overlay) overlay.classList.add('open');
+  }
+
+  function hideConfirmModal() {
+    withdrawTeamId = null;
+    const overlay = document.getElementById('tm-confirm-overlay');
+    if (overlay) overlay.classList.remove('open');
+  }
+
   /* ────────────────────────────────────────────
      UTILS
   ──────────────────────────────────────────── */
@@ -534,6 +562,45 @@
         activeCreatedId = null;
         document.querySelectorAll('#createdTeamsList .pf-team-btn').forEach(b => b.classList.remove('active'));
       });
+
+    // Custom confirm modal event bindings
+    const confirmOverlay = document.getElementById('tm-confirm-overlay');
+    const confirmYes     = document.getElementById('tm-confirm-yes');
+    const confirmCancel  = document.getElementById('tm-confirm-cancel');
+
+    if (confirmCancel) {
+      confirmCancel.addEventListener('click', hideConfirmModal);
+    }
+    if (confirmOverlay) {
+      confirmOverlay.addEventListener('click', (e) => {
+        if (e.target === confirmOverlay) hideConfirmModal();
+      });
+    }
+    if (confirmYes) {
+      confirmYes.addEventListener('click', () => {
+        if (!withdrawTeamId) return;
+
+        // Update localStorage applied state
+        const state = lsGet('hk_tm_v2', []);
+        const index = state.findIndex(x => String(x.id) === String(withdrawTeamId));
+        if (index !== -1) {
+          state[index].applied = false;
+          lsSet('hk_tm_v2', state);
+        }
+
+        // Close detail panel
+        const panel = document.getElementById('appliedDetailPanel');
+        if (panel) panel.style.display = 'none';
+        activeAppliedId = null;
+
+        // Close modal
+        hideConfirmModal();
+
+        // Refresh stats and applied list dynamically
+        renderStats();
+        renderApplied();
+      });
+    }
   }
 
   /* ────────────────────────────────────────────
