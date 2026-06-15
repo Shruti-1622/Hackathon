@@ -43,10 +43,10 @@
           top:calc(100% + 12px);
           right:0;
           min-width:180px;
-          background: linear-gradient(135deg, rgba(217,164,65,0.13) 0%, rgba(217,164,65,0.06) 100%);
+          background: rgba(14, 15, 18, 0.96);
           backdrop-filter:blur(20px);
           -webkit-backdrop-filter:blur(20px);
-          border:1px solid rgba(217,164,65,0.3);
+          border:1px solid rgba(217,164,65,0.25);
           border-radius:16px;
           box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(217,164,65,0.08), inset 0 1px 0 rgba(217,164,65,0.15);
           overflow:hidden;
@@ -206,11 +206,15 @@
     localStorage.removeItem('isLoggedIn');
     closeDrop();
     updateNav();
+    if (window.location.pathname.includes('profile.html')) {
+      window.location.replace('index.html');
+    }
   }
 
   /* ── BIND EVENTS ── */
   function bindEvents() {
-    // Global click interceptor for registration gating
+    // Global click interceptor for registration gating (Disabled: let people register directly)
+    /*
     document.addEventListener('click', function (e) {
       var target = e.target.closest('.event-card, .feat-register-btn, .event-register-btn, .register-btn, .hm-register');
       if (target) {
@@ -221,6 +225,7 @@
         }
       }
     }, true);
+    */
 
     // Escape closes dropdown
     document.addEventListener('keydown', function (e) {

@@ -607,6 +607,10 @@
      INIT
   ──────────────────────────────────────────── */
   function init() {
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.replace('signup.html?mode=login&redirect=' + encodeURIComponent(window.location.href));
+      return;
+    }
     approvals = lsGet('hk_approvals', {});
     loadProfile();
     renderProfile();

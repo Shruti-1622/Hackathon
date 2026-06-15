@@ -61,7 +61,8 @@ function buildCard(h) {
     </div>
   `;
 
-  /* Register button — require login before navigating */
+  /* Register button — let users register directly without login check */
+  /*
   const registerBtn = card.querySelector('[data-register-link]');
   registerBtn.addEventListener('click', function (e) {
     if (window.Auth && !window.Auth.isLoggedIn()) {
@@ -70,6 +71,7 @@ function buildCard(h) {
       window.Auth.showLoginRequired();
     }
   }, true);
+  */
 
   /* Like button click handler */
   const likeBtn = card.querySelector('.hs-like-btn');
@@ -146,13 +148,15 @@ function openModal(h) {
   hmTitle.textContent    = h.title;
   hmReg.href = h.link;
 
-  /* Gate: intercept Register Now click if not logged in */
+  /* Gate: intercept Register Now click if not logged in (Disabled) */
+  /*
   hmReg.onclick = function (e) {
     if (window.Auth && !window.Auth.isLoggedIn()) {
       e.preventDefault();
       window.Auth.showLoginRequired();
     }
   };
+  */
 
   hmStats.innerHTML = `
     <div class="hm-stat">

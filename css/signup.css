@@ -5,15 +5,15 @@
 :root {
     --bg-dark: #09090b;
     --card-dark: #121214;
-    --input-bg: #18181b;
+    --input-bg: rgba(255, 255, 255, 0.08);
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
-    --accent-gold: #f59e0b;
-    --accent-orange: #ea580c;
-    --accent-gradient: linear-gradient(135deg, #f59e0b, #ea580c);
-    --border-color: rgba(255, 255, 255, 0.08);
-    --border-focus: rgba(245, 158, 11, 0.6);
-    --glow-shadow: 0 0 20px rgba(234, 88, 12, 0.25);
+    --accent-gold: #D9A441;
+    --accent-orange: #f5c14e;
+    --accent-gradient: linear-gradient(135deg, #D9A441, #f5c14e);
+    --border-color: rgba(255, 255, 255, 0.16);
+    --border-focus: rgba(217, 164, 65, 0.6);
+    --glow-shadow: 0 0 20px rgba(217, 164, 65, 0.25);
     --font-outfit: 'Outfit', sans-serif;
     --font-sans: 'DM Sans', sans-serif;
 }
@@ -186,7 +186,7 @@ body {
     border-radius: 9999px;
     z-index: 1;
     transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3);
+    box-shadow: 0 4px 15px rgba(217, 164, 65, 0.3);
 }
 
 .tab-btn {
@@ -271,12 +271,12 @@ form {
 
 .input-group input:focus {
     border-color: var(--accent-gold);
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.22) !important;
     box-shadow: var(--glow-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
 .input-group input::placeholder {
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .input-icon {
@@ -331,13 +331,13 @@ form {
     font-weight: 700;
     cursor: pointer;
     margin-top: 1rem;
-    box-shadow: 0 4px 20px rgba(234, 88, 12, 0.3);
+    box-shadow: 0 4px 20px rgba(217, 164, 65, 0.3);
     transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
 }
 
 .auth-submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(234, 88, 12, 0.45);
+    box-shadow: 0 8px 25px rgba(217, 164, 65, 0.45);
     filter: brightness(1.05);
 }
 

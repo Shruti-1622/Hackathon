@@ -150,17 +150,7 @@
       });
     });
 
-  // Gate form interactions
-  const orgFormContainer = document.getElementById('orgFormContainer');
-  if (orgFormContainer) {
-    orgFormContainer.addEventListener('click', function (e) {
-      if (!window.Auth || !window.Auth.isLoggedIn()) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        window.Auth && window.Auth.showLoginRequired();
-      }
-    }, true);
-  }
+
 
   // Step navigation buttons
   document.getElementById('step1Next').addEventListener('click', () => {

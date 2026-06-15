@@ -29,6 +29,7 @@
   /* ── STATE ── */
   let roles  = [];   // [{ n: string }]
   let stack  = [];   // [string]
+  let currentStep = 1;
 
   /* ── INJECT HTML ── */
   function injectModal() {
@@ -54,98 +55,115 @@
             <button class="ctm-close" id="ctm-close-btn" aria-label="Close">✕</button>
           </div>
 
+          <!-- Progress Stepper -->
+          <div class="ctm-stepper">
+            <div class="ctm-step active" id="ctm-step-indicator-1">
+              <span class="ctm-step-num">1</span>
+              <span class="ctm-step-lbl">Basics</span>
+            </div>
+            <div class="ctm-step-line" id="ctm-step-line-1"></div>
+            <div class="ctm-step" id="ctm-step-indicator-2">
+              <span class="ctm-step-num">2</span>
+              <span class="ctm-step-lbl">Details</span>
+            </div>
+            <div class="ctm-step-line" id="ctm-step-line-2"></div>
+            <div class="ctm-step" id="ctm-step-indicator-3">
+              <span class="ctm-step-num">3</span>
+              <span class="ctm-step-lbl">Squad</span>
+            </div>
+          </div>
+
           <!-- Form body -->
           <div class="ctm-body" id="ctm-form-body">
 
-            <!-- Team basics -->
-            <div class="ctm-section-label">Team Info</div>
-
-            <div class="ctm-row">
+            <!-- STEP 1: BASICS -->
+            <div class="ctm-form-step" id="ctm-step-container-1">
+              <div class="ctm-section-label">Team Identity</div>
+              
               <div class="ctm-field">
                 <label class="ctm-label" for="ctm-team-name">Team Name *</label>
                 <input class="ctm-input" id="ctm-team-name" type="text" placeholder="e.g. Alpha Builders" maxlength="40" autocomplete="off">
               </div>
+
+              <div class="ctm-row">
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-hackathon">Hackathon *</label>
+                  <select class="ctm-select" id="ctm-hackathon">
+                    <option value="" disabled selected>Choose one</option>
+                    ${hackOptions}
+                  </select>
+                </div>
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-theme">Theme / Focus Area *</label>
+                  <input class="ctm-input" id="ctm-theme" type="text" placeholder="e.g. AI for Healthcare" maxlength="60" autocomplete="off">
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: DETAILS & CAPACITY -->
+            <div class="ctm-form-step" id="ctm-step-container-2" style="display: none;">
+              <div class="ctm-section-label">About & Capacity</div>
+
+              <div class="ctm-field full">
+                <label class="ctm-label" for="ctm-desc">About the Team *</label>
+                <textarea class="ctm-textarea" id="ctm-desc" placeholder="What are you building? What problem does it solve? Define your team's objective here." maxlength="280"></textarea>
+              </div>
+
+              <div class="ctm-row">
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-spots">Max Team Size *</label>
+                  <input class="ctm-input" id="ctm-spots" type="number" min="2" max="12" placeholder="e.g. 7">
+                </div>
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-current-members">Current Members *</label>
+                  <input class="ctm-input" id="ctm-current-members" type="number" min="1" max="12" placeholder="e.g. 5">
+                </div>
+              </div>
+
+              <div class="ctm-row">
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-exp">Experience Level</label>
+                  <select class="ctm-select" id="ctm-exp">
+                    <option value="" disabled selected>Choose</option>
+                    ${expOptions}
+                  </select>
+                </div>
+                <div class="ctm-field">
+                  <label class="ctm-label" for="ctm-deadline">Application Deadline</label>
+                  <input class="ctm-input" id="ctm-deadline" type="date">
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: SQUAD DETAILS -->
+            <div class="ctm-form-step" id="ctm-step-container-3" style="display: none;">
+              <div class="ctm-section-label">Your Squad Info</div>
+
               <div class="ctm-field">
-                <label class="ctm-label" for="ctm-hackathon">Hackathon *</label>
-                <select class="ctm-select" id="ctm-hackathon">
-                  <option value="" disabled selected>Choose one</option>
-                  ${hackOptions}
-                </select>
+                <label class="ctm-label" for="ctm-lead">Your Name (Team Lead) *</label>
+                <input class="ctm-input" id="ctm-lead" type="text" placeholder="e.g. Shruti Gupta" maxlength="40" autocomplete="off">
               </div>
-            </div>
 
-            <div class="ctm-field full">
-              <label class="ctm-label" for="ctm-theme">Theme / Focus Area *</label>
-              <input class="ctm-input" id="ctm-theme" type="text" placeholder="e.g. AI for Healthcare" maxlength="60" autocomplete="off">
-            </div>
+              <div class="ctm-section-divider"></div>
 
-            <div class="ctm-field full">
-              <label class="ctm-label" for="ctm-desc">About the Team *</label>
-              <textarea class="ctm-textarea" id="ctm-desc" placeholder="What are you building? What problem does it solve?" maxlength="280"></textarea>
-            </div>
-
-            <div class="ctm-section-divider"></div>
-
-            <!-- Team size & level -->
-            <div class="ctm-section-label">Capacity</div>
-
-            <div class="ctm-row">
               <div class="ctm-field">
-                <label class="ctm-label" for="ctm-spots">Max Team Size *</label>
-                <input class="ctm-input" id="ctm-spots" type="number" min="2" max="12" placeholder="e.g. 7">
+                <label class="ctm-label">Roles Needed</label>
+                <div class="ctm-roles-list" id="ctm-roles-list"></div>
+                <div class="ctm-role-input-row">
+                  <input class="ctm-input" id="ctm-role-input" type="text" placeholder="e.g. UI Designer" maxlength="40" autocomplete="off">
+                  <button class="ctm-add-role-btn" id="ctm-add-role-btn" type="button">+ Add</button>
+                </div>
               </div>
+
+              <div class="ctm-section-divider"></div>
+
               <div class="ctm-field">
-                <label class="ctm-label" for="ctm-current-members">Current Members *</label>
-                <input class="ctm-input" id="ctm-current-members" type="number" min="1" max="12" placeholder="e.g. 5">
-              </div>
-            </div>
-
-            <div class="ctm-row">
-              <div class="ctm-field">
-                <label class="ctm-label" for="ctm-lead">Your Name *</label>
-                <input class="ctm-input" id="ctm-lead" type="text" placeholder="Team lead name" maxlength="40" autocomplete="off">
-              </div>
-              <div class="ctm-field">
-                <label class="ctm-label" for="ctm-exp">Experience Level</label>
-                <select class="ctm-select" id="ctm-exp">
-                  <option value="" disabled selected>Choose</option>
-                  ${expOptions}
-                </select>
-              </div>
-            </div>
-
-            <div class="ctm-row">
-              <div class="ctm-field">
-                <label class="ctm-label" for="ctm-deadline">Application Deadline</label>
-                <input class="ctm-input" id="ctm-deadline" type="date">
-              </div>
-            </div>
-
-            <div class="ctm-section-divider"></div>
-
-            <!-- Roles needed -->
-            <div class="ctm-section-label">Roles Needed</div>
-
-            <div class="ctm-field full">
-              <label class="ctm-label">Add roles you're looking for</label>
-              <div class="ctm-roles-list" id="ctm-roles-list"></div>
-              <div class="ctm-role-input-row">
-                <input class="ctm-input" id="ctm-role-input" type="text" placeholder="e.g. UI Designer" maxlength="40" autocomplete="off">
-                <button class="ctm-add-role-btn" id="ctm-add-role-btn" type="button">+ Add</button>
-              </div>
-            </div>
-
-            <div class="ctm-section-divider"></div>
-
-            <!-- Tech stack -->
-            <div class="ctm-section-label">Tech Stack</div>
-
-            <div class="ctm-field full">
-              <label class="ctm-label">Add technologies</label>
-              <div class="ctm-stack-list" id="ctm-stack-list"></div>
-              <div class="ctm-role-input-row">
-                <input class="ctm-input" id="ctm-stack-input" type="text" placeholder="e.g. React, Python..." maxlength="30" autocomplete="off">
-                <button class="ctm-add-role-btn" id="ctm-add-stack-btn" type="button">+ Add</button>
+                <label class="ctm-label">Tech Stack</label>
+                <div class="ctm-stack-list" id="ctm-stack-list"></div>
+                <div class="ctm-role-input-row">
+                  <input class="ctm-input" id="ctm-stack-input" type="text" placeholder="e.g. React, Python" maxlength="30" autocomplete="off">
+                  <button class="ctm-add-role-btn" id="ctm-add-stack-btn" type="button">+ Add</button>
+                </div>
               </div>
             </div>
 
@@ -160,8 +178,10 @@
 
           <!-- Footer -->
           <div class="ctm-footer" id="ctm-footer">
-            <span class="ctm-hint">* required fields</span>
-            <button class="ctm-submit-btn" id="ctm-submit-btn" type="button">Launch Team →</button>
+            <button class="ctm-back-btn" id="ctm-back-btn" type="button" style="display: none;">Back</button>
+            <span class="ctm-hint" id="ctm-hint">* required fields</span>
+            <button class="ctm-next-btn" id="ctm-next-btn" type="button">Next Step →</button>
+            <button class="ctm-submit-btn" id="ctm-submit-btn" type="button" style="display: none;">Launch Team →</button>
           </div>
 
         </div>
@@ -235,6 +255,103 @@
     renderStack();
   }
 
+  /* ── STEP NAVIGATION ── */
+  function showStep(stepNum) {
+    currentStep = stepNum;
+    
+    // Hide all step containers, show active one
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById(`ctm-step-container-${i}`);
+      if (el) el.style.display = i === stepNum ? 'flex' : 'none';
+    }
+
+    // Update stepper indicators
+    for (let i = 1; i <= 3; i++) {
+      const stepInd = document.getElementById(`ctm-step-indicator-${i}`);
+      if (stepInd) {
+        stepInd.classList.toggle('active', i === stepNum);
+        stepInd.classList.toggle('completed', i < stepNum);
+      }
+    }
+
+    // Update stepper line highlights
+    for (let i = 1; i <= 2; i++) {
+      const line = document.getElementById(`ctm-step-line-${i}`);
+      if (line) {
+        line.classList.toggle('active', i === stepNum - 1);
+        line.classList.toggle('completed', i < stepNum);
+      }
+    }
+
+    // Update footer buttons
+    const backBtn = document.getElementById('ctm-back-btn');
+    const nextBtn = document.getElementById('ctm-next-btn');
+    const submitBtn = document.getElementById('ctm-submit-btn');
+
+    if (backBtn) backBtn.style.display = stepNum > 1 ? 'inline-block' : 'none';
+    if (nextBtn) nextBtn.style.display = stepNum < 3 ? 'inline-block' : 'none';
+    if (submitBtn) submitBtn.style.display = stepNum === 3 ? 'inline-block' : 'none';
+
+    // Focus first input of the active step
+    setTimeout(() => {
+      if (stepNum === 1) document.getElementById('ctm-team-name')?.focus();
+      else if (stepNum === 2) document.getElementById('ctm-desc')?.focus();
+      else if (stepNum === 3) document.getElementById('ctm-lead')?.focus();
+    }, 100);
+  }
+
+  function shakeElement(el) {
+    if (!el) return;
+    el.classList.add('shake-error');
+    setTimeout(() => el.classList.remove('shake-error'), 400);
+  }
+
+  function validateStep(stepNum) {
+    if (stepNum === 1) {
+      const teamName = document.getElementById('ctm-team-name');
+      const hackathon = document.getElementById('ctm-hackathon');
+      const theme = document.getElementById('ctm-theme');
+      
+      let valid = true;
+      if (!teamName || !teamName.value.trim()) { shakeElement(teamName); valid = false; }
+      if (!hackathon || !hackathon.value) { shakeElement(hackathon); valid = false; }
+      if (!theme || !theme.value.trim()) { shakeElement(theme); valid = false; }
+      return valid;
+    }
+    
+    if (stepNum === 2) {
+      const desc = document.getElementById('ctm-desc');
+      const spots = document.getElementById('ctm-spots');
+      const current = document.getElementById('ctm-current-members');
+      
+      let valid = true;
+      if (!desc || !desc.value.trim()) { shakeElement(desc); valid = false; }
+      
+      const spotsVal = parseInt(spots?.value) || 0;
+      const curVal = parseInt(current?.value) || 0;
+
+      if (!spots || spotsVal < 2 || spotsVal > 12) { shakeElement(spots); valid = false; }
+      if (!current || curVal < 1 || curVal > 12) { shakeElement(current); valid = false; }
+      
+      if (valid && curVal >= spotsVal) {
+        // current members must be less than max spots
+        shakeElement(spots);
+        shakeElement(current);
+        valid = false;
+      }
+      return valid;
+    }
+
+    if (stepNum === 3) {
+      const lead = document.getElementById('ctm-lead');
+      let valid = true;
+      if (!lead || !lead.value.trim()) { shakeElement(lead); valid = false; }
+      return valid;
+    }
+
+    return true;
+  }
+
   /* ── OPEN / CLOSE ── */
   function open() {
     // Reset state
@@ -255,7 +372,7 @@
       if (el) el.selectedIndex = 0;
     });
 
-    // Show success, show form
+    // Reset Success Overlay and footer
     const formBody = document.getElementById('ctm-form-body');
     const success  = document.getElementById('ctm-success');
     const footer   = document.getElementById('ctm-footer');
@@ -265,7 +382,9 @@
 
     document.getElementById('ctm-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('ctm-team-name')?.focus(), 80);
+    
+    // Switch to step 1
+    showStep(1);
   }
 
   function close() {
@@ -275,6 +394,8 @@
 
   /* ── SUBMIT ── */
   function submit() {
+    if (!validateStep(3)) return;
+
     const teamName      = (document.getElementById('ctm-team-name')?.value || '').trim();
     const hackathon     = document.getElementById('ctm-hackathon')?.value || '';
     const theme         = (document.getElementById('ctm-theme')?.value    || '').trim();
@@ -285,34 +406,6 @@
     const currentMembers    = isNaN(currentMembersRaw) ? 1 : Math.max(1, Math.min(currentMembersRaw, spots));
     const exp           = document.getElementById('ctm-exp')?.value  || 'All Levels';
     const deadline      = document.getElementById('ctm-deadline')?.value || '';
-
-    // Basic validation
-    if (!teamName || !hackathon || !theme || !desc || !lead) {
-      const btn = document.getElementById('ctm-submit-btn');
-      btn.style.transition = 'transform 0.08s';
-      btn.style.transform  = 'translateX(-4px)';
-      setTimeout(() => btn.style.transform = 'translateX(4px)',  80);
-      setTimeout(() => btn.style.transform = 'translateX(-3px)', 160);
-      setTimeout(() => btn.style.transform = 'translateX(0)',    240);
-      return;
-    }
-
-    // Validate: current members must be less than total spots
-    if (currentMembers >= spots) {
-      const btn = document.getElementById('ctm-submit-btn');
-      btn.style.transition = 'transform 0.08s';
-      btn.style.transform  = 'translateX(-4px)';
-      setTimeout(() => btn.style.transform = 'translateX(4px)',  80);
-      setTimeout(() => btn.style.transform = 'translateX(-3px)', 160);
-      setTimeout(() => btn.style.transform = 'translateX(0)',    240);
-      // Highlight the offending fields
-      const spotsEl   = document.getElementById('ctm-spots');
-      const curEl     = document.getElementById('ctm-current-members');
-      [spotsEl, curEl].forEach(el => {
-        if (el) { el.style.borderColor = '#ef4444'; setTimeout(() => el.style.borderColor = '', 1500); }
-      });
-      return;
-    }
 
     // Build members array: lead + (currentMembers - 1) placeholder members
     const membersArr = [{ n: lead, r: 'Team Lead' }];
@@ -351,7 +444,6 @@
     if (window.TMCards && typeof window.TMCards.addTeam === 'function') {
       window.TMCards.addTeam(newTeam);
     } else {
-      // Fallback: reload-based append via localStorage only
       appendCardToGrid(newTeam);
     }
 
@@ -366,7 +458,6 @@
     // Auto-close after 1.6s
     setTimeout(() => {
       close();
-      // Scroll to teams grid
       const grid = document.getElementById('teams-grid');
       if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 1600);
@@ -381,12 +472,11 @@
     } catch {}
   }
 
-  /* ── FALLBACK: append card directly to grid DOM ── */
+  /* ── FALLBACK CARD INJECTOR ── */
   function appendCardToGrid(t) {
     const grid = document.getElementById('teams-grid');
     if (!grid) return;
 
-    // Remove empty state if present
     const empty = grid.querySelector('.tm-empty');
     if (empty) empty.remove();
 
@@ -396,7 +486,6 @@
       .map(r => `<span class="tm-chip">${r.n}</span>`)
       .join('');
 
-    // Avatar: initials with gold bg since no image
     const avatarHTML = `
       <div style="
         width:100%; height:100%;
@@ -441,7 +530,7 @@
     grid.appendChild(card);
   }
 
-  /* ── LOAD USER-CREATED TEAMS ON PAGE LOAD ── */
+  /* ── LOAD TEAMS ── */
   function loadUserTeams() {
     if (window.TMCards) return;
     try {
@@ -450,25 +539,20 @@
     } catch {}
   }
 
-  /* ── FALLBACK DRAWER for user-created teams ── */
   function openDrawerFallback(id) {
     try {
       const saved = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
       const t = saved.find(x => x.id === id);
       if (!t || !window.TMCards) return;
-      // Temporarily inject into TMCards' addTeam if available
       if (typeof window.TMCards.addTeam === 'function') {
         window.TMCards.openDrawer(id);
       }
     } catch {}
   }
 
-  /* ── WIRE "Create a Team" BUTTON ── */
   function wireButtons() {
-    // All buttons/links that should open the modal
     document.querySelectorAll('[data-open-create-team], .secondary-btn').forEach(btn => {
       btn.addEventListener('click', e => {
-        // Only intercept if this is the create team button
         const text = btn.textContent.trim().toLowerCase();
         if (text.includes('create') || btn.dataset.openCreateTeam !== undefined) {
           e.preventDefault();
@@ -480,46 +564,41 @@
 
   /* ── BIND EVENTS ── */
   function bindEvents() {
-    // Close button
-    document.getElementById('ctm-close-btn')
-      ?.addEventListener('click', close);
+    document.getElementById('ctm-close-btn')?.addEventListener('click', close);
 
-    // Click outside modal
-    document.getElementById('ctm-overlay')
-      ?.addEventListener('click', e => {
-        if (e.target.id === 'ctm-overlay') close();
-      });
+    document.getElementById('ctm-overlay')?.addEventListener('click', e => {
+      if (e.target.id === 'ctm-overlay') close();
+    });
 
-    // Escape key
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && document.getElementById('ctm-overlay')?.classList.contains('open')) {
         close();
       }
     });
 
-    // Auto-calculate members count
-    document.getElementById('ctm-spots')
-      ?.addEventListener('input', updateCurrentMembersCount);
+    // Wizard navigation button listeners
+    document.getElementById('ctm-back-btn')?.addEventListener('click', () => {
+      if (currentStep > 1) showStep(currentStep - 1);
+    });
 
-    // Add role on button click
-    document.getElementById('ctm-add-role-btn')
-      ?.addEventListener('click', addRole);
+    document.getElementById('ctm-next-btn')?.addEventListener('click', () => {
+      if (validateStep(currentStep)) {
+        showStep(currentStep + 1);
+      }
+    });
 
-    // Add role on Enter key
-    document.getElementById('ctm-role-input')
-      ?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addRole(); } });
+    document.getElementById('ctm-spots')?.addEventListener('input', updateCurrentMembersCount);
+    document.getElementById('ctm-add-role-btn')?.addEventListener('click', addRole);
+    document.getElementById('ctm-role-input')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); addRole(); }
+    });
 
-    // Add stack on button click
-    document.getElementById('ctm-add-stack-btn')
-      ?.addEventListener('click', addStack);
+    document.getElementById('ctm-add-stack-btn')?.addEventListener('click', addStack);
+    document.getElementById('ctm-stack-input')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); addStack(); }
+    });
 
-    // Add stack on Enter key
-    document.getElementById('ctm-stack-input')
-      ?.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addStack(); } });
-
-    // Submit
-    document.getElementById('ctm-submit-btn')
-      ?.addEventListener('click', submit);
+    document.getElementById('ctm-submit-btn')?.addEventListener('click', submit);
   }
 
   /* ── INIT ── */
@@ -530,7 +609,6 @@
     loadUserTeams();
   }
 
-  // Run after DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {

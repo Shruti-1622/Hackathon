@@ -70,7 +70,8 @@
       </div>
     `;
 
-    /* Register button — require login before navigating */
+    /* Register button — let users register directly without login check */
+    /*
     const registerBtn = card.querySelector('[data-register-link]');
     registerBtn.addEventListener('click', function (e) {
       if (window.Auth && !window.Auth.isLoggedIn()) {
@@ -79,6 +80,7 @@
         window.Auth.showLoginRequired();
       }
     }, true);
+    */
 
     /* Click heart icon: remove from liked, animate fade, and remove element */
     const likeBtn = card.querySelector('.hs-like-btn');
@@ -150,13 +152,15 @@
     hmTitle.textContent    = h.title;
     hmReg.href = h.link;
 
-    /* Gate: intercept Register Now click if not logged in */
+    /* Gate: intercept Register Now click if not logged in (Disabled) */
+    /*
     hmReg.onclick = function (e) {
       if (window.Auth && !window.Auth.isLoggedIn()) {
         e.preventDefault();
         window.Auth.showLoginRequired();
       }
     };
+    */
 
     hmStats.innerHTML = `
       <div class="hm-stat">

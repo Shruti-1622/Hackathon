@@ -250,27 +250,27 @@
 }
 
 .pf-edit-input {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid #2a2a2a;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
-  color: #fff;
+  color: #ffffff !important;
   font-family: 'Syne', sans-serif;
   font-size: 13px;
   padding: 10px 13px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
   width: 100%;
   box-sizing: border-box;
 }
 
 .pf-edit-input::placeholder {
-  color: #444;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .pf-edit-input:focus {
-  border-color: rgba(201, 162, 39, 0.5);
-  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.08);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(201, 162, 39, 0.7);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15);
+  background: rgba(255, 255, 255, 0.22) !important;
 }
 
 .pf-edit-textarea {

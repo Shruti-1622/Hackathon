@@ -41,3 +41,21 @@ cards.forEach(card => {
         card.style.animation = `float${card.classList[1].slice(-1)} ${6 + Math.random() * 2}s ease-in-out infinite`;
     });
 });
+
+// Animated stat counters for hero section
+document.querySelectorAll('.stat-num[data-count]').forEach(el => {
+  const target = parseInt(el.getAttribute('data-count'), 10);
+  const duration = 1400;
+  const start = performance.now();
+
+  function update(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = Math.floor(eased * target);
+    el.textContent = value.toLocaleString('en-IN') + '+';
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target.toLocaleString('en-IN') + '+';
+  }
+
+  requestAnimationFrame(update);
+});
