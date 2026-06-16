@@ -173,14 +173,14 @@
         try {
           var saved = localStorage.getItem('hk_profile');
           if (saved) savedProfile = JSON.parse(saved);
-        } catch (e) {}
+        } catch (e) { }
 
         var avatarUrl = '';
         var initials = '';
         if (savedProfile) {
           if (savedProfile.avatar) avatarUrl = savedProfile.avatar;
           if (savedProfile.name) {
-            initials = savedProfile.name.split(' ').map(function(w) { return w[0] || ''; }).join('').toUpperCase().slice(0, 2);
+            initials = savedProfile.name.split(' ').map(function (w) { return w[0] || ''; }).join('').toUpperCase().slice(0, 2);
           }
         }
 

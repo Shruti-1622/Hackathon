@@ -12,13 +12,13 @@
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  padding: 140px 4vw 100px !important;
-  min-height: 480px;
+  padding: 140px 4vw 50px !important;
+  min-height: 380px;
   height: auto !important;
   box-sizing: border-box;
   background-image: 
-    linear-gradient(180deg, rgba(10, 10, 10, 0.55) 0%, #0a0a0a 100%), 
-    url('assets/avatar/squad.webp') !important;
+  linear-gradient(180deg, rgba(10, 10, 10, 0.55) 0%, #0a0a0a 100%), 
+  url('assets/avatar/squad.webp') !important;
   background-size: cover !important;
   background-position: center !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -40,8 +40,8 @@
 
 @media (max-width: 768px) {
   .tf-hero {
-    min-height: 520px;
-    padding: 120px 4vw 80px !important;
+    min-height: 340px;
+    padding: 120px 4vw 40px !important;
   }
 }
 
@@ -87,7 +87,7 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fff;
-  line-height: 1.1;
+  line-height: 1;
   margin-bottom: 16px;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
@@ -97,11 +97,12 @@
 }
 
 .spotlight-sub {
-  font-size: 16.5px;
+  font-family: var(--font-body), sans-serif;
+  font-size: 15px;
   color: #A1A1AA;
   max-width: 620px;
   margin: 0 auto;
-  line-height: 1.65;
+  line-height: 1.6;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -172,7 +173,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-  padding: 48px 8% 36px;
+  padding: 24px 8% 36px;
   border-bottom: 1px solid var(--border-dim);
 }
 
@@ -428,7 +429,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
-    padding: 36px 5% 28px;
+    padding: 16px 5% 28px;
   }
 
   .tf-toolbar-right {
@@ -443,7 +444,7 @@
 
 @media (max-width: 600px) {
   .tf-hero {
-    padding: 70px 5vw 60px !important;
+    padding: 70px 5vw 30px !important;
   }
 
   .tf-tab-btns {
@@ -461,7 +462,7 @@
   }
 
   .tf-toolbar {
-    padding: 28px 5% 20px;
+    padding: 12px 5% 20px;
   }
 
   .tf-create-panel {
