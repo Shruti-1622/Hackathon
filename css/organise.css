@@ -1118,3 +1118,179 @@
     padding: 70px 4vw;
   }
 }
+
+/* ── Organise Page Light Mode Overrides ── */
+body.light-mode .org-hero {
+  background: var(--bg);
+}
+
+body.light-mode .org-hero-grid {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+}
+
+body.light-mode .org-hero-counters {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .org-counter-num {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-counter-sep {
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+}
+
+body.light-mode .org-why-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .org-why-card:hover {
+  background: #ffffff;
+  border-color: rgba(217, 164, 65, 0.3);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .org-why-card h3 {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-step h4 {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-step:not(:last-child)::after {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .org-test-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .org-test-card:hover {
+  border-color: rgba(217, 164, 65, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .org-test-author h5 {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-test-avatar {
+  color: #ffffff;
+}
+
+body.light-mode .org-form-glass {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .org-form-grid-overlay {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+}
+
+body.light-mode .org-progress-track {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .org-pstep-dot {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: var(--fg-muted);
+}
+
+body.light-mode .org-progress-step.active .org-pstep-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0a0a;
+}
+
+body.light-mode .org-progress-step.completed .org-pstep-dot {
+  background: rgba(217, 164, 65, 0.15);
+  border-color: rgba(217, 164, 65, 0.4);
+  color: #b07d2e;
+}
+
+body.light-mode .org-form-step-title {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-form-group input,
+body.light-mode .org-form-group select,
+body.light-mode .org-form-group textarea {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #0a0a0a;
+}
+
+body.light-mode .org-form-group input::placeholder,
+body.light-mode .org-form-group textarea::placeholder {
+  color: #888;
+}
+
+body.light-mode .org-form-group input:focus,
+body.light-mode .org-form-group select:focus,
+body.light-mode .org-form-group textarea:focus {
+  background: #ffffff;
+  border-color: var(--accent);
+}
+
+body.light-mode .org-form-group select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23444444' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+body.light-mode .org-form-group select option {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+body.light-mode .org-form-actions {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .org-form-back {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: var(--fg-muted);
+}
+
+body.light-mode .org-form-back:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: #0a0a0a;
+}
+
+body.light-mode .org-review-card {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .org-review-divider {
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.08), transparent);
+}
+
+body.light-mode .org-success-glass {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .org-success-what-next {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .org-success-title {
+  color: #0a0a0a;
+}
+
+body.light-mode .org-success-desc {
+  color: var(--fg-muted);
+}

@@ -54,6 +54,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 30px;
   width: 100%;
+
 }
 
 /* ── STRICT 8px BORDER RADIUS OVERRIDES FOR HACKLIST PAGE ── */
@@ -62,49 +63,45 @@
   height: 380px !important;
   border-radius: 8px !important; /* Strict 8px constraint */
   margin: 0 auto;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: hl-card-pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-/* Stagger cards animation */
-.hacklist-page .hs-card:nth-child(1) { animation-delay: 0.05s; }
-.hacklist-page .hs-card:nth-child(2) { animation-delay: 0.1s; }
-.hacklist-page .hs-card:nth-child(3) { animation-delay: 0.15s; }
-.hacklist-page .hs-card:nth-child(4) { animation-delay: 0.2s; }
-.hacklist-page .hs-card:nth-child(5) { animation-delay: 0.25s; }
-.hacklist-page .hs-card:nth-child(n+6) { animation-delay: 0.3s; }
-
 .hacklist-page .hs-card-btn {
-  border-radius: 50px !important; /* Strict 50px pill shape constraint */
+  border-radius: 50px !important;
+  /* Strict 50px pill shape constraint */
 }
 
 .hacklist-page .hs-like-btn {
-  border-radius: 50% !important; /* Circular like button */
+  border-radius: 50% !important;
+  /* Circular like button */
 }
 
 /* Modal and related elements */
 .hacklist-page .hm-modal {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 8px !important;
+  /* Strict 8px constraint */
 }
 
 .hacklist-page .hm-register {
-  border-radius: 50px !important; /* Premium rounded pill shape */
+  border-radius: 50px !important;
+  /* Premium rounded pill shape */
 }
 
 .hacklist-page .hm-close {
-  border-radius: 50% !important; /* Circular close button */
+  border-radius: 50% !important;
+  /* Circular close button */
 }
 
 .hacklist-page .hm-stat {
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 8px !important;
+  /* Strict 8px constraint */
 }
 
 /* Navbar items */
 .hacklist-page .btn-primary,
 .hacklist-page .nav-cta,
 .hacklist-page .btn-primary.nav-cta {
-  border-radius: 50px !important; /* Premium rounded pill shape */
+  border-radius: 50px !important;
+  /* Premium rounded pill shape */
 }
 
 /* ── EMPTY STATE ── */
@@ -114,7 +111,8 @@
   padding: 80px 40px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px dashed rgba(255, 255, 255, 0.08);
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 8px !important;
+  /* Strict 8px constraint */
   max-width: 500px;
   margin: 40px auto;
   animation: hl-fade-in 0.4s ease-out;
@@ -161,7 +159,8 @@
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 50px !important; /* Premium rounded pill shape */
+  border-radius: 50px !important;
+  /* Premium rounded pill shape */
   text-decoration: none;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   border: none;
@@ -181,8 +180,13 @@
 
 /* ── ANIMATIONS ── */
 @keyframes hl-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes hl-card-pop {
@@ -190,6 +194,7 @@
     opacity: 0;
     transform: translateY(20px) scale(0.95);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -201,6 +206,7 @@
     opacity: 1;
     transform: scale(1);
   }
+
   to {
     opacity: 0;
     transform: scale(0.9) translateY(10px);
@@ -212,6 +218,7 @@
   .hacklist-section {
     padding: 80px 4% 60px;
   }
+
   .hacklist-grid {
     gap: 20px;
   }

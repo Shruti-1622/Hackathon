@@ -26,9 +26,10 @@
 
   <nav class="nav">
 
-    <div class="nav-logo">
-      <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
-    </div>
+    <a href="index.html" class="nav-logo" aria-label="HackHub Home">
+      <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+    </a>
 
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -50,91 +51,91 @@
 
 
 
-  <!-- //new code -->
+    <!-- //new code -->
 
-  <!-- ── SPOTLIGHT SECTION ── -->
-  <section class="spotlight" id="spotlight">
+    <!-- ── SPOTLIGHT SECTION ── -->
+    <section class="spotlight" id="spotlight">
 
-    <!-- heading -->
-    <div class="spotlight-header">
-      <span class="spotlight-eyebrow">Curated picks</span>
-      <h2 class="spotlight-title">Hackathon <span class="spotlight-accent">Spotlight</span></h2>
-      <p class="spotlight-sub">Discover the most exciting upcoming hackathons before everyone else.</p>
-    </div>
+      <!-- heading -->
+      <div class="spotlight-header">
+        <span class="spotlight-eyebrow">Curated picks</span>
+        <h2 class="spotlight-title">Hackathon <span class="spotlight-accent">Spotlight</span></h2>
+        <p class="spotlight-sub">Discover the most exciting upcoming hackathons before everyone else.</p>
+      </div>
 
-    <!-- main 2-col layout -->
-    <div class="spotlight-stage">
+      <!-- main 2-col layout -->
+      <div class="spotlight-stage">
 
-      <!-- LEFT: video card -->
-      <div class="spotlight-video-card">
-        <video id="spotlightVideo" class="spotlight-video" autoplay muted loop playsinline
-          poster="assets/hackathon events/office.webp">
-          <!-- swap src for a real promo .mp4 if you have one -->
-          <source data-src="assets/hackathon events/adobe video.mp4" type="video/mp4">
-        </video>
+        <!-- LEFT: video card -->
+        <div class="spotlight-video-card">
+          <video id="spotlightVideo" class="spotlight-video" autoplay muted loop playsinline
+            poster="assets/hackathon events/office.webp">
+            <!-- swap src for a real promo .mp4 if you have one -->
+            <source data-src="assets/hackathon events/adobe video.mp4" type="video/mp4">
+          </video>
 
-        <!-- always-on dark scrim -->
-        <div class="spotlight-scrim"></div>
+          <!-- always-on dark scrim -->
+          <div class="spotlight-scrim"></div>
 
-        <!-- overlay content -->
-        <div class="spotlight-overlay">
-          <div class="spotlight-badge">
-            <span class="badge-dot"></span>
-            Upcoming Event
-          </div>
-
-          <div class="spotlight-overlay-body">
-            <h3 class="spotlight-event-title">Adobe India<br>Hackathon 2026</h3>
-            <div class="spotlight-meta">
-              <span>July 8, 2026</span>
-              <span class="meta-sep">·</span>
-              <span>Online</span>
-              <span class="meta-sep">·</span>
-              <span>AI + Design + Dev</span>
+          <!-- overlay content -->
+          <div class="spotlight-overlay">
+            <div class="spotlight-badge">
+              <span class="badge-dot"></span>
+              Upcoming Event
             </div>
-            <a href="https://unstop.com/hackathons/crp-adobe-india-hackathon-adobe-1483364" target="_blank"
-              class="spotlight-explore-btn">
-              Explore Event →
-            </a>
+
+            <div class="spotlight-overlay-body">
+              <h3 class="spotlight-event-title">Adobe India<br>Hackathon 2026</h3>
+              <div class="spotlight-meta">
+                <span>July 8, 2026</span>
+                <span class="meta-sep">·</span>
+                <span>Online</span>
+                <span class="meta-sep">·</span>
+                <span>AI + Design + Dev</span>
+              </div>
+              <a href="https://unstop.com/hackathons/crp-adobe-india-hackathon-adobe-1483364" target="_blank"
+                class="spotlight-explore-btn">
+                Explore Event →
+              </a>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- RIGHT: info panel -->
-      <div class="spotlight-panel">
-        <div class="feat-side-card">
+        <!-- RIGHT: info panel -->
+        <div class="spotlight-panel">
+          <div class="feat-side-card">
 
-          <img src="assets/hackathon events/ama.avif" alt="Amazon HackOn">
+            <img src="assets/hackathon events/ama.avif" alt="Amazon HackOn">
 
-          <div class="feat-card-overlay">
-            <h3>Amazon HackOn 2026</h3>
+            <div class="feat-card-overlay">
+              <h3>Amazon HackOn 2026</h3>
 
-            <a href="https://unstop.com/hackathons/crp-hackon-with-amazon-60-amazon-1682652" target="_blank"
-              class="feat-register-btn">
-              Register →
-            </a>
+              <a href="https://unstop.com/hackathons/crp-hackon-with-amazon-60-amazon-1682652" target="_blank"
+                class="feat-register-btn">
+                Register →
+              </a>
+            </div>
+
+          </div>
+
+          <div class="feat-side-card">
+
+            <img src="assets/hackathon events/microsoftt.webp" alt="Microsoft Imagine Cup">
+
+            <div class="feat-card-overlay">
+              <h3>Imagine Cup 2026</h3>
+
+              <a href="https://imaginecup.microsoft.com/" target="_blank" class="feat-register-btn">
+                Register →
+              </a>
+            </div>
+
           </div>
 
         </div>
 
-        <div class="feat-side-card">
 
-          <img src="assets/hackathon events/microsoftt.webp" alt="Microsoft Imagine Cup">
-
-          <div class="feat-card-overlay">
-            <h3>Imagine Cup 2026</h3>
-
-            <a href="https://imaginecup.microsoft.com/" target="_blank" class="feat-register-btn">
-              Register →
-            </a>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- tags
+        <!-- tags
       <div class="panel-tags">
         <span class="ptag">Adobe API</span>
         <span class="ptag">Firefly AI</span>
@@ -144,92 +145,94 @@
 
 
 
-    </div>
-  </section>
-
-
-  <!-- upcoming events  -->
-
-  <!-- ── SECTION HEADER ── -->
-  <section class="hs-section">
-    <div class="hs-header">
-      <span class="hs-eyebrow">All Events</span>
-      <h2 class="hs-title">Upcoming <span>Hackathons</span></h2>
-      <p class="hs-sub">Scroll to explore. Click any card to see full details.</p>
-    </div>
-
-    <!-- ── INFINITE SCROLL TRACK ── -->
-    <div class="hs-track-wrap" id="hsTrackWrap">
-      <div class="hs-track" id="hsTrack">
-        <!-- cards injected by JS -->
       </div>
-    </div>
+    </section>
 
-    <!-- Collapsible Container for All Dynamic Events -->
-    <div id="all-events-container" class="all-events-container">
-      <div class="all-events-wrapper">
-        <!-- Aesthetic Dynamic Search Bar -->
-        <div class="dynamic-search-container">
-          <div class="search-input-wrapper">
-            <input type="text" id="dynamic-search-input" placeholder="Search hackathons by name, category..." autocomplete="off">
-            <button id="dynamic-search-clear" class="search-clear-btn" aria-label="Clear search">✕</button>
-            <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+
+    <!-- upcoming events  -->
+
+    <!-- ── SECTION HEADER ── -->
+    <section class="hs-section">
+      <div class="hs-header">
+        <span class="hs-eyebrow">All Events</span>
+        <h2 class="hs-title">Upcoming <span>Hackathons</span></h2>
+        <p class="hs-sub">Scroll to explore. Click any card to see full details.</p>
+      </div>
+
+      <!-- ── INFINITE SCROLL TRACK ── -->
+      <div class="hs-track-wrap" id="hsTrackWrap">
+        <div class="hs-track" id="hsTrack">
+          <!-- cards injected by JS -->
+        </div>
+      </div>
+
+      <!-- Collapsible Container for All Dynamic Events -->
+      <div id="all-events-container" class="all-events-container">
+        <div class="all-events-wrapper">
+          <!-- Aesthetic Dynamic Search Bar -->
+          <div class="dynamic-search-container">
+            <div class="search-input-wrapper">
+              <input type="text" id="dynamic-search-input" placeholder="Search hackathons by name, category..."
+                autocomplete="off">
+              <button id="dynamic-search-clear" class="search-clear-btn" aria-label="Clear search">✕</button>
+              <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+            </div>
+          </div>
+
+          <div class="featured-hackathon-cards" id="all-events-grid" style="margin-bottom: 0;">
+            <!-- Dynamically generated cards will be injected here -->
           </div>
         </div>
+      </div>
 
-        <div class="featured-hackathon-cards" id="all-events-grid" style="margin-bottom: 0;">
-          <!-- Dynamically generated cards will be injected here -->
+      <div class="featured-btn-container" style="margin-top: 3rem; text-align: center;">
+        <button id="viewAllBtn" class="view-events-btn">
+          View All Events
+        </button>
+      </div>
+    </section>
+
+    <!-- ── MODAL OVERLAY ── -->
+    <div class="hm-overlay" id="hmOverlay">
+      <div class="hm-modal" id="hmModal" role="dialog" aria-modal="true" aria-labelledby="hmTitle">
+        <button class="hm-close" id="hmClose" aria-label="Close">✕</button>
+
+        <div class="hm-img-wrap">
+          <img class="hm-img" id="hmImg" src="" alt="" />
+          <div class="hm-img-scrim"></div>
+          <span class="hm-category" id="hmCategory"></span>
+        </div>
+
+        <div class="hm-body">
+          <p class="hm-organizer" id="hmOrganizer"></p>
+          <h2 class="hm-title" id="hmTitle"></h2>
+
+          <div class="hm-stats" id="hmStats"></div>
+
+          <a class="hm-register" id="hmRegister" href="#" target="_blank" rel="noopener">
+            Register Now →
+          </a>
         </div>
       </div>
     </div>
 
-    <div class="featured-btn-container" style="margin-top: 3rem; text-align: center;">
-      <button id="viewAllBtn" class="view-events-btn">
-        View All Events
-      </button>
-    </div>
-  </section>
 
-  <!-- ── MODAL OVERLAY ── -->
-  <div class="hm-overlay" id="hmOverlay">
-    <div class="hm-modal" id="hmModal" role="dialog" aria-modal="true" aria-labelledby="hmTitle">
-      <button class="hm-close" id="hmClose" aria-label="Close">✕</button>
 
-      <div class="hm-img-wrap">
-        <img class="hm-img" id="hmImg" src="" alt="" />
-        <div class="hm-img-scrim"></div>
-        <span class="hm-category" id="hmCategory"></span>
+    <!-- CTA ---------------------------------------------- -->
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>FIND YOUR DREAM <span>TEAM</span></h2>
+        <p>Join thousands of developers competing and creating at HackHub</p>
+        <div class="cta-buttons">
+          <button class="secondary-btn" onclick="window.location.href='teamfinder.html'">Find Teams →</button>
+        </div>
       </div>
-
-      <div class="hm-body">
-        <p class="hm-organizer" id="hmOrganizer"></p>
-        <h2 class="hm-title" id="hmTitle"></h2>
-
-        <div class="hm-stats" id="hmStats"></div>
-
-        <a class="hm-register" id="hmRegister" href="#" target="_blank" rel="noopener">
-          Register Now →
-        </a>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- CTA ---------------------------------------------- -->
-  <!-- CTA Section -->
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>FIND YOUR DREAM <span>TEAM</span></h2>
-      <p>Join thousands of developers competing and creating at HackHub</p>
-      <div class="cta-buttons">
-        <button class="secondary-btn" onclick="window.location.href='teamfinder.html'">Find Teams →</button>
-      </div>
-    </div>
-  </section>
+    </section>
 
   </main>
 
@@ -237,21 +240,27 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="nav-logo"><span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span></div>
+        <a href="index.html" class="nav-logo" aria-label="HackHub Home">
+          <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
+          <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+        </a>
         <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
         <div class="footer-socials">
-          <a href="https://github.com/Shruti-1622" target="_blank" rel="noopener" class="footer-social-link" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <a href="https://github.com/Shruti-1622" target="_blank" rel="noopener" class="footer-social-link"
+            aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path
                 d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
             </svg></a>
-          <a href="https://x.com/shruti_gupta_" target="_blank" rel="noopener" class="footer-social-link" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <a href="https://x.com/shruti_gupta_" target="_blank" rel="noopener" class="footer-social-link"
+            aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
               <path
                 d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
             </svg></a>
-          <a href="https://www.linkedin.com/in/shruti-gupta-6a057a20a/" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none"
-              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <a href="https://www.linkedin.com/in/shruti-gupta-6a057a20a/" target="_blank" rel="noopener"
+            class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
               <rect x="2" y="9" width="4" height="12" />
               <circle cx="4" cy="4" r="2" />
@@ -264,7 +273,7 @@
           <ul>
             <li><a href="hackathon.html">Hackathons</a></li>
             <li><a href="teamfinder.html">Find Teams</a></li>
-           
+
             <li><a href="gallery.html">Gallery</a></li>
           </ul>
         </div>
@@ -273,6 +282,7 @@
           <ul>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="mailto:shruti.gupta.in@gmail.com">Contact Me</a></li>
           </ul>
         </div>
       </nav>
@@ -307,7 +317,7 @@
         if (source && source.dataset.src) {
           source.src = source.dataset.src;
           video.load();
-          video.play().catch(function(err) {
+          video.play().catch(function (err) {
             console.log("Autoplay check:", err);
           });
         }
@@ -354,7 +364,7 @@
           const card = document.createElement('div');
           card.className = 'event-card dynamic-card';
           card.style.animationDelay = `${idx * 0.05}s`;
-          
+
           // Navigate to link when clicked
           card.onclick = () => window.open(hack.link || 'https://devfolio.co', '_blank');
 
@@ -407,11 +417,11 @@
           const prize = (hack.prize || '').toLowerCase();
           const cleanPrize = prize.replace(/[,₹]/g, '');
 
-          return title.includes(query) || 
-                 organizer.includes(query) || 
-                 category.includes(query) || 
-                 prize.includes(query) ||
-                 cleanPrize.includes(cleanQuery);
+          return title.includes(query) ||
+            organizer.includes(query) ||
+            category.includes(query) ||
+            prize.includes(query) ||
+            cleanPrize.includes(cleanQuery);
         });
 
         renderCards(filtered);

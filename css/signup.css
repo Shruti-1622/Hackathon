@@ -85,21 +85,48 @@ body {
 .auth-logo-overlay {
     position: relative;
     z-index: 3;
-    font-family: var(--font-outfit);
-    font-size: 1.8rem;
-    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    outline: none;
+}
+
+.auth-logo-overlay:hover {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.auth-logo-overlay img {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 0 6px rgba(217, 164, 65, 0.15));
+    transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.auth-logo-overlay:hover img {
+    filter: drop-shadow(0 0 14px rgba(217, 164, 65, 0.5));
+    transform: scale(1.04);
+}
+
+.auth-logo-overlay .nav-logo-text {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 22px;
     letter-spacing: -0.5px;
     color: var(--text-primary);
-}
-
-.logo-bracket {
-    color: var(--accent-gold);
     display: inline-block;
-    transition: transform 0.3s ease;
+    vertical-align: middle;
 }
 
-.auth-logo-overlay:hover .logo-bracket {
-    transform: scale(1.1);
+.auth-logo-overlay:hover .nav-logo-text {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.15));
+}
+
+.text-accent {
+    color: var(--accent-gold);
 }
 
 .auth-visual-content {

@@ -6,15 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Hacklist - HackHub</title>
   <meta name="description" content="View and manage your saved and liked upcoming hackathons on HackHub.">
+  <meta name="theme-color" content="#09090b">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="preload" as="style" href="css/carousel.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="css/hacklist.css" onload="this.onload=null;this.rel='stylesheet'">
-<noscript>
-  <link rel="stylesheet" href="css/carousel.css">
-  <link rel="stylesheet" href="css/hacklist.css">
-</noscript>
+<link rel="stylesheet" href="css/carousel.css">
+<link rel="stylesheet" href="css/hacklist.css">
 
  <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,9 +24,10 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <div class="nav-logo">
-      <span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span>
-    </div>
+    <a href="index.html" class="nav-logo" aria-label="HackHub Home">
+      <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="hackathon.html">Hackathons</a></li>
@@ -37,11 +36,11 @@
       <li><a href="hacklist.html" class="active">Hacklist</a></li>
     </ul>
     <a href="signup.html" id="auth-signup-btn" class="btn-primary nav-cta" style="display:none">Get Started</a>
-    <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;">Dashboard</a>
+    <a href="#" id="auth-dashboard-btn" class="btn-primary nav-cta" style="display:none;" aria-label="Dashboard">Dashboard</a>
     <a href="profile.html" id="auth-profile-btn" class="btn-primary nav-cta"
       style="display:none;margin-left:.5rem;">Profile</a>
-    <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;">Logout</a>
-    <button class="hamburger" id="hamburger">&#9776;</button>
+    <a href="#" id="auth-logout-btn" class="btn-primary nav-cta" style="display:none;margin-left:.5rem;" aria-label="Logout">Logout</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">&#9776;</button>
   </nav>
 
   <!-- HACKLIST CONTENT -->
@@ -64,7 +63,7 @@
       <button class="hm-close" id="hmClose" aria-label="Close">✕</button>
 
       <div class="hm-img-wrap">
-        <img class="hm-img" id="hmImg" src="" alt="" />
+        <img class="hm-img" id="hmImg" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Hackathon Image" />
         <div class="hm-img-scrim"></div>
         <span class="hm-category" id="hmCategory"></span>
       </div>
@@ -86,7 +85,10 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="nav-logo"><span class="logo-bracket">{</span>HackHub<span class="logo-bracket">}</span></div>
+        <a href="index.html" class="nav-logo" aria-label="HackHub Home">
+          <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
+          <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+        </a>
         <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
         <div class="footer-socials">
           <a href="https://github.com/Shruti-1622" target="_blank" rel="noopener" class="footer-social-link" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none"
@@ -121,6 +123,7 @@
           <ul>
             <li><a href="profile.html">Profile</a></li>
             <li><a href="signup.html">Sign Up</a></li>
+            <li><a href="mailto:shruti.gupta.in@gmail.com">Contact Me</a></li>
           </ul>
         </div>
       </nav>

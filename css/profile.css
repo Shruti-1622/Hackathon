@@ -1007,3 +1007,161 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ── Profile Page Light Mode Overrides ── */
+body.light-mode .pf-page {
+  background: var(--bg);
+}
+
+body.light-mode .pf-profile-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+body.light-mode .pf-info h2 {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-bio {
+  color: var(--fg-muted);
+}
+
+body.light-mode .pf-meta span,
+body.light-mode .pf-meta a {
+  color: var(--fg-muted);
+}
+
+body.light-mode .pf-meta a:hover {
+  color: var(--accent);
+}
+
+body.light-mode .pf-stat-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .pf-stat-value {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-section-card {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .pf-team-btn {
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-team-btn:hover {
+  background: rgba(201, 162, 39, 0.05);
+  border-color: rgba(201, 162, 39, 0.35);
+}
+
+body.light-mode .pf-team-btn.active {
+  background: rgba(201, 162, 39, 0.1);
+  border-color: var(--accent);
+}
+
+body.light-mode .pf-t-sub {
+  color: var(--fg-muted);
+}
+
+body.light-mode .pf-edit-btn,
+body.light-mode .pf-cancel-btn {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #555560;
+}
+
+body.light-mode .pf-edit-btn:hover,
+body.light-mode .pf-cancel-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+body.light-mode .pf-edit-modal {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .pf-edit-header {
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .pf-edit-title {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-edit-label {
+  color: var(--fg-muted);
+}
+
+body.light-mode .pf-edit-input {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-edit-input::placeholder {
+  color: #888;
+}
+
+body.light-mode .pf-edit-input:focus {
+  background: #ffffff;
+  border-color: var(--accent);
+}
+
+body.light-mode .pf-edit-footer {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .pf-detail-panel {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .pf-detail-name {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-detail-item {
+  background: rgba(0, 0, 0, 0.01);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .pf-detail-val {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-detail-desc {
+  background: rgba(0, 0, 0, 0.01);
+  border-color: rgba(0, 0, 0, 0.06);
+  color: var(--fg-muted);
+}
+
+body.light-mode .pf-tech-chip {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #444;
+}
+
+body.light-mode .pf-applicant-row {
+  border-bottom-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .pf-app-av {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .pf-app-name {
+  color: #0a0a0a;
+}
+
+body.light-mode .pf-app-role {
+  color: var(--fg-muted);
+}

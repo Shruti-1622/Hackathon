@@ -590,3 +590,111 @@
     display: none; /* Hide lines on small screens to fit text */
   }
 }
+
+/* ── Team Creation Modal Light Mode Overrides ── */
+body.light-mode .ctm-overlay {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+body.light-mode .ctm-modal {
+  background: #ffffff;
+  border-color: rgba(217, 164, 65, 0.3);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .ctm-header {
+  background: #ffffff;
+  border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .ctm-title {
+  color: #0a0a0a;
+}
+
+body.light-mode .ctm-close {
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #555560;
+}
+
+body.light-mode .ctm-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(217, 164, 65, 0.08);
+}
+
+body.light-mode .ctm-label {
+  color: var(--fg-muted);
+}
+
+body.light-mode .ctm-input,
+body.light-mode .ctm-select,
+body.light-mode .ctm-textarea {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #0a0a0a;
+}
+
+body.light-mode .ctm-input::placeholder,
+body.light-mode .ctm-textarea::placeholder {
+  color: #888;
+}
+
+body.light-mode .ctm-input:focus,
+body.light-mode .ctm-select:focus,
+body.light-mode .ctm-textarea:focus {
+  border-color: var(--accent);
+  background: #ffffff;
+}
+
+body.light-mode .ctm-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(0,0,0,0.5)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+body.light-mode .ctm-select option {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
+body.light-mode .ctm-role-tag {
+  background: rgba(217, 164, 65, 0.1);
+  border-color: rgba(217, 164, 65, 0.35);
+  color: #b07d2e;
+}
+
+body.light-mode .ctm-role-tag button {
+  color: rgba(217, 164, 65, 0.7);
+}
+
+body.light-mode .ctm-stack-tag {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #444;
+}
+
+body.light-mode .ctm-stack-tag button {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+body.light-mode .ctm-section-divider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .ctm-section-label {
+  color: var(--fg-muted);
+}
+
+body.light-mode .ctm-footer {
+  border-top-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .ctm-hint {
+  color: var(--fg-muted);
+}
+
+body.light-mode .ctm-success-title {
+  color: #0a0a0a;
+}
+
+body.light-mode .ctm-success-sub {
+  color: var(--fg-muted);
+}
