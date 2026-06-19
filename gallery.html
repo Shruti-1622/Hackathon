@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hall of Fame — HackHub</title>
+  <title>Hall of Fame — HackVerse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -18,9 +18,9 @@
 
   <!-- NAV -->
   <nav class="nav">
-    <a href="index.html" class="nav-logo" aria-label="HackHub Home">
-      <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
-      <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+    <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
+      <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -93,7 +93,6 @@
           </div>
           <div class="hof-spotlight-actions">
             <a href="#" class="hof-btn-primary">View Project →</a>
-            <a href="#" class="hof-btn-ghost">GitHub ↗</a>
           </div>
         </div>
       </div>
@@ -167,9 +166,9 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" aria-label="HackHub Home">
-          <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
-          <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+        <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
+          <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
         </a>
         <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
         <div class="footer-socials">
@@ -298,16 +297,10 @@
           const spotlightActions = document.querySelector('.hof-spotlight-actions');
           if (spotlightActions) {
             const viewBtn = spotlightActions.querySelector('.hof-btn-primary');
-            const ghBtn = spotlightActions.querySelector('.hof-btn-ghost');
             if (viewBtn && data.spotlight.projectUrl) {
               viewBtn.href = data.spotlight.projectUrl;
               viewBtn.target = '_blank';
               viewBtn.rel = 'noopener noreferrer';
-            }
-            if (ghBtn && data.spotlight.githubUrl) {
-              ghBtn.href = data.spotlight.githubUrl;
-              ghBtn.target = '_blank';
-              ghBtn.rel = 'noopener noreferrer';
             }
           }
         }

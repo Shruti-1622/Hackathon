@@ -117,7 +117,7 @@ function setupFiltersAndSearch() {
     const featuredSection = document.querySelector('.featured-section');
     
     searchInput.addEventListener('focus', function() {
-        this.style.boxShadow = '0 0 30px rgba(139, 92, 246, 0.2)';
+        this.style.boxShadow = '0 0 30px rgba(217, 164, 65, 0.25)';
     });
 
     searchInput.addEventListener('blur', function() {

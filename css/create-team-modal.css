@@ -58,14 +58,22 @@
 .ctm-modal::-webkit-scrollbar {
   width: 4px;
 }
+
 .ctm-modal::-webkit-scrollbar-thumb {
   background: rgba(217, 164, 65, 0.2);
   border-radius: 4px;
 }
 
 @keyframes ctm-pop {
-  from { opacity: 0; transform: scale(0.95) translateY(20px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* ── HEADER ── */
@@ -235,6 +243,7 @@
     opacity: 0;
     transform: translateX(12px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -366,8 +375,15 @@
 }
 
 @keyframes ctm-tag-in {
-  from { opacity: 0; transform: scale(0.85) translateY(4px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .ctm-role-tag button,
@@ -448,9 +464,21 @@
 }
 
 @keyframes borderShake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-4px); }
-  40%, 80% { transform: translateX(4px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
 }
 
 /* ── FOOTER & ACTION CTAS ── */
@@ -573,21 +601,29 @@
     grid-template-columns: 1fr;
     gap: 12px;
   }
+
   .ctm-modal {
     border-radius: 16px;
     max-height: 95vh;
   }
-  .ctm-header, .ctm-body, .ctm-footer, .ctm-stepper {
+
+  .ctm-header,
+  .ctm-body,
+  .ctm-footer,
+  .ctm-stepper {
     padding-left: 1.2rem;
     padding-right: 1.2rem;
   }
+
   .ctm-stepper {
     flex-wrap: wrap;
     gap: 8px;
     justify-content: flex-start;
   }
+
   .ctm-step-line {
-    display: none; /* Hide lines on small screens to fit text */
+    display: none;
+    /* Hide lines on small screens to fit text */
   }
 }
 

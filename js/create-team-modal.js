@@ -149,8 +149,9 @@
               <div class="ctm-field">
                 <label class="ctm-label">Roles Needed</label>
                 <div class="ctm-roles-list" id="ctm-roles-list"></div>
-                <div class="ctm-role-input-row">
-                  <input class="ctm-input" id="ctm-role-input" type="text" placeholder="e.g. UI Designer" maxlength="40" autocomplete="off">
+                <div class="ctm-role-input-row" style="display:flex; gap:8px;">
+                  <input class="ctm-input" id="ctm-role-input" type="text" placeholder="e.g. UI Designer" maxlength="40" autocomplete="off" style="flex:1;">
+                  <input class="ctm-input" id="ctm-role-qty" type="number" min="1" max="10" value="1" style="width:60px;">
                   <button class="ctm-add-role-btn" id="ctm-add-role-btn" type="button">+ Add</button>
                 </div>
               </div>
@@ -206,7 +207,7 @@
     if (!list) return;
     list.innerHTML = roles.map((r, i) => `
       <span class="ctm-role-tag">
-        ${r.n}
+        ${r.n} (${r.qty || 1})
         <button type="button" aria-label="Remove" onclick="CreateTeamModal._removeRole(${i})">✕</button>
       </span>`).join('');
     updateCurrentMembersCount();
@@ -226,10 +227,13 @@
   /* ── ADD / REMOVE ROLE ── */
   function addRole() {
     const input = document.getElementById('ctm-role-input');
+    const qtyInput = document.getElementById('ctm-role-qty');
     const val   = (input.value || '').trim();
+    const qty = parseInt(qtyInput.value) || 1;
     if (!val) return;
-    roles.push({ n: val });
+    roles.push({ n: val, qty: qty, o: true });
     input.value = '';
+    qtyInput.value = '1';
     input.focus();
     renderRoles();
   }
@@ -354,6 +358,36 @@
 
   /* ── OPEN / CLOSE ── */
   function open() {
+    const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+    if (!currentUserEmail) {
+      alert("Please log in to create a team.");
+      return;
+    }
+    
+    // Check if free user has reached team creation limit (3 teams per month)
+    const profiles = JSON.parse(localStorage.getItem('hk_profiles') || '{}');
+    const userProfile = profiles[currentUserEmail] || {};
+    const membership = userProfile.membership || 'free';
+    
+    if (membership === 'free') {
+      const userTeams = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
+      const currentMonthPrefix = new Date().toISOString().slice(0, 7); // e.g. "2026-06"
+      const creationsThisMonth = userTeams.filter(t => (t.creatorEmail || '').trim().toLowerCase() === currentUserEmail && t.creationDate && t.creationDate.startsWith(currentMonthPrefix));
+      
+      if (creationsThisMonth.length >= 3) {
+        const msg = "Free tier limit reached: You can create a maximum of 3 teams per month. Redirecting to upgrade page...";
+        if (window.HackToast && window.HackToast.show) {
+          window.HackToast.show(msg, "error");
+        } else {
+          alert(msg);
+        }
+        setTimeout(() => {
+          window.location.href = 'upgrade.html?reason=create_limit&redirect=' + encodeURIComponent(window.location.href);
+        }, 1200);
+        return;
+      }
+    }
+
     // Reset state
     roles = [];
     stack = [];
@@ -418,6 +452,8 @@
       ? window.TMCards.getRandomAvatar()
       : null;
 
+    const currentUserEmail = (localStorage.getItem('currentUserEmail') || 'unknown').trim().toLowerCase();
+
     const newTeam = {
       id:              Date.now(),
       team:            teamName,
@@ -435,6 +471,8 @@
       roles:           roles.map(r => ({ n: r.n, o: true })),
       applied:         false,
       userCreated:     true,
+      creatorEmail:    currentUserEmail,
+      applications:    []
     };
 
     // Persist
@@ -463,12 +501,22 @@
     }, 1600);
   }
 
-  /* ── SAVE TO LOCALSTORAGE ── */
   function saveUserTeam(team) {
     try {
       const existing = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
       existing.push(team);
       localStorage.setItem('hk_user_teams', JSON.stringify(existing));
+
+      window.dispatchEvent(new CustomEvent('teamCreated', { detail: team }));
+
+      if (window.Auth && window.Auth.notify) {
+        window.Auth.notify(
+          team.creatorEmail,
+          'team_created',
+          'Team Created Successfully!',
+          `Your team ${team.team} is now live and waiting for applicants.`
+        );
+      }
     } catch {}
   }
 

@@ -9,19 +9,11 @@
 
   /* ── LIKED EVENTS HELPERS ── */
   function getLikedEvents() {
-    try {
-      return JSON.parse(localStorage.getItem('hk_liked_events') || '[]');
-    } catch (e) {
-      return [];
-    }
+    return window.HackState.getWish();
   }
 
   function unlikeEvent(id) {
-    try {
-      let liked = getLikedEvents();
-      liked = liked.filter(x => x !== id);
-      localStorage.setItem('hk_liked_events', JSON.stringify(liked));
-    } catch (e) {}
+    window.HackState.toggleWish(id);
   }
 
   /* ── RENDER EMPTY STATE ── */
@@ -212,5 +204,19 @@
 
   // Init page
   document.addEventListener('DOMContentLoaded', renderList);
+
+  window.addEventListener('wishlistUpdated', (e) => {
+    const id = e.detail;
+    const cards = document.querySelectorAll(`.hs-card[data-id="${id}"]`);
+    cards.forEach(card => {
+       if (!getLikedEvents().includes(parseInt(id))) {
+         card.classList.add('fade-out');
+         card.addEventListener('animationend', () => {
+           card.remove();
+           if (getLikedEvents().length === 0) renderEmptyState();
+         });
+       }
+    });
+  });
 
 })();

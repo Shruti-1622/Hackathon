@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HackHub - Authenticate</title>
+    <title>HackVerse - Authenticate</title>
     <link rel="stylesheet" href="css/signup.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+    </noscript>
 </head>
 <body>
     <div class="auth-container">
         <!-- LEFT PANEL (Artwork & Brand Content) -->
         <div class="auth-visual-panel">
-            <a href="index.html" class="auth-logo-overlay" aria-label="HackHub Home">
-                <img src="assets/avatar/yes.webp" alt="HackHub Logo">
-                <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+            <a href="index.html" class="auth-logo-overlay" aria-label="HackVerse Home">
+                <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
+                <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
             </a>
             
             <div class="auth-visual-bg" style="background-image: url('assets/auth-hero.png');"></div>
@@ -55,6 +58,41 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             </span>
                             <input type="email" id="signup-email" placeholder="Enter Your Email" required autocomplete="email">
+                        </div>
+
+                        <div class="input-row" style="margin-top: 16px;">
+                            <div class="input-group">
+                                <select id="signup-role" required style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: #fff; font-family: inherit; font-size: 0.9rem;">
+                                    <option value="" disabled selected style="color:#888">Primary Role</option>
+                                    <option value="Frontend Dev" style="color:#000">Frontend Dev</option>
+                                    <option value="Backend Dev" style="color:#000">Backend Dev</option>
+                                    <option value="Full Stack Dev" style="color:#000">Full Stack Dev</option>
+                                    <option value="UI/UX Designer" style="color:#000">UI/UX Designer</option>
+                                    <option value="ML/AI Engineer" style="color:#000">ML/AI Engineer</option>
+                                    <option value="Product Manager" style="color:#000">Product Manager</option>
+                                    <option value="Other" style="color:#000">Other</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <select id="signup-experience" required style="width: 100%; padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: #fff; font-family: inherit; font-size: 0.9rem;">
+                                    <option value="" disabled selected style="color:#888">Experience</option>
+                                    <option value="Student" style="color:#000">Student</option>
+                                    <option value="Beginner (0-1 yr)" style="color:#000">Beginner (0-1 yr)</option>
+                                    <option value="Intermediate (1-3 yrs)" style="color:#000">Intermediate (1-3 yrs)</option>
+                                    <option value="Advanced (3+ yrs)" style="color:#000">Advanced (3+ yrs)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group icon-input" style="margin-top: 16px;">
+                            <span class="input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            </span>
+                            <input type="url" id="signup-github" placeholder="GitHub URL (Optional)">
+                        </div>
+
+                        <div class="input-group" style="margin-top: 16px; margin-bottom: 16px;">
+                            <input type="text" id="signup-skills" placeholder="Skills (e.g. React, Node.js, Python)">
                         </div>
 
                         <div class="input-group icon-input password-group">
@@ -209,9 +247,14 @@
             e.preventDefault();
             const firstname = document.getElementById('signup-firstname').value.trim();
             const lastname = document.getElementById('signup-lastname').value.trim();
-            const email = document.getElementById('signup-email').value.trim();
+            const email = document.getElementById('signup-email').value.trim().toLowerCase();
             const password = document.getElementById('signup-password').value.trim();
             const confirmPassword = document.getElementById('signup-confirm-password').value.trim();
+
+            const role = document.getElementById('signup-role').value;
+            const experience = document.getElementById('signup-experience').value;
+            const github = document.getElementById('signup-github').value.trim();
+            const skillsStr = document.getElementById('signup-skills').value.trim();
 
             if (!firstname || !lastname) {
                 showToast("Please enter both first and last name.");
@@ -226,6 +269,10 @@
                 showToast("Please enter a valid email address.");
                 return;
             }
+            if (!role || !experience) {
+                showToast("Please select your role and experience.");
+                return;
+            }
             if (password.length < 6) {
                 showToast("Password must be at least 6 characters.");
                 return;
@@ -235,18 +282,45 @@
                 return;
             }
 
-            // Save to localStorage
             const name = `${firstname} ${lastname}`;
-            localStorage.setItem('isLoggedIn', 'true');
+            const skills = skillsStr.split(',').map(s => s.trim()).filter(Boolean);
             
+            const AVATARS = [
+                'assets/avatar/a1.webp', 'assets/avatar/a2.webp', 'assets/avatar/a3.webp', 
+                'assets/avatar/a4.webp', 'assets/avatar/a5.webp', 'assets/avatar/a6.webp', 
+                'assets/avatar/a7.webp', 'assets/avatar/a8.webp', 'assets/avatar/a9.webp', 
+                'assets/avatar/a10.webp', 'assets/avatar/a11.webp'
+            ];
+            const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
+
             try {
-                const existing = localStorage.getItem('hk_profile');
-                const p = existing ? JSON.parse(existing) : {};
-                p.name = name;
-                if (!p.avatar) {
-                    p.avatar = 'assets/avatar/shruti.webp'; // Default avatar
+                const profilesStr = localStorage.getItem('hk_profiles');
+                const profiles = profilesStr ? JSON.parse(profilesStr) : {};
+                
+                // Check if user already exists
+                if (profiles[email]) {
+                    showToast("User already exists. Please log in.");
+                    return;
                 }
-                localStorage.setItem('hk_profile', JSON.stringify(p));
+                
+                profiles[email] = {
+                    name: name,
+                    email: email,
+                    role: role,
+                    experience: experience,
+                    github: github,
+                    skills: skills,
+                    avatar: randomAvatar,
+                    password: password // Storing password for mock authentication
+                };
+                
+                localStorage.setItem('hk_profiles', JSON.stringify(profiles));
+                localStorage.setItem('hk_profile', JSON.stringify(profiles[email]));
+                localStorage.setItem('hackhub_user', JSON.stringify({ name, email }));
+
+                // Login the user automatically after successful signup
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUserEmail', email);
             } catch(err) {
                 console.error("Error setting profile:", err);
             }
@@ -261,7 +335,7 @@
 
         document.getElementById('login-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const email = document.getElementById('login-email').value.trim();
+            const email = document.getElementById('login-email').value.trim().toLowerCase();
             const password = document.getElementById('login-password').value.trim();
 
             if (!email) {
@@ -278,20 +352,34 @@
                 return;
             }
 
-            // Simple login verification (for demo/localStorage)
-            localStorage.setItem('isLoggedIn', 'true');
-
-            // Default profile setup if it doesn't exist
+            // Verify login
             try {
-                const existing = localStorage.getItem('hk_profile');
-                if (!existing) {
-                    const p = {
-                        name: "Ethan Walker",
-                        avatar: "assets/avatar/shruti.webp"
-                    };
-                    localStorage.setItem('hk_profile', JSON.stringify(p));
+                const profilesStr = localStorage.getItem('hk_profiles');
+                const profiles = profilesStr ? JSON.parse(profilesStr) : {};
+                
+                let p = profiles[email];
+                if (!p) {
+                    showToast("Account not found. Please sign up.");
+                    return;
                 }
-            } catch(err) {}
+                
+                // If the profile has a password, verify it. 
+                // (Older accounts might not have a password, so we let them in to avoid breaking demo state)
+                if (p.password && p.password !== password) {
+                    showToast("Invalid password.");
+                    return;
+                }
+
+                // Successful login
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUserEmail', email);
+                localStorage.setItem('hk_profile', JSON.stringify(p));
+                localStorage.setItem('hackhub_user', JSON.stringify({ name: p.name, email: p.email }));
+            } catch(err) {
+                console.error("Login error:", err);
+                showToast("An error occurred during login.");
+                return;
+            }
 
             showToast("Logged in successfully! Redirecting...", "success");
             

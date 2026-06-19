@@ -501,7 +501,7 @@
   transform: translate(-50%, -50%);
   width: 700px;
   height: 400px;
-  background: radial-gradient(ellipse, rgba(220, 38, 38, 0.1) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(217, 164, 65, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -555,7 +555,7 @@
 
 .secondary-btn:hover {
   border-color: var(--accent);
-  background: rgba(220, 38, 38, 0.08);
+  background: rgba(217, 164, 65, 0.08);
   transform: translateY(-2px);
 }
 

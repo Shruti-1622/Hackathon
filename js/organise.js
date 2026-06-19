@@ -232,7 +232,7 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const colors = ['#D9A441', '#e8b84a', '#7c3aed', '#0ea5e9', '#22c55e', '#f43f5e', '#ffffff'];
+    const colors = ['#D9A441', '#e8b84a', '#f5c14e', '#b07d2e', '#ffffff', '#808080'];
     const particles = [];
 
     for (let i = 0; i < 120; i++) {

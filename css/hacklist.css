@@ -1,6 +1,6 @@
 /* ============================================================
    HACKLIST PAGE STYLES
-   HackHub premium dark UI — with strict 8px border-radius standard
+   HackVerse premium dark UI — with strict 8px border-radius standard
    ============================================================ */
 
 .hacklist-section {
@@ -61,7 +61,8 @@
 .hacklist-page .hs-card {
   width: 100% !important;
   height: 380px !important;
-  border-radius: 8px !important; /* Strict 8px constraint */
+  border-radius: 8px !important;
+  /* Strict 8px constraint */
   margin: 0 auto;
 }
 

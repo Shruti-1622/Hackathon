@@ -148,7 +148,6 @@
       ],
       roles: [
         { n: 'Mobile Dev', o: true },
-        { n: 'Psychologist', o: true },
         { n: 'UI Designer', o: true },
         { n: 'ML Engineer', o: true },
       ],
@@ -169,23 +168,92 @@
   /* ── LOCALSTORAGE ── */
   function save() {
     try {
+      const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+      if (!currentUserEmail) return;
       localStorage.setItem(
-        'hk_tm_v2',
-        JSON.stringify(TEAMS.map(t => ({ id: t.id, applied: t.applied })))
+        'hk_tm_v2_' + currentUserEmail,
+        JSON.stringify(TEAMS.filter(t => !t.userCreated).map(t => ({ id: t.id, applied: t.applied })))
       );
     } catch { }
   }
 
   function load() {
     try {
-      const d = JSON.parse(localStorage.getItem('hk_tm_v2'));
+      const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+      
+      const d = JSON.parse(localStorage.getItem('hk_tm_v2_' + currentUserEmail) || localStorage.getItem('hk_tm_v2'));
       if (Array.isArray(d)) {
         d.forEach(item => {
           const t = TEAMS.find(x => x.id === item.id);
-          if (t) t.applied = item.applied;
+          if (t && !t.userCreated) t.applied = item.applied;
+        });
+      }
+
+      if (currentUserEmail) {
+        const userTeams = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
+        TEAMS.forEach(t => {
+          if (t.userCreated) {
+            const match = userTeams.find(ut => ut.id === t.id);
+            if (match && match.applications) {
+              const myApp = match.applications.find(a => (a.email || '').trim().toLowerCase() === currentUserEmail);
+              if (myApp) t.applied = true;
+            }
+          }
         });
       }
     } catch { }
+  }
+
+  function processApply(t, applyMode) {
+    const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+    if (!currentUserEmail) {
+      alert("Please log in to apply.");
+      return false;
+    }
+    if ((t.creatorEmail || '').trim().toLowerCase() === currentUserEmail) {
+      alert("You cannot apply to a team you created.");
+      return false;
+    }
+
+    t.applied = applyMode;
+
+    // Clean up hk_applications if withdrawing
+    if (!applyMode) {
+      try {
+        let allApps = JSON.parse(localStorage.getItem('hk_applications') || '[]');
+        allApps = allApps.filter(a => !((a.applicantId || '').trim().toLowerCase() === currentUserEmail && String(a.teamId) === String(t.id)));
+        localStorage.setItem('hk_applications', JSON.stringify(allApps));
+      } catch (e) { console.error(e); }
+    }
+    
+    if (t.userCreated) {
+      try {
+        const userTeams = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
+        const ut = userTeams.find(x => x.id === t.id);
+        if (ut) {
+          if (!ut.applications) ut.applications = [];
+          if (applyMode) {
+            const profilesStr = localStorage.getItem('hk_profiles');
+            const profiles = profilesStr ? JSON.parse(profilesStr) : {};
+            const p = profiles[currentUserEmail] || { email: currentUserEmail, name: currentUserEmail };
+            ut.applications.push({
+              email: p.email,
+              name: p.name,
+              role: p.role || 'Member',
+              avatar: p.avatar,
+              status: 'pending',
+              timestamp: new Date().toISOString()
+            });
+          } else {
+            ut.applications = ut.applications.filter(a => (a.email || '').trim().toLowerCase() !== currentUserEmail);
+          }
+          localStorage.setItem('hk_user_teams', JSON.stringify(userTeams));
+        }
+      } catch (e) { console.error(e); }
+    } else {
+      save();
+    }
+    return true;
   }
 
   /* ── RENDER CARDS ── */
@@ -437,16 +505,13 @@
     if (t.applied) {
       showConfirm().then(function (yes) {
         if (!yes) return;
-        t.applied = false;
-        save();
-        btn.textContent = 'Apply';
-        btn.classList.remove('applied');
+        if (processApply(t, false)) {
+          btn.textContent = 'Apply';
+          btn.classList.remove('applied');
+        }
       });
     } else {
-      t.applied = true;
-      save();
-      btn.textContent = '✓ Applied';
-      btn.classList.add('applied');
+      ApplyModal.open(id, btn);
     }
   }
 
@@ -458,51 +523,95 @@
     if (t.applied) {
       showConfirm().then(function (yes) {
         if (!yes) return;
-        t.applied = false;
-        save();
-        const btn = document.getElementById('tm-d-apply-btn');
-        if (btn) {
-          btn.textContent = 'Apply to Join';
-          btn.classList.remove('applied');
+        if (processApply(t, false)) {
+          const btn = document.getElementById('tm-d-apply-btn');
+          if (btn) {
+            btn.textContent = 'Apply to Join';
+            btn.classList.remove('applied');
+          }
+          renderGrid(getCurrentList());
         }
-        renderGrid(getCurrentList());
       });
     } else {
-      t.applied = true;
-      save();
       const btn = document.getElementById('tm-d-apply-btn');
-      if (btn) {
-        btn.textContent = '✓ Applied — All the best!';
-        btn.classList.add('applied');
-      }
-      renderGrid(getCurrentList());
+      ApplyModal.open(id, btn);
     }
   }
 
   /* ── SEARCH + FILTER ── */
   let _query = '';
   let _filter = 'All Events';
+  let _roleFilter = 'All Roles';
+
+  const ROLE_ALIASES = {
+    'backend': 'Backend',
+    'backend dev': 'Backend',
+    'backend developer': 'Backend',
+    'backend engineer': 'Backend',
+    'backend engineering': 'Backend',
+    'backebd': 'Backend',
+    'frontend': 'Frontend',
+    'frontend dev': 'Frontend',
+    'frontend developer': 'Frontend',
+    'frontend engineer': 'Frontend',
+    'ui designer': 'Design',
+    'ux designer': 'Design',
+    'ui/ux designer': 'Design',
+    'design': 'Design',
+    'designer': 'Design'
+  };
+
+  function getNormalizedRole(roleName) {
+    const lower = roleName.trim().toLowerCase();
+    if (ROLE_ALIASES[lower]) return ROLE_ALIASES[lower];
+    return lower.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  }
 
   function getCurrentList() {
+    const q = _query.toLowerCase().trim();
     return TEAMS.filter(t => {
-      const q = _query.toLowerCase();
+      // Visibility rule: at least one required role must be vacant
+      if (t.roles && t.roles.length > 0 && t.roles.every(r => !r.o)) {
+        return false;
+      }
+
       const matchQ = !q ||
         t.team.toLowerCase().includes(q) ||
         t.name.toLowerCase().includes(q) ||
         t.theme.toLowerCase().includes(q);
       const matchF = _filter === 'All Events' ||
         t.theme.toLowerCase().includes(_filter.toLowerCase().split(' ')[0].toLowerCase());
-      return matchQ && matchF;
+      const matchR = _roleFilter === 'All Roles' ||
+        t.roles.some(r => r.o && getNormalizedRole(r.n) === _roleFilter);
+      return matchQ && matchF && matchR;
     });
   }
 
   function setupSearch() {
     const input = document.querySelector('.search-input');
+    const roleSelect = document.getElementById('role-filter');
     const pills = document.querySelectorAll('.filter-pill');
 
     if (input) {
       input.addEventListener('input', e => {
         _query = e.target.value;
+        renderGrid(getCurrentList());
+      });
+    }
+
+    if (roleSelect) {
+      const uniqueRoles = new Set();
+      TEAMS.forEach(t => {
+        t.roles.filter(r => r.o).forEach(r => {
+          uniqueRoles.add(getNormalizedRole(r.n));
+        });
+      });
+      const sortedRoles = Array.from(uniqueRoles).sort();
+      roleSelect.innerHTML = '<option value="All Roles">All Roles</option>' + 
+        sortedRoles.map(r => `<option value="${r}">${r}</option>`).join('');
+
+      roleSelect.addEventListener('change', e => {
+        _roleFilter = e.target.value;
         renderGrid(getCurrentList());
       });
     }
@@ -551,7 +660,225 @@
     renderGrid(getCurrentList());
   }
 
+  /* ── APPLY MODAL ── */
+  let currentApplyTeamId = null;
+  let currentApplyBtn = null;
+
+  function initApplyModal() {
+    const html = `
+      <div class="tm-apply-overlay" id="tm-apply-overlay">
+        <div class="tm-apply-box">
+          <button class="tm-apply-close" onclick="ApplyModal.close()">✕</button>
+          <div class="tm-apply-header">
+            <h2 id="tm-apply-title">Apply to Join</h2>
+            <p id="tm-apply-sub">Complete your application</p>
+          </div>
+          <div class="tm-apply-body">
+            <div class="tm-apply-field">
+              <label class="tm-apply-label">Role Applying For *</label>
+              <select class="tm-apply-input" id="tm-apply-role"></select>
+            </div>
+            <div class="tm-apply-field">
+              <label class="tm-apply-label">Key Skills *</label>
+              <input class="tm-apply-input" id="tm-apply-skills" type="text" placeholder="e.g. React, Node.js, Figma">
+            </div>
+            <div class="tm-apply-field">
+              <label class="tm-apply-label">Portfolio / GitHub Link *</label>
+              <input class="tm-apply-input" id="tm-apply-portfolio" type="text" placeholder="e.g. github.com/username">
+              <div class="tm-apply-error" id="tm-apply-error-url" style="display:none; color:#ef4444; font-size:12px; margin-top:4px;">Please enter a valid URL</div>
+            </div>
+            <div class="tm-apply-field">
+              <label class="tm-apply-label">Message (Optional)</label>
+              <textarea class="tm-apply-textarea" id="tm-apply-msg" placeholder="Why are you a good fit for this team?"></textarea>
+            </div>
+          </div>
+          <div class="tm-apply-footer">
+            <button class="tm-apply-btn-cancel" onclick="ApplyModal.close()">Cancel</button>
+            <button class="tm-apply-btn-submit" id="tm-apply-submit" onclick="ApplyModal.submit()">Submit Application</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', html);
+  }
+
+  function openApplyModal(teamId, btn) {
+    const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+    if (!currentUserEmail) {
+      alert("Please log in to apply.");
+      return;
+    }
+    const t = TEAMS.find(x => x.id === teamId);
+    if (!t) return;
+    if ((t.creatorEmail || '').trim().toLowerCase() === currentUserEmail) {
+      alert("You cannot apply to a team you created.");
+      return;
+    }
+    
+    // Check if free user has reached team application limit (max 3 active teams)
+    const profiles = JSON.parse(localStorage.getItem('hk_profiles') || '{}');
+    const userProfile = profiles[currentUserEmail] || {};
+    const membership = userProfile.membership || 'free';
+    
+    if (membership === 'free') {
+      const allApps = JSON.parse(localStorage.getItem('hk_applications') || '[]');
+      const myActiveApps = allApps.filter(a => (a.applicantId || '').trim().toLowerCase() === currentUserEmail && a.status !== 'reject');
+      
+      if (myActiveApps.length >= 3) {
+        const msg = "Free tier limit reached: You can apply to a maximum of 3 active teams. Redirecting to upgrade page...";
+        if (window.HackToast && window.HackToast.show) {
+          window.HackToast.show(msg, "error");
+        } else {
+          alert(msg);
+        }
+        setTimeout(() => {
+          window.location.href = 'upgrade.html?reason=apply_limit&redirect=' + encodeURIComponent(window.location.href);
+        }, 1200);
+        return;
+      }
+    }
+    
+    currentApplyTeamId = teamId;
+    currentApplyBtn = btn;
+    
+    document.getElementById('tm-apply-title').textContent = `Apply to ${t.team}`;
+    
+    const roleSelect = document.getElementById('tm-apply-role');
+    roleSelect.innerHTML = t.roles.map(r => `<option value="${r.n}">${r.n}</option>`).join('');
+    
+    document.getElementById('tm-apply-skills').value = '';
+    document.getElementById('tm-apply-portfolio').value = '';
+    document.getElementById('tm-apply-msg').value = '';
+    document.getElementById('tm-apply-error-url').style.display = 'none';
+    
+    document.getElementById('tm-apply-overlay').classList.add('open');
+  }
+
+  function closeApplyModal() {
+    document.getElementById('tm-apply-overlay').classList.remove('open');
+    currentApplyTeamId = null;
+    currentApplyBtn = null;
+  }
+
+  function submitApplication() {
+    const role = document.getElementById('tm-apply-role').value;
+    const skills = document.getElementById('tm-apply-skills').value.trim();
+    let portfolio = document.getElementById('tm-apply-portfolio').value.trim();
+    const msg = document.getElementById('tm-apply-msg').value.trim();
+    const errorUrl = document.getElementById('tm-apply-error-url');
+    
+    if (!skills || !portfolio) {
+      alert("Please fill in the required fields: Skills and Portfolio.");
+      return;
+    }
+    
+    if (!/^https?:\/\//i.test(portfolio)) {
+      portfolio = 'https://' + portfolio;
+    }
+    
+    try {
+      new URL(portfolio);
+      errorUrl.style.display = 'none';
+    } catch (_) {
+      errorUrl.style.display = 'block';
+      return;
+    }
+    
+    const btnSubmit = document.getElementById('tm-apply-submit');
+    btnSubmit.textContent = 'Submitting...';
+    btnSubmit.disabled = true;
+    
+    setTimeout(() => {
+      const t = TEAMS.find(x => x.id === currentApplyTeamId);
+      if (t) {
+        processApplyEnhanced(t, { role, skills, portfolio, msg });
+        if (currentApplyBtn) {
+          if (currentApplyBtn.id === 'tm-d-apply-btn') {
+            currentApplyBtn.textContent = '✓ Applied — All the best!';
+            currentApplyBtn.classList.add('applied');
+          } else {
+            currentApplyBtn.textContent = '✓ Applied';
+            currentApplyBtn.classList.add('applied');
+          }
+        }
+        renderGrid(getCurrentList());
+      }
+      btnSubmit.textContent = 'Submit Application';
+      btnSubmit.disabled = false;
+      closeApplyModal();
+      
+      if (window.HackToast) {
+        window.HackToast.show('Application submitted successfully!', 'success');
+      } else {
+        alert('Application submitted successfully!');
+      }
+    }, 600);
+  }
+
+  function processApplyEnhanced(t, appData) {
+    const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+    t.applied = true;
+    
+    let allApps = JSON.parse(localStorage.getItem('hk_applications') || '[]');
+    // Prevent duplicate entries by removing old applications for this team
+    allApps = allApps.filter(a => !((a.applicantId || '').trim().toLowerCase() === currentUserEmail && String(a.teamId) === String(t.id)));
+    
+    const newApp = {
+      applicantId: currentUserEmail,
+      teamId: t.id,
+      role: appData.role,
+      skills: appData.skills,
+      portfolio: appData.portfolio,
+      message: appData.msg,
+      status: 'pending',
+      appliedAt: new Date().toISOString()
+    };
+    allApps.push(newApp);
+    localStorage.setItem('hk_applications', JSON.stringify(allApps));
+
+    if (t.userCreated) {
+      try {
+        const userTeams = JSON.parse(localStorage.getItem('hk_user_teams') || '[]');
+        const ut = userTeams.find(x => x.id === t.id);
+        if (ut) {
+          if (!ut.applications) ut.applications = [];
+          const profilesStr = localStorage.getItem('hk_profiles');
+          const profiles = profilesStr ? JSON.parse(profilesStr) : {};
+          const p = profiles[currentUserEmail] || { email: currentUserEmail, name: currentUserEmail };
+          
+          ut.applications.push({
+            email: p.email,
+            name: p.name,
+            role: appData.role,
+            skills: appData.skills,
+            portfolio: appData.portfolio,
+            msg: appData.msg,
+            avatar: p.avatar,
+            status: 'pending',
+            timestamp: newApp.appliedAt
+          });
+          localStorage.setItem('hk_user_teams', JSON.stringify(userTeams));
+        }
+      } catch (e) { console.error(e); }
+    } else {
+      save();
+    }
+
+    if (window.Auth && window.Auth.notify && t.creatorEmail && (t.creatorEmail || '').trim().toLowerCase() !== currentUserEmail) {
+      const applicantName = currentUserEmail ? currentUserEmail.split('@')[0] : 'Someone';
+      window.Auth.notify(
+        t.creatorEmail,
+        'application_received',
+        'New Application!',
+        `${applicantName} applied for the ${appData.role} role in your team ${t.team}.`
+      );
+    }
+  }
+
+  window.ApplyModal = { open: openApplyModal, close: closeApplyModal, submit: submitApplication };
+
   /* ── INIT ── */
+  initApplyModal();
   loadUserCreatedTeams();
   load();
   renderGrid(TEAMS);

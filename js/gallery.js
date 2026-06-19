@@ -112,7 +112,6 @@
         </div>
         <div class="hof-spotlight-actions">
           <a href="${s.projectUrl}" class="hof-btn-primary">View Project →</a>
-          <a href="${s.githubUrl}" class="hof-btn-ghost">GitHub ↗</a>
         </div>
       </div>
     `;

@@ -9,21 +9,28 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profile - HackHub</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <title>Profile - HackVerse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&family=DM+Mono:wght@400;500&display=swap">
+  </noscript>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/create-team-modal.css">
 </head>
 
 <body>
 
   <!-- NAV -->
   <nav class="nav">
-    <a href="index.html" class="nav-logo" aria-label="HackHub Home">
-      <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
-      <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+    <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
+      <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -90,6 +97,10 @@
 
           </div>
           <div class="pf-skills-display" id="pfSkillsDisplay"></div>
+          <div class="pf-membership-container" style="margin-top: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+            <span id="pfMembershipBadge" style="display:inline-block; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: var(--font-body); letter-spacing: 0.05em; text-transform: uppercase;"></span>
+            <button id="pfUpgradeBtn" style="background: none; border: 1px solid var(--accent); color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; font-family: var(--font-body); cursor: pointer; transition: all 0.2s;"></button>
+          </div>
         </div>
 
         <button class="pf-edit-btn" id="pfEditBtn">
@@ -205,47 +216,37 @@
         </div>
       </div>
 
-      <!-- TWO SECTION PANELS -->
-      <div class="pf-sections">
+      <!-- TAB NAVIGATION -->
+      <div class="pf-tabs">
+        <button class="pf-tab-btn active" onclick="Profile.switchTab('tab-registered')">My Hackathons & Teams</button>
+        <button class="pf-tab-btn" onclick="Profile.switchTab('tab-applied')">Teams I Applied To</button>
+        <button class="pf-tab-btn" onclick="Profile.switchTab('tab-created')">Teams I Created</button>
+        <button class="pf-tab-btn" onclick="Profile.switchTab('tab-completed')">Completed Teams</button>
+      </div>
+
+      <!-- TAB CONTENT PANELS -->
+      <div class="pf-tab-content">
+
+        <!-- REGISTERED HACKATHONS -->
+        <div class="pf-section-card active" id="tab-registered">
+          <div id="registeredHackathonsList"></div>
+        </div>
 
         <!-- APPLIED TEAMS -->
-        <div class="pf-section-card">
-          <div class="pf-section-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              aria-hidden="true">
-              <line x1="22" y1="2" x2="11" y2="13" />
-              <polygon points="22 2 15 22 11 13 2 9 22 2" />
-            </svg>
-            Teams I Applied To
-          </div>
+        <div class="pf-section-card" id="tab-applied" style="display:none;">
           <div id="appliedTeamsList"></div>
         </div>
 
         <!-- CREATED TEAMS -->
-        <div class="pf-section-card">
-          <div class="pf-section-title">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              aria-hidden="true">
-              <polygon
-                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-            </svg>
-            Teams I Created
-          </div>
+        <div class="pf-section-card" id="tab-created" style="display:none;">
           <div id="createdTeamsList"></div>
         </div>
 
-      </div>
+        <!-- COMPLETED TEAMS -->
+        <div class="pf-section-card" id="tab-completed" style="display:none;">
+          <div id="completedTeamsList"></div>
+        </div>
 
-      <!-- APPLIED TEAM DETAIL PANEL (shown below sections) -->
-      <div class="pf-detail-panel" id="appliedDetailPanel" style="display:none">
-        <button class="pf-back-btn" id="appliedDetailBack">← Back</button>
-        <div id="appliedDetailContent"></div>
-      </div>
-
-      <!-- CREATED TEAM DETAIL PANEL -->
-      <div class="pf-detail-panel" id="createdDetailPanel" style="display:none">
-        <button class="pf-back-btn" id="createdDetailBack">← Back</button>
-        <div id="createdDetailContent"></div>
       </div>
 
     </div>
@@ -255,9 +256,9 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" aria-label="HackHub Home">
-          <img src="assets/avatar/yes.webp" alt="HackHub Logo" class="nav-logo-img">
-          <span class="nav-logo-text">Hack<span class="text-accent">Hub</span></span>
+        <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
+          <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
+      <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
         </a>
         <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
         <div class="footer-socials">
@@ -302,7 +303,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 HackHub. All rights reserved.</p>
+      <p class="footer-copy">© 2026 HackVerse. All rights reserved.</p>
       <p class="footer-built">Built with <svg width="10" height="10" viewBox="0 0 24 24" fill="#ff4444" stroke="#ff4444"
           stroke-width="2" style="vertical-align: middle; margin: 0 2px;">
           <path
@@ -317,7 +318,10 @@
     const navLinks = document.querySelector('.nav-links');
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
   </script>
+  <script src="js/hackathons-data.js"></script>
+  <script src="js/reg-state.js"></script>
   <script src="js/profile.js"></script>
+  <script src="js/create-team-modal.js"></script>
   <script src="js/auth.js?v=1.1"></script>
 
   <!-- Custom Confirm Modal -->

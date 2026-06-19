@@ -1,5 +1,5 @@
 /* ═════════════════════════════════════════
-   HackHub Premium Auth Stylesheet
+   HackVerse Premium Auth Stylesheet
    ═════════════════════════════════════════ */
 
 :root {
@@ -14,7 +14,7 @@
     --border-color: rgba(255, 255, 255, 0.16);
     --border-focus: rgba(217, 164, 65, 0.6);
     --glow-shadow: 0 0 20px rgba(217, 164, 65, 0.25);
-    --font-outfit: 'Outfit', sans-serif;
+    --font-outfit: 'Bebas Neue', sans-serif;
     --font-sans: 'DM Sans', sans-serif;
 }
 
@@ -72,13 +72,11 @@ body {
 .auth-visual-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(8, 7, 6, 0.25) 0%,
-        rgba(10, 9, 8, 0.35) 40%,
-        rgba(9, 8, 7, 0.75) 70%,
-        rgba(9, 9, 11, 0.97) 100%
-    );
+    background: linear-gradient(to bottom,
+            rgba(8, 7, 6, 0.25) 0%,
+            rgba(10, 9, 8, 0.35) 40%,
+            rgba(9, 8, 7, 0.75) 70%,
+            rgba(9, 9, 11, 0.97) 100%);
     z-index: 2;
 }
 
@@ -167,8 +165,8 @@ body {
 }
 
 .visual-subtitle {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.6;
     font-weight: 400;
 }
@@ -318,8 +316,8 @@ form {
     transition: color 0.25s;
 }
 
-.input-group input:focus + .input-icon,
-.input-group input:focus ~ .input-icon {
+.input-group input:focus+.input-icon,
+.input-group input:focus~.input-icon {
     color: var(--accent-gold);
 }
 
@@ -417,7 +415,7 @@ form {
     .auth-container {
         padding: 0.5rem;
     }
-    
+
     .auth-visual-panel {
         display: none;
     }

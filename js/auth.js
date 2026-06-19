@@ -13,6 +13,50 @@
   /* ── INJECT MODALS + PROFILE AVATAR ── */
   function injectUI() {
     const html = `
+      <!-- NOTIFICATION BELL (injected before profile) -->
+      <div id="auth-notification-wrap" style="display:none;position:relative;margin-right:12px;">
+        <button id="auth-notif-btn" aria-label="Notifications" style="
+          width:38px; height:38px;
+          border-radius:50%;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.1);
+          cursor:pointer;
+          display:flex; align-items:center; justify-content:center;
+          transition: all 0.2s;
+          padding:0;
+          outline:none;
+        ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span id="auth-notif-badge" style="display:none;position:absolute;top:-2px;right:-2px;background:#ef4444;color:#fff;font-size:10px;font-weight:bold;width:16px;height:16px;border-radius:50%;align-items:center;justify-content:center;border:2px solid #0f0f1a;">0</span>
+        </button>
+
+        <!-- Notification Dropdown -->
+        <div id="auth-notif-dropdown" style="
+          display:none;
+          position:absolute;
+          top:calc(100% + 12px);
+          right:-50px;
+          width:320px;
+          max-height:400px;
+          background: rgba(14, 15, 18, 0.98);
+          backdrop-filter:blur(20px);
+          border:1px solid rgba(255,255,255,0.1);
+          border-radius:12px;
+          box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+          overflow-y:auto;
+          z-index:8999;
+          animation: auth-drop-in 0.18s cubic-bezier(0.22,1,0.36,1);
+        ">
+          <div style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #c9a84c;">Notifications</div>
+          <div id="auth-notif-list" style="display:flex; flex-direction:column;">
+            <!-- list items -->
+          </div>
+        </div>
+      </div>
+
       <!-- PROFILE AVATAR + DROPDOWN (injected next to sign-up btn) -->
       <div id="auth-profile-wrap" style="display:none;position:relative;">
 
@@ -73,7 +117,7 @@
               border:none !important;
               border-radius:0 !important;
               color:rgba(217,164,65,0.9) !important;
-              font-family:'Syne', sans-serif !important;
+              font-family:var(--font-body) !important;
               font-size:.83rem !important;
               font-weight:600 !important;
               letter-spacing:.02em !important;
@@ -117,12 +161,26 @@
     document.body.insertAdjacentHTML('beforeend', html);
   }
 
-  /* ── MOVE PROFILE WRAP INTO NAV (next to sign-up btn) ── */
   function mountProfileInNav() {
     const signupBtn = document.getElementById('auth-signup-btn');
     const wrap = document.getElementById('auth-profile-wrap');
+    const notifWrap = document.getElementById('auth-notification-wrap');
+    
     if (signupBtn && wrap) {
-      signupBtn.parentNode.insertBefore(wrap, signupBtn.nextSibling);
+      // Create a wrapper so they stay together in flex layouts
+      const container = document.createElement('div');
+      container.id = 'auth-controls-container';
+      container.style.display = 'flex';
+      container.style.alignItems = 'center';
+      container.style.gap = '16px';
+      
+      signupBtn.parentNode.insertBefore(container, signupBtn.nextSibling);
+      
+      if (notifWrap) {
+        notifWrap.style.marginRight = '0'; // remove old margin
+        container.appendChild(notifWrap);
+      }
+      container.appendChild(wrap);
     }
   }
 
@@ -138,15 +196,29 @@
 
   /* ── DROPDOWN TOGGLE ── */
   var _dropOpen = false;
+  var _notifOpen = false;
 
   function openDrop() {
     document.getElementById('auth-dropdown').style.display = 'block';
+    if (_notifOpen) closeNotifDrop();
     _dropOpen = true;
   }
 
   function closeDrop() {
     document.getElementById('auth-dropdown').style.display = 'none';
     _dropOpen = false;
+  }
+
+  function openNotifDrop() {
+    document.getElementById('auth-notif-dropdown').style.display = 'block';
+    if (_dropOpen) closeDrop();
+    _notifOpen = true;
+    markNotificationsRead();
+  }
+
+  function closeNotifDrop() {
+    document.getElementById('auth-notif-dropdown').style.display = 'none';
+    _notifOpen = false;
   }
 
   /* ── UPDATE NAV ── */
@@ -165,6 +237,8 @@
     if (isLoggedIn()) {
       signupBtn.style.display = 'none';
       if (profileWrap) profileWrap.style.display = 'flex';
+      var notifWrap = document.getElementById('auth-notification-wrap');
+      if (notifWrap) notifWrap.style.display = 'flex';
 
       // Load profile info and set avatar button image/initials
       var avatarBtn = document.getElementById('auth-avatar-btn');
@@ -187,15 +261,20 @@
         if (avatarUrl) {
           avatarBtn.innerHTML = '<img src="' + avatarUrl + '" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;">';
         } else if (initials) {
-          avatarBtn.innerHTML = '<span style="color:#c9a84c;font-family:\'Syne\',sans-serif;font-size:0.85rem;font-weight:700;">' + initials + '</span>';
+          avatarBtn.innerHTML = '<span style="color:#c9a84c;font-family:var(--font-body);font-size:0.85rem;font-weight:700;">' + initials + '</span>';
         } else {
           avatarBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
         }
       }
+      
+      renderNotifications();
     } else {
       signupBtn.style.display = 'inline-flex';
       if (profileWrap) profileWrap.style.display = 'none';
+      var notifWrap = document.getElementById('auth-notification-wrap');
+      if (notifWrap) notifWrap.style.display = 'none';
       closeDrop();
+      closeNotifDrop();
     }
     document.body.classList.add('auth-ready');
   }
@@ -204,10 +283,97 @@
   /* ── LOGOUT ── */
   function logout() {
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('currentUserEmail');
+    localStorage.removeItem('hackhub_user');
+    localStorage.removeItem('hk_profile');
     closeDrop();
+    closeNotifDrop();
     updateNav();
     if (window.location.pathname.includes('profile.html')) {
       window.location.replace('index.html');
+    } else {
+      window.location.reload();
+    }
+  }
+
+  /* ── NOTIFICATIONS LOGIC ── */
+  function notify(userEmail, type, title, message) {
+    if (!userEmail) return;
+    let notifs = [];
+    try {
+      notifs = JSON.parse(localStorage.getItem('hk_notifications')) || [];
+    } catch (e) {}
+    notifs.push({
+      id: Math.random().toString(36).substring(2, 10),
+      userEmail: userEmail,
+      type: type,
+      title: title,
+      message: message,
+      read: false,
+      timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('hk_notifications', JSON.stringify(notifs));
+    renderNotifications(); // update if current user is logged in
+  }
+
+  function renderNotifications() {
+    if (!isLoggedIn()) return;
+    const currentUser = localStorage.getItem('currentUserEmail');
+    if (!currentUser) return;
+
+    let notifs = [];
+    try {
+      notifs = JSON.parse(localStorage.getItem('hk_notifications')) || [];
+    } catch(e) {}
+
+    const myNotifs = notifs.filter(n => n.userEmail === currentUser).sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+    const unreadCount = myNotifs.filter(n => !n.read).length;
+
+    const badge = document.getElementById('auth-notif-badge');
+    if (badge) {
+      if (unreadCount > 0) {
+        badge.textContent = unreadCount > 9 ? '9+' : unreadCount;
+        badge.style.display = 'flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+
+    const list = document.getElementById('auth-notif-list');
+    if (list) {
+      if (myNotifs.length === 0) {
+        list.innerHTML = `<div style="padding: 16px; text-align: center; color: #a1a1aa; font-family: var(--font-body); font-size: 13px;">No notifications yet.</div>`;
+      } else {
+        list.innerHTML = myNotifs.map(n => `
+          <div style="padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.05); background: ${n.read ? 'transparent' : 'rgba(239, 68, 68, 0.05)'};">
+            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: ${n.read ? '#e4e4e7' : '#fff'}; margin-bottom: 4px;">${n.title}</div>
+            <div style="font-family: var(--font-body); font-size: 12px; color: #a1a1aa; line-height: 1.4;">${n.message}</div>
+            <div style="font-size: 10px; color: #71717a; margin-top: 6px; font-family: var(--font-mono);">${new Date(n.timestamp).toLocaleDateString()}</div>
+          </div>
+        `).join('');
+      }
+    }
+  }
+
+  function markNotificationsRead() {
+    const currentUser = localStorage.getItem('currentUserEmail');
+    if (!currentUser) return;
+    let notifs = [];
+    try {
+      notifs = JSON.parse(localStorage.getItem('hk_notifications')) || [];
+    } catch(e) {}
+    
+    let changed = false;
+    notifs.forEach(n => {
+      if (n.userEmail === currentUser && !n.read) {
+        n.read = true;
+        changed = true;
+      }
+    });
+    
+    if (changed) {
+      localStorage.setItem('hk_notifications', JSON.stringify(notifs));
+      renderNotifications();
     }
   }
 
@@ -254,6 +420,13 @@
         closeDrop();
       });
 
+    // Notification toggle
+    document.getElementById('auth-notif-btn')
+      ?.addEventListener('click', function(e) {
+        e.stopPropagation();
+        _notifOpen ? closeNotifDrop() : openNotifDrop();
+      });
+
     // Dropdown — Logout
     document.getElementById('auth-dd-logout')
       ?.addEventListener('click', function () {
@@ -265,6 +438,10 @@
       var wrap = document.getElementById('auth-profile-wrap');
       if (wrap && !wrap.contains(e.target)) {
         closeDrop();
+      }
+      var notifWrap = document.getElementById('auth-notification-wrap');
+      if (notifWrap && !notifWrap.contains(e.target)) {
+        closeNotifDrop();
       }
     });
   }
@@ -291,6 +468,6 @@
   }
 
   /* ── PUBLIC API ── */
-  window.Auth = { requireLogin, showSignUp, showLoginRequired, isLoggedIn, updateNav };
+  window.Auth = { requireLogin, showSignUp, showLoginRequired, isLoggedIn, updateNav, notify };
 
 })();
