@@ -12,6 +12,12 @@
 
   /* ── INJECT MODALS + PROFILE AVATAR ── */
   function injectUI() {
+    if (!document.querySelector('link[href*="modals.css"]')) {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'css/modals.css';
+      document.head.appendChild(link);
+    }
     const html = `
       <!-- NOTIFICATION BELL (injected before profile) -->
       <div id="auth-notification-wrap" style="display:none;position:relative;margin-right:12px;">
@@ -453,12 +459,184 @@
     return false;
   }
 
+  /* ── CHECK ONBOARDING ── */
+  function checkOnboarding() {
+    if (!isLoggedIn()) return;
+    if (localStorage.getItem('needsOnboarding') !== 'true') return;
+
+    // Check if onboarding form is already in DOM to avoid duplicate rendering
+    if (document.getElementById('onboarding-modal-overlay')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'onboarding-modal-overlay';
+    overlay.className = 'modal-overlay open';
+    overlay.style.zIndex = '9999';
+
+    const skillsList = [
+      'HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'Python', 
+      'Java', 'C++', 'Figma', 'TensorFlow', 'SQL', 'Git', 'Other'
+    ];
+
+    const skillsChipsHtml = skillsList.map(skill => `
+      <span class="skill-chip" data-skill="${skill}" style="user-select: none;">${skill}</span>
+    `).join('');
+
+    overlay.innerHTML = `
+      <div class="modal-box" style="animation: modalIn 0.3s forwards; max-width: 540px; border-color: #c9a84c;">
+        <div class="modal-header">
+          <h2 style="color: #fff; font-family: var(--font-display, 'Bebas Neue', sans-serif); font-size: 2rem; letter-spacing: 1px;">COMPLETE YOUR PROFILE</h2>
+          <p style="color: #a1a1aa; margin-top: 4px; font-size: 0.9rem;">Tell us a bit about your skills so teams can find you!</p>
+        </div>
+        <div class="modal-body">
+          <form id="onboarding-form" novalidate>
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label class="form-label" style="display:block; font-size: 0.85rem; color:#fff; margin-bottom: 8px;">Primary Role <span class="required" style="color: #c9a84c;">*</span></label>
+              <select id="onboard-role" class="form-select" required style="background: rgba(255,255,255,0.05); color:#fff; border: 1px solid rgba(255,255,255,0.1); width:100%; padding:12px; border-radius:10px;">
+                <option value="" disabled selected>Select Primary Role</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="UI/UX Designer">UI/UX Designer</option>
+                <option value="AI/ML Engineer">AI/ML Engineer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Mobile Developer">Mobile Developer</option>
+                <option value="Product Manager">Product Manager</option>
+                <option value="Pitching / Business">Pitching / Business</option>
+              </select>
+              <span class="form-error" id="onboard-role-error" style="color:#ef4444; font-size:0.75rem; display:none; margin-top:4px;">Primary Role is required</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label class="form-label" style="display:block; font-size: 0.85rem; color:#fff; margin-bottom: 8px;">Skills (Select at least one) <span class="required" style="color: #c9a84c;">*</span></label>
+              <div class="skills-container" id="onboard-skills-container" style="display:flex; flex-wrap:wrap; gap:8px;">
+                ${skillsChipsHtml}
+              </div>
+              <span class="form-error" id="onboard-skills-error" style="color:#ef4444; font-size:0.75rem; display:none; margin-top:4px;">Please select at least one skill</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 20px;">
+              <label class="form-label" style="display:block; font-size: 0.85rem; color:#fff; margin-bottom: 8px;">GitHub Profile (Optional)</label>
+              <input type="url" id="onboard-github" class="form-input" placeholder="https://github.com/username" style="background: rgba(255,255,255,0.05); color:#fff; border: 1px solid rgba(255,255,255,0.1); width:100%; padding:12px; border-radius:10px; box-sizing:border-box;">
+              <span class="form-error" id="onboard-github-error" style="color:#ef4444; font-size:0.75rem; display:none; margin-top:4px;">Please enter a valid GitHub URL</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label class="form-label" style="display:block; font-size: 0.85rem; color:#fff; margin-bottom: 8px;">LinkedIn Profile (Optional)</label>
+              <input type="url" id="onboard-linkedin" class="form-input" placeholder="https://linkedin.com/in/username" style="background: rgba(255,255,255,0.05); color:#fff; border: 1px solid rgba(255,255,255,0.1); width:100%; padding:12px; border-radius:10px; box-sizing:border-box;">
+              <span class="form-error" id="onboard-linkedin-error" style="color:#ef4444; font-size:0.75rem; display:none; margin-top:4px;">Please enter a valid LinkedIn URL</span>
+            </div>
+
+            <button type="submit" class="form-btn" style="background: #c9a84c; color:#000; border:none; width:100%; padding:14px; border-radius:50px; font-weight:bold; cursor:pointer;">
+              Save & Get Started
+            </button>
+          </form>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    const selectedSkills = new Set();
+    const chips = overlay.querySelectorAll('.skill-chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const skill = chip.dataset.skill;
+        if (selectedSkills.has(skill)) {
+          selectedSkills.delete(skill);
+          chip.classList.remove('selected');
+        } else {
+          selectedSkills.add(skill);
+          chip.classList.add('selected');
+        }
+      });
+    });
+
+    const form = overlay.querySelector('#onboarding-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      overlay.querySelector('#onboard-role-error').style.display = 'none';
+      overlay.querySelector('#onboard-skills-error').style.display = 'none';
+      overlay.querySelector('#onboard-github-error').style.display = 'none';
+      overlay.querySelector('#onboard-linkedin-error').style.display = 'none';
+
+      let hasError = false;
+
+      const roleSelect = overlay.querySelector('#onboard-role');
+      const selectedRole = roleSelect.value;
+      if (!selectedRole) {
+        overlay.querySelector('#onboard-role-error').style.display = 'block';
+        hasError = true;
+      }
+
+      if (selectedSkills.size === 0) {
+        overlay.querySelector('#onboard-skills-error').style.display = 'block';
+        hasError = true;
+      }
+
+      const githubInput = overlay.querySelector('#onboard-github');
+      const githubVal = githubInput.value.trim();
+      if (githubVal) {
+        try {
+          new URL(githubVal);
+        } catch (_) {
+          overlay.querySelector('#onboard-github-error').style.display = 'block';
+          hasError = true;
+        }
+      }
+
+      const linkedinInput = overlay.querySelector('#onboard-linkedin');
+      const linkedinVal = linkedinInput.value.trim();
+      if (linkedinVal) {
+        try {
+          new URL(linkedinVal);
+        } catch (_) {
+          overlay.querySelector('#onboard-linkedin-error').style.display = 'block';
+          hasError = true;
+        }
+      }
+
+      if (hasError) return;
+
+      const currentUserEmail = localStorage.getItem('currentUserEmail');
+      if (currentUserEmail) {
+        const profiles = JSON.parse(localStorage.getItem('hk_profiles') || '{}');
+        const profile = profiles[currentUserEmail] || {};
+
+        profile.role = selectedRole;
+        profile.skills = Array.from(selectedSkills);
+        profile.github = githubVal;
+        profile.linkedin = linkedinVal;
+        profile.hasOnboarded = true;
+
+        profiles[currentUserEmail] = profile;
+        localStorage.setItem('hk_profiles', JSON.stringify(profiles));
+        localStorage.setItem('hk_profile', JSON.stringify(profile));
+      }
+
+      localStorage.removeItem('needsOnboarding');
+      overlay.remove();
+
+      if (window.Auth && typeof window.Auth.updateNav === 'function') {
+        window.Auth.updateNav();
+      }
+      if (window.location.pathname.includes('teamfinder.html') && typeof renderGrid === 'function') {
+        renderGrid();
+      }
+    });
+  }
+
   /* ── INIT ── */
   function init() {
     injectUI();
     mountProfileInNav();
     bindEvents();
     updateNav();
+    checkOnboarding();
   }
 
   if (document.readyState === 'loading') {

@@ -6,39 +6,38 @@
   'use strict';
 
   // ── Animated counter (count-up on scroll) ─────────
-  const counters = document.querySelectorAll('.org-counter-num');
-  let countersDone = false;
+  const counters = document.querySelectorAll('.org-counter-num, .org-metric-val');
 
-  function animateCounters() {
-    if (countersDone) return;
-    countersDone = true;
+  function animateCounter(el) {
+    if (el.classList.contains('counted')) return;
+    el.classList.add('counted');
 
-    counters.forEach(el => {
-      const target = +el.dataset.target;
-      const duration = 2000;
-      const start = performance.now();
+    const target = +el.dataset.target;
+    const duration = 2000;
+    const start = performance.now();
 
-      function tick(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        // ease-out quad
-        const ease = 1 - (1 - progress) * (1 - progress);
-        el.textContent = Math.round(ease * target).toLocaleString();
-        if (progress < 1) requestAnimationFrame(tick);
+    function tick(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out quad
+      const ease = 1 - (1 - progress) * (1 - progress);
+      el.textContent = Math.round(ease * target).toLocaleString();
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
       }
-
-      requestAnimationFrame(tick);
     });
-  }
+  }, { threshold: 0.2 });
 
-  // trigger counters when hero-counters visible
-  const counterSection = document.querySelector('.org-hero-counters');
-  if (counterSection) {
-    const cObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) animateCounters();
-    }, { threshold: 0.5 });
-    cObserver.observe(counterSection);
-  }
+  counters.forEach(c => counterObserver.observe(c));
 
   // ── Scroll reveal ──────────────────────────────────
   const revealEls = document.querySelectorAll('.reveal-card');
@@ -113,10 +112,12 @@
 
     if (step === 2) {
       const eventName = document.getElementById('orgEventName');
-      const format = document.getElementById('orgFormat');
+      const participants = document.getElementById('orgParticipants');
+      const details = document.getElementById('orgDetails');
 
-      if (!eventName.value.trim()) { showError(eventName, 'Event name is required'); valid = false; }
-      if (!format.value) { showError(format, 'Please select a format'); valid = false; }
+      if (!eventName.value.trim()) { showError(eventName, 'Hackathon name is required'); valid = false; }
+      if (!participants.value) { showError(participants, 'Please select expected participants'); valid = false; }
+      if (!details.value.trim()) { showError(details, 'Message is required'); valid = false; }
     }
 
     return valid;
@@ -170,15 +171,12 @@
     const eventGrid = document.getElementById('reviewEvent');
 
     personalGrid.innerHTML = makeReviewItem('Name', document.getElementById('orgName').value)
-      + makeReviewItem('Email', document.getElementById('orgEmail').value)
-      + makeReviewItem('Company', document.getElementById('orgCompany').value)
-      + makeReviewItem('Role', document.getElementById('orgRole').value || '—');
+      + makeReviewItem('Work Email', document.getElementById('orgEmail').value)
+      + makeReviewItem('Organization', document.getElementById('orgCompany').value);
 
-    eventGrid.innerHTML = makeReviewItem('Event Name', document.getElementById('orgEventName').value)
-      + makeReviewItem('Format', document.getElementById('orgFormat').value || '—')
-      + makeReviewItem('Participants', document.getElementById('orgParticipants').value || '—')
-      + makeReviewItem('Timeline', document.getElementById('orgTimeline').value || '—')
-      + makeReviewItem('Details', document.getElementById('orgDetails').value || '—');
+    eventGrid.innerHTML = makeReviewItem('Hackathon Name', document.getElementById('orgEventName').value)
+      + makeReviewItem('Expected Participants', document.getElementById('orgParticipants').value || '—')
+      + makeReviewItem('Message', document.getElementById('orgDetails').value || '—');
   }
 
   function makeReviewItem(label, value) {

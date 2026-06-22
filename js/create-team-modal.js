@@ -145,13 +145,30 @@
               </div>
 
               <div class="ctm-section-divider"></div>
+              <div class="ctm-section-label">Preferred Contacts (Fill in at least one) *</div>
+
+              <div class="ctm-field">
+                <label class="ctm-label" for="ctm-contact-email">Email Address</label>
+                <input class="ctm-input" id="ctm-contact-email" type="email" placeholder="e.g. lead@hackverse.com" autocomplete="off">
+              </div>
+
+              <div class="ctm-field">
+                <label class="ctm-label" for="ctm-contact-linkedin">LinkedIn URL</label>
+                <input class="ctm-input" id="ctm-contact-linkedin" type="text" placeholder="e.g. linkedin.com/in/username" autocomplete="off">
+              </div>
+
+              <div class="ctm-field">
+                <label class="ctm-label" for="ctm-contact-discord">Discord Username / Tag</label>
+                <input class="ctm-input" id="ctm-contact-discord" type="text" placeholder="e.g. username" autocomplete="off">
+              </div>
+
+              <div class="ctm-section-divider"></div>
 
               <div class="ctm-field">
                 <label class="ctm-label">Roles Needed</label>
                 <div class="ctm-roles-list" id="ctm-roles-list"></div>
                 <div class="ctm-role-input-row" style="display:flex; gap:8px;">
                   <input class="ctm-input" id="ctm-role-input" type="text" placeholder="e.g. UI Designer" maxlength="40" autocomplete="off" style="flex:1;">
-                  <input class="ctm-input" id="ctm-role-qty" type="number" min="1" max="10" value="1" style="width:60px;">
                   <button class="ctm-add-role-btn" id="ctm-add-role-btn" type="button">+ Add</button>
                 </div>
               </div>
@@ -207,7 +224,7 @@
     if (!list) return;
     list.innerHTML = roles.map((r, i) => `
       <span class="ctm-role-tag">
-        ${r.n} (${r.qty || 1})
+        ${r.n}
         <button type="button" aria-label="Remove" onclick="CreateTeamModal._removeRole(${i})">✕</button>
       </span>`).join('');
     updateCurrentMembersCount();
@@ -227,13 +244,10 @@
   /* ── ADD / REMOVE ROLE ── */
   function addRole() {
     const input = document.getElementById('ctm-role-input');
-    const qtyInput = document.getElementById('ctm-role-qty');
     const val   = (input.value || '').trim();
-    const qty = parseInt(qtyInput.value) || 1;
     if (!val) return;
-    roles.push({ n: val, qty: qty, o: true });
+    roles.push({ n: val, o: true });
     input.value = '';
-    qtyInput.value = '1';
     input.focus();
     renderRoles();
   }
@@ -327,6 +341,7 @@
       const desc = document.getElementById('ctm-desc');
       const spots = document.getElementById('ctm-spots');
       const current = document.getElementById('ctm-current-members');
+      const deadline = document.getElementById('ctm-deadline');
       
       let valid = true;
       if (!desc || !desc.value.trim()) { shakeElement(desc); valid = false; }
@@ -343,13 +358,68 @@
         shakeElement(current);
         valid = false;
       }
+
+      if (deadline && deadline.value) {
+        const selectedDate = new Date(deadline.value + 'T00:00:00');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (selectedDate < today) {
+          shakeElement(deadline);
+          if (window.HackToast && window.HackToast.show) {
+            window.HackToast.show("Deadline cannot be in the past.", "error");
+          } else {
+            alert("Deadline cannot be in the past.");
+          }
+          valid = false;
+        }
+      }
       return valid;
     }
 
     if (stepNum === 3) {
       const lead = document.getElementById('ctm-lead');
+      const contactEmail = document.getElementById('ctm-contact-email');
+      const contactLinkedin = document.getElementById('ctm-contact-linkedin');
+      const contactDiscord = document.getElementById('ctm-contact-discord');
+      
       let valid = true;
       if (!lead || !lead.value.trim()) { shakeElement(lead); valid = false; }
+
+      const emailVal = contactEmail?.value.trim();
+      const linkedinVal = contactLinkedin?.value.trim();
+      const discordVal = contactDiscord?.value.trim();
+
+      if (!emailVal && !linkedinVal && !discordVal) {
+        if (contactEmail) shakeElement(contactEmail);
+        if (contactLinkedin) shakeElement(contactLinkedin);
+        if (contactDiscord) shakeElement(contactDiscord);
+        
+        if (window.HackToast && window.HackToast.show) {
+          window.HackToast.show("Please provide at least one contact channel.", "error");
+        } else {
+          alert("Please provide at least one contact channel (Email, LinkedIn, or Discord).");
+        }
+        valid = false;
+      }
+
+      if (linkedinVal) {
+        let testUrl = linkedinVal;
+        if (!/^https?:\/\//i.test(testUrl)) {
+          testUrl = 'https://' + testUrl;
+        }
+        try {
+          new URL(testUrl);
+        } catch (_) {
+          if (contactLinkedin) shakeElement(contactLinkedin);
+          if (window.HackToast && window.HackToast.show) {
+            window.HackToast.show("Please enter a valid LinkedIn URL.", "error");
+          } else {
+            alert("Please enter a valid LinkedIn URL.");
+          }
+          valid = false;
+        }
+      }
+
       return valid;
     }
 
@@ -447,6 +517,14 @@
       membersArr.push({ n: `Member ${i + 1}`, r: 'Member' });
     }
 
+    const contactEmail = (document.getElementById('ctm-contact-email')?.value || '').trim();
+    let contactLinkedin = (document.getElementById('ctm-contact-linkedin')?.value || '').trim();
+    const contactDiscord = (document.getElementById('ctm-contact-discord')?.value || '').trim();
+
+    if (contactLinkedin && !/^https?:\/\//i.test(contactLinkedin)) {
+      contactLinkedin = 'https://' + contactLinkedin;
+    }
+
     // Build new team object
     const randomAvatar = (window.TMCards && typeof window.TMCards.getRandomAvatar === 'function')
       ? window.TMCards.getRandomAvatar()
@@ -472,7 +550,12 @@
       applied:         false,
       userCreated:     true,
       creatorEmail:    currentUserEmail,
-      applications:    []
+      applications:    [],
+      contact: {
+        email: contactEmail,
+        linkedin: contactLinkedin,
+        discord: contactDiscord
+      }
     };
 
     // Persist

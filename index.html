@@ -35,10 +35,10 @@
 
   <nav class="nav">
 
-    <div class="nav-logo">
+    <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
       <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
       <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
-    </div>
+    </a>
 
     <ul class="nav-links">
       <li><a href="index.html" class="active">Home</a></li>
@@ -69,6 +69,7 @@
 
       <div class="hero-noise"></div>
 
+
       <div class="hero-content">
 
         <h1 class="hero-title">
@@ -82,6 +83,7 @@
 
         <div class="hero-actions">
           <a href="signup.html?mode=signup" id="hero-signup-btn" class="btn-primary btn-large">Get Started</a>
+          <a href="organise.html" class="btn-ghost btn-large" style="margin-left: 1rem;">Host a Hackathon</a>
         </div>
 
         <div class="hero-stats">
@@ -189,7 +191,7 @@
           <!-- CARD 1 -->
 
           <div class="event-card"
-            onclick="window.location.href='hackathon.html#hackathon/104'">
+            onclick="window.location.href = 'hackathon.html#hackathon/104'">
 
             <div class="event-card-image">
               <img src="assets/hackathon events/cloudfest.webp" alt="CloudFest hackathon event" loading="lazy"
@@ -222,11 +224,6 @@
                   48-hour AI & Web3 hackathon with ₹5L prize pool
                 </div>
 
-                <div class="event-prize-pool">
-                  <span class="prize-lbl">Prize Pool</span>
-                  <span class="prize-val">₹5,00,000</span>
-                </div>
-
               </div>
 
             </div>
@@ -236,7 +233,7 @@
           <!-- CARD 2 -->
 
           <div class="event-card"
-            onclick="window.location.href='hackathon.html#hackathon/101'">
+            onclick="window.location.href = 'hackathon.html#hackathon/101'">
 
             <div class="event-card-image">
               <img src="assets/hackathon events/office.webp" alt="Adobe India hackathon" loading="lazy" decoding="async"
@@ -269,11 +266,6 @@
                   PPI for Internship and a lot more!
                 </div>
 
-                <div class="event-prize-pool">
-                  <span class="prize-lbl">Prize Pool</span>
-                  <span class="prize-val">₹10,00,000</span>
-                </div>
-
               </div>
 
             </div>
@@ -283,7 +275,7 @@
           <!-- CARD 3 -->
 
           <div class="event-card"
-            onclick="window.location.href='hackathon.html#hackathon/102'">
+            onclick="window.location.href = 'hackathon.html#hackathon/102'">
 
             <div class="event-card-image">
               <img src="assets/hackathon events/amazonfeat.webp" alt="Amazon hackathon" loading="lazy" decoding="async"
@@ -314,11 +306,6 @@
 
                 <div class="event-description">
                   National level developer competition with internship opportunities and ₹10L cash prize
-                </div>
-
-                <div class="event-prize-pool">
-                  <span class="prize-lbl">Prize Pool</span>
-                  <span class="prize-val">₹12,00,000</span>
                 </div>
 
               </div>
@@ -356,6 +343,11 @@
       <div class="section-inner">
         <div class="section-label"><span class="mono">01 /</span> Why HackVerse?</div>
         <h2 class="section-title">DISCOVER. CONNECT. <span class="text-accent">COMPETE.</span> </h2>
+        <p class="section-desc" style="max-width: 800px; margin: -1.5rem auto 3.5rem auto; text-align: center; color: var(--fg-muted); font-size: 1.05rem; line-height: 1.6;">
+          HackVerse solves the real challenge of participation. Our specialized 
+          <strong>team formation and role-matching engine</strong> connects developers, designers, and domain experts to turn 
+          ideas into complete, competitive teams.
+        </p>
         <div class="about-grid">
           <div class="about-card">
             <div class="card-icon" style="color:#ffd700;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -491,10 +483,7 @@
               For Organizations
             </span>
             <h2 class="organiser-title">Host World-Class <span class="text-accent">Hackathons</span></h2>
-            <p class="organiser-desc">Partner with HackVerse to create extraordinary hackathon experiences. We
-              
-              handle everything — from ideation to execution — so you can focus on discovering top talent and
-              groundbreaking innovation.</p>
+            <p class="organiser-desc">Most hackathon platforms focus only on registrations. HackVerse focuses on active participation. We help solo developers form complete, competitive teams and fill critical roles—eliminating drop-offs and maximizing submission quality.</p>
 
             <a href="organise.html" class="organiser-cta-btn">
               <span>Start Organising</span>
@@ -517,8 +506,8 @@
                   <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 </svg>
               </div>
-              <h3>Talent Pipeline</h3>
-              <p>Source top-tier engineers, designers, and product thinkers directly from the competition floor.</p>
+              <h3>Eliminate Drop-offs</h3>
+              <p>Solo participants find matched teammates automatically, ensuring they submit complete, high-quality projects rather than giving up early.</p>
             </div>
             <div class="organiser-feature-card">
               <div class="organiser-feature-icon">
@@ -529,8 +518,8 @@
                   <line x1="9" y1="21" x2="9" y2="9" />
                 </svg>
               </div>
-              <h3>End-to-End Platform</h3>
-              <p> Team formation, Hackathon information, and guidance — all managed seamlessly on one platform.</p>
+              <h3>Role Matching Engine</h3>
+              <p>Ensure every team is well-balanced. Our engine matches developers with designers, product managers, and domain experts based on project needs.</p>
             </div>
             <div class="organiser-feature-card">
               <div class="organiser-feature-icon">
@@ -540,8 +529,8 @@
                   <polyline points="22 4 12 14.01 9 11.01" />
                 </svg>
               </div>
-              <h3>Brand Visibility</h3>
-              <p>Amplify your employer brand in front of thousands of engaged developers and innovators.</p>
+              <h3>Active Community</h3>
+              <p>Promote your hackathon to a highly targeted community of developers actively looking to build, collaborate, and compete.</p>
             </div>
           </div>
 
@@ -593,10 +582,10 @@
   <footer class="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <div class="nav-logo">
+        <a href="index.html" class="nav-logo" aria-label="HackVerse Home">
           <img src="assets/avatar/yes.webp" alt="HackVerse Logo" class="nav-logo-img">
           <span class="nav-logo-text">Hack<span class="text-accent">Verse</span></span>
-        </div>
+        </a>
         <p class="footer-tagline">We love <strong>software</strong> and people who <strong>ship it</strong>.</p>
         <div class="footer-socials">
           <a href="https://github.com/Shruti-1622" target="_blank" rel="noopener" class="footer-social-link"

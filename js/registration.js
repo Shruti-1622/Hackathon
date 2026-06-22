@@ -52,7 +52,7 @@ window.HackHub = (function () {
 
   function showLoginModal() {
     createModal('auth-modal-overlay', `
-      <div class="modal-header"><h2>Welcome Back</h2><p>Sign in to HackHub</p></div>
+      <div class="modal-header"><h2>Welcome Back</h2><p>Sign in to HackVerse</p></div>
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label">Email <span class="required">*</span></label>

@@ -46,12 +46,12 @@ window.HACKATHONS = [
   },
   {
     id: 2,
-    title: "DevFusion 2026",
-    organiser: "Devfolio x MLH",
-    organiserLogo: "D",
+    title: "IIT Bombay HackFest 2026",
+    organiser: "IIT Bombay x Devfolio",
+    organiserLogo: "IITB",
     fee: 0,
     prize: "₹7,50,000",
-    tags: ["Web", "Open Source", "DevTools"],
+    tags: ["DeepTech", "Hardware", "ML/AI"],
     status: "upcoming",
     format: "hybrid",
     teamRequired: true,
@@ -65,22 +65,22 @@ window.HACKATHONS = [
     endDate: "September 16, 2026",
     bannerGradient: "linear-gradient(135deg, #181510, #0a0a0a)",
     image: "assets/hackathon events/blue.webp",
-    description: "DevFusion brings together open-source enthusiasts and web developers for 72 hours of non-stop building. Hosted in partnership with MLH, this hybrid event features in-person hacking hubs in Mumbai and Delhi alongside a global online track. Free to enter, with workshops, mentorship, and swag for all participants.",
+    description: "IIT Bombay's flagship DeepTech hackathon. Prototype cutting-edge technology solutions using advanced hardware, robotics, Internet of Things (IoT), and advanced machine learning models. Free to enter, with mentoring and prototyping kits provided for in-person teams.",
     tracks: [
-      { name: "Open Source Tools", prize: "₹3,00,000", description: "Build developer tools, CLI apps, or libraries that solve real pain points in the open-source ecosystem." },
-      { name: "Full Stack Web", prize: "₹2,50,000", description: "Create polished full-stack web applications with exceptional UI/UX and robust backends." }
+      { name: "DeepTech Innovation", prize: "₹4,50,000", description: "Build deep tech hardware or software solutions addressing aerospace, robotics, or healthcare challenges." },
+      { name: "ML/AI Prototype", prize: "₹3,00,000", description: "Design systems incorporating computer vision, NLP, or LLMs to solve industrial-grade automation problems." }
     ],
     timeline: [
       { label: "Registrations open", date: "August 1, 2026", past: false },
-      { label: "Workshops begin", date: "September 7, 2026", past: false },
+      { label: "Pre-event bootcamps", date: "September 7, 2026", past: false },
       { label: "Team formation deadline", date: "September 8, 2026", past: false },
       { label: "Hackathon begins", date: "September 14, 2026", past: false },
       { label: "Submission deadline", date: "September 16, 2026", past: false },
       { label: "Results announced", date: "September 25, 2026", past: false }
     ],
-    sponsors: ["Devfolio", "MLH", "GitHub", "Vercel"],
+    sponsors: ["IIT Bombay Alumni", "NVIDIA", "AWS", "Devfolio"],
     prizes: [
-      { rank: "1st Place", amount: "₹3,00,000" },
+      { rank: "1st Place", amount: "₹4,50,000" },
       { rank: "2nd Place", amount: "₹2,00,000" },
       { rank: "3rd Place", amount: "₹1,00,000" }
     ]
@@ -128,12 +128,12 @@ window.HACKATHONS = [
   },
   {
     id: 4,
-    title: "CloudFest Hackathon",
-    organiser: "Microsoft Azure",
-    organiserLogo: "M",
+    title: "BITS Pilani HackFest 2026",
+    organiser: "BITS Pilani",
+    organiserLogo: "BP",
     fee: 0,
     prize: "₹5,00,000",
-    tags: ["Cloud", "Azure", "DevOps"],
+    tags: ["Open Innovation", "Web3", "FinTech"],
     status: "upcoming",
     format: "online",
     teamRequired: true,
@@ -147,20 +147,20 @@ window.HACKATHONS = [
     endDate: "November 6, 2026",
     bannerGradient: "linear-gradient(135deg, #15130f, #0a0a0a)",
     image: "assets/hackathon events/cloudf.webp",
-    description: "CloudFest is Microsoft's 24-hour sprint hackathon focused on cloud-native development. Build scalable microservices, serverless functions, or AI-powered applications on Azure. Free to participate with Azure credits for all registered teams. Winners receive Microsoft Surface devices and internship fast-tracks.",
+    description: "BITS Pilani's premier national level open innovation developer hackathon. Build solutions across Web3, FinTech, Sustainability, or HealthTech. Gain visibility in front of top venture capitalists and receive BITS Spark accelerator mentoring support.",
     tracks: [
-      { name: "Serverless Apps", prize: "₹2,50,000", description: "Build production-ready serverless applications using Azure Functions, Logic Apps, and Cosmos DB." },
-      { name: "AI + Cloud", prize: "₹2,50,000", description: "Combine Azure Cognitive Services with cloud infrastructure to build intelligent applications." }
+      { name: "Web3 Track", prize: "₹2,50,000", description: "Design decentralized protocols, smart contract integrations, or consumer crypto apps." },
+      { name: "FinTech Innovation", prize: "₹2,50,000", description: "Develop innovative personal finance, micro-credit, or transaction infrastructure prototypes." }
     ],
     timeline: [
       { label: "Registrations open", date: "October 1, 2026", past: false },
-      { label: "Azure workshop", date: "October 25, 2026", past: false },
+      { label: "Idea submission", date: "October 25, 2026", past: false },
       { label: "Team formation deadline", date: "October 28, 2026", past: false },
       { label: "Hackathon begins", date: "November 5, 2026", past: false },
       { label: "Submission deadline", date: "November 6, 2026", past: false },
       { label: "Results announced", date: "November 15, 2026", past: false }
     ],
-    sponsors: ["Microsoft Azure", "GitHub Copilot", "VS Code"],
+    sponsors: ["BITS Spark", "Devfolio", "Polygon", "Solana"],
     prizes: [
       { rank: "1st Place", amount: "₹2,00,000" },
       { rank: "2nd Place", amount: "₹1,50,000" },
@@ -251,12 +251,12 @@ window.HACKATHONS = [
   },
   {
     id: 7,
-    title: "Midnight CodeFest",
-    organiser: "GitHub x HackVerse",
-    organiserLogo: "GH",
+    title: "HackDTU 2026",
+    organiser: "DTU x GitHub",
+    organiserLogo: "DTU",
     fee: 0,
     prize: "₹6,00,000",
-    tags: ["Open Source", "Web", "Mobile"],
+    tags: ["AI Tools", "Social Impact", "Open Source"],
     status: "upcoming",
     format: "online",
     teamRequired: true,
@@ -270,21 +270,21 @@ window.HACKATHONS = [
     endDate: "February 7, 2027",
     bannerGradient: "linear-gradient(135deg, #16120e, #0a0a0a)",
     image: "assets/hackathon events/github.webp",
-    description: "Midnight CodeFest is a 36-hour coding marathon celebrating open-source culture. Hosted by GitHub, this event challenges teams to build impactful projects that will be open-sourced upon completion. Every participant gets GitHub Pro for a year and exclusive Octocat swag. Best projects get featured on GitHub's official blog.",
+    description: "Delhi Technological University's flagship national level software hackathon. Over 36 hours, build impactful open-source tools addressing civic tech, educational accessibility, and custom developer tools. Participants get exclusive DTU swags and GitHub credits.",
     tracks: [
-      { name: "Developer Tools", prize: "₹2,50,000", description: "Build tools that make developers' lives easier — extensions, automation, CI/CD pipelines, or code quality tools." },
-      { name: "Social Impact", prize: "₹2,00,000", description: "Create open-source solutions for education, accessibility, environmental sustainability, or public health." },
-      { name: "Mobile First", prize: "₹1,50,000", description: "Build cross-platform mobile applications using React Native, Flutter, or Kotlin Multiplatform." }
+      { name: "AI Tools", prize: "₹2,50,000", description: "Build tools, integrations, or models that augment efficiency, education, or coding speed." },
+      { name: "Social Good", prize: "₹2,00,000", description: "Open-source projects addressing accessibility, environmental monitoring, or local communities." },
+      { name: "Mobile First", prize: "₹1,50,000", description: "Build cross-platform mobile prototypes solving day-to-day productivity challenges." }
     ],
     timeline: [
       { label: "Registrations open", date: "January 1, 2027", past: false },
-      { label: "Open source workshop", date: "January 25, 2027", past: false },
+      { label: "Kickoff workshop", date: "January 25, 2027", past: false },
       { label: "Team formation deadline", date: "January 28, 2027", past: false },
       { label: "Hackathon begins", date: "February 5, 2027", past: false },
       { label: "Submission deadline", date: "February 7, 2027", past: false },
       { label: "Results announced", date: "February 15, 2027", past: false }
     ],
-    sponsors: ["GitHub", "Vercel", "Supabase", "Netlify"],
+    sponsors: ["DTU", "GitHub", "Vercel", "Supabase"],
     prizes: [
       { rank: "1st Place", amount: "₹2,50,000" },
       { rank: "2nd Place", amount: "₹2,00,000" },

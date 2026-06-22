@@ -256,6 +256,72 @@
     return true;
   }
 
+  /* ── ROLE & TECH MATCH HELPER FUNCTIONS ── */
+  function isRoleMatch(userRole, teamRoleName) {
+    if (!userRole || !teamRoleName) return false;
+    const u = userRole.toLowerCase().trim();
+    const t = teamRoleName.toLowerCase().trim();
+
+    if (u.includes('frontend') && t.includes('frontend')) return true;
+    if (u.includes('backend') && t.includes('backend')) return true;
+    if (u.includes('full stack') && (t.includes('full stack') || t.includes('fullstack'))) return true;
+    if (u.includes('ui/ux') || u.includes('designer') || u.includes('design')) {
+      if (t.includes('ui') || t.includes('ux') || t.includes('design') || t.includes('art') || t.includes('illustrator')) return true;
+    }
+    if (u.includes('ai/ml') || u.includes('ml/ai') || u.includes('machine learning') || u.includes('artificial') || u.includes('engineer')) {
+      if (t.includes('ml') || t.includes('ai') || t.includes('nlp')) return true;
+    }
+    if (u.includes('data')) {
+      if (t.includes('data') || t.includes('analyst') || t.includes('analytics') || t.includes('science') || t.includes('scientist')) return true;
+    }
+    if (u.includes('mobile') && t.includes('mobile')) return true;
+    if (u.includes('product manager') && (t.includes('product') || t.includes('pm') || t.includes('manager'))) return true;
+    if (u.includes('pitching') || u.includes('business') || u.includes('marketing')) {
+      if (t.includes('pitch') || t.includes('business') || t.includes('biz') || t.includes('market') || t.includes('sale') || t.includes('pitching')) return true;
+    }
+
+    return u.includes(t) || t.includes(u);
+  }
+
+  function getCurrentUserProfile() {
+    const email = localStorage.getItem('currentUserEmail');
+    if (!email) return null;
+    try {
+      const profiles = JSON.parse(localStorage.getItem('hk_profiles') || '{}');
+      return profiles[email] || null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function getMatchScore(team, userProfile) {
+    if (!userProfile) return 0;
+    const userRole = userProfile.role;
+    const userSkills = userProfile.skills || [];
+
+    // 1. Check vacant role match (score 2)
+    if (team.roles && team.roles.some(r => r.o && isRoleMatch(userRole, r.n))) {
+      return 2;
+    }
+
+    // 2. Check filled role match (score 1)
+    const hasFilledRoleMatch = (team.roles && team.roles.some(r => !r.o && isRoleMatch(userRole, r.n))) ||
+                               (team.members && team.members.some(m => isRoleMatch(userRole, m.r)));
+    if (hasFilledRoleMatch) {
+      return 1;
+    }
+
+    // 3. Check tech stack overlap with user skills (score 1)
+    const hasTechOverlap = team.techStack && team.techStack.some(ts => 
+      userSkills.some(us => us.toLowerCase().trim() === ts.toLowerCase().trim())
+    );
+    if (hasTechOverlap) {
+      return 1;
+    }
+
+    return 0;
+  }
+
   /* ── RENDER CARDS ── */
   function renderGrid(list) {
     const grid = document.getElementById('teams-grid');
@@ -266,6 +332,8 @@
       return;
     }
 
+    const userProfile = getCurrentUserProfile();
+
     grid.innerHTML = list.map(t => {
       const openCount = t.roles.filter(r => r.o).length;
       const filled = t.members.length;
@@ -273,9 +341,17 @@
         .map(r => `<span class="tm-chip">${r.n}</span>`)
         .join('');
 
-      return `
-        <div class="tm-card">
+      const score = getMatchScore(t, userProfile);
+      let badgeHtml = '';
+      if (score === 2) {
+        badgeHtml = `<span class="tm-match-badge role-match" style="position: absolute; top: 12px; right: 12px; background: rgba(217, 164, 65, 0.2); border: 1px solid var(--gold, #c9a84c); color: var(--gold, #c9a84c); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; z-index: 10; letter-spacing: 0.5px;">Role Match</span>`;
+      } else if (score === 1) {
+        badgeHtml = `<span class="tm-match-badge good-match" style="position: absolute; top: 12px; right: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; z-index: 10; letter-spacing: 0.5px;">Good Match</span>`;
+      }
 
+      return `
+        <div class="tm-card" style="position: relative;">
+          ${badgeHtml}
           <!-- Floating Avatar -->
           <div class="tm-avatar-wrap">
             <div class="tm-avatar">
@@ -389,10 +465,6 @@
           <div class="tm-d-stat-n">${filled}</div>
           <div class="tm-d-stat-l">Filled</div>
         </div>
-        <div class="tm-d-stat">
-          <div class="tm-d-stat-n">${needed}</div>
-          <div class="tm-d-stat-l">Open</div>
-        </div>
       </div>
 
       <!-- Info Grid -->
@@ -446,6 +518,55 @@
       <!-- Tech Stack -->
       <div class="tm-d-label">Tech Stack</div>
       <div class="tm-d-stack">${stackHTML}</div>
+
+      ${(() => {
+        const currentUserEmail = (localStorage.getItem('currentUserEmail') || '').trim().toLowerCase();
+        let isApproved = false;
+        if (currentUserEmail) {
+          if (t.userCreated) {
+            if (t.applications) {
+              const myApp = t.applications.find(a => (a.email || '').trim().toLowerCase() === currentUserEmail);
+              if (myApp && myApp.status === 'approve') {
+                isApproved = true;
+              }
+            }
+          } else {
+            try {
+              const allApps = JSON.parse(localStorage.getItem('hk_applications') || '[]');
+              const myApp = allApps.find(a => String(a.teamId) === String(t.id) && (a.applicantId || '').trim().toLowerCase() === currentUserEmail);
+              if (myApp && myApp.status === 'approve') {
+                isApproved = true;
+              }
+            } catch (_) {}
+          }
+        }
+
+        if (isApproved) {
+          const contactInfo = t.contact || {
+            email: t.creatorEmail || `${t.team.toLowerCase().replace(/\s+/g, '')}-lead@hackverse.com`,
+            linkedin: `https://linkedin.com/company/${t.team.toLowerCase().replace(/\s+/g, '')}`,
+            discord: `${t.team.toLowerCase().replace(/\s+/g, '')}_lead`
+          };
+
+          const emailLink = contactInfo.email ? `<p style="margin: 6px 0; font-size: 0.88rem; color: #fff;"><strong>Email:</strong> <a href="mailto:${contactInfo.email}" style="color: var(--gold, #c9a84c); text-decoration: none;">${contactInfo.email}</a></p>` : '';
+          const linkedinLink = contactInfo.linkedin ? `<p style="margin: 6px 0; font-size: 0.88rem; color: #fff;"><strong>LinkedIn:</strong> <a href="${contactInfo.linkedin}" target="_blank" style="color: var(--gold, #c9a84c); text-decoration: none;">${contactInfo.linkedin}</a></p>` : '';
+          const discordLink = contactInfo.discord ? `<p style="margin: 6px 0; font-size: 0.88rem; color: #fff;"><strong>Discord:</strong> <span style="color: #fff;">${contactInfo.discord}</span></p>` : '';
+
+          return `
+            <div class="tm-d-divider"></div>
+            <div class="tm-d-label" style="color: #10b981; font-weight: 700; display: flex; align-items: center; gap: 6px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              Contact Details Unlocked
+            </div>
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 14px 18px; margin-top: 8px;">
+              ${emailLink}
+              ${linkedinLink}
+              ${discordLink}
+            </div>
+          `;
+        }
+        return '';
+      })()}
 
       <div class="tm-d-divider"></div>
 
@@ -569,7 +690,7 @@
 
   function getCurrentList() {
     const q = _query.toLowerCase().trim();
-    return TEAMS.filter(t => {
+    const list = TEAMS.filter(t => {
       // Visibility rule: at least one required role must be vacant
       if (t.roles && t.roles.length > 0 && t.roles.every(r => !r.o)) {
         return false;
@@ -585,6 +706,16 @@
         t.roles.some(r => r.o && getNormalizedRole(r.n) === _roleFilter);
       return matchQ && matchF && matchR;
     });
+
+    const userProfile = getCurrentUserProfile();
+    if (userProfile) {
+      list.sort((a, b) => {
+        const scoreA = getMatchScore(a, userProfile);
+        const scoreB = getMatchScore(b, userProfile);
+        return scoreB - scoreA;
+      });
+    }
+    return list;
   }
 
   function setupSearch() {
@@ -881,7 +1012,7 @@
   initApplyModal();
   loadUserCreatedTeams();
   load();
-  renderGrid(TEAMS);
+  renderGrid(getCurrentList());
   setupSearch();
 
   window.TMCards = { openDrawer, close, applyCard, applyDrawer, getRandomAvatar, addTeam };

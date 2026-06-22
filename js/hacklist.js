@@ -41,6 +41,8 @@
     card.setAttribute('tabindex', '0');
     card.setAttribute('aria-label', `${h.title} — click for details`);
 
+    const isR = window.HackState && window.HackState.isReg ? window.HackState.isReg(h.id) : false;
+
     card.innerHTML = `
       <img class="hs-card-img" src="${h.image}" alt="${h.title}" loading="lazy" decoding="async"/>
       <div class="hs-card-scrim"></div>
@@ -57,22 +59,16 @@
           <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px; opacity: 0.85;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>${h.month} ${h.day}</span>
           <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px; opacity: 0.85;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>${h.location}</span>
         </div>
-        <a class="hs-card-btn" href="${h.link}" target="_blank" rel="noopener"
-           data-stop data-register-link>Register</a>
+        <button class="hs-card-btn ${isR?'registered':''}" data-stop data-register-btn>${isR?'✓ Registered':'Register'}</button>
       </div>
     `;
 
-    /* Register button — let users register directly without login check */
-    /*
-    const registerBtn = card.querySelector('[data-register-link]');
-    registerBtn.addEventListener('click', function (e) {
-      if (window.Auth && !window.Auth.isLoggedIn()) {
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        window.Auth.showLoginRequired();
-      }
-    }, true);
-    */
+    /* Click Register button: go to hackathon.html#hackathon/id */
+    const registerBtn = card.querySelector('[data-register-btn]');
+    registerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.location.href = 'hackathon.html#hackathon/' + h.id;
+    });
 
     /* Click heart icon: remove from liked, animate fade, and remove element */
     const likeBtn = card.querySelector('.hs-like-btn');
@@ -92,16 +88,16 @@
       });
     });
 
-    /* Click card: open modal */
+    /* Click card: go to details page */
     card.addEventListener('click', (e) => {
       if (e.target.closest('[data-stop]')) return;
-      openModal(h);
+      window.location.href = 'hackathon.html#hackathon/' + h.id;
     });
 
     card.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         if (e.target.closest('[data-stop]')) return;
-        openModal(h);
+        window.location.href = 'hackathon.html#hackathon/' + h.id;
       }
     });
 
@@ -114,7 +110,8 @@
     grid.innerHTML = '';
     
     const likedIDs = getLikedEvents();
-    const likedEvents = HACKATHONS.filter(h => likedIDs.includes(h.id));const liked = getLikedEvents();
+    const likedEvents = HACKATHONS.filter(h => likedIDs.includes(h.id));
+    const liked = getLikedEvents();
 
     if (likedEvents.length === 0) {
       renderEmptyState();
@@ -142,17 +139,12 @@
     hmCategory.textContent = h.category;
     hmOrg.textContent      = h.organizer;
     hmTitle.textContent    = h.title;
-    hmReg.href = h.link;
-
-    /* Gate: intercept Register Now click if not logged in (Disabled) */
-    /*
+    hmReg.href = '#';
     hmReg.onclick = function (e) {
-      if (window.Auth && !window.Auth.isLoggedIn()) {
-        e.preventDefault();
-        window.Auth.showLoginRequired();
-      }
+      e.preventDefault();
+      closeModal();
+      window.location.href = 'hackathon.html#hackathon/' + h.id;
     };
-    */
 
     hmStats.innerHTML = `
       <div class="hm-stat">

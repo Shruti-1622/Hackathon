@@ -321,6 +321,7 @@
                 // Login the user automatically after successful signup
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('currentUserEmail', email);
+                localStorage.setItem('needsOnboarding', 'true');
             } catch(err) {
                 console.error("Error setting profile:", err);
             }

@@ -595,6 +595,32 @@
                  <button class="pf-btn-approve" onclick="Profile.decide('${t.id}','${a.email}')">Approve</button>
                  <button class="pf-btn-reject"  onclick="Profile.reject('${t.id}','${a.email}')">Reject</button>
                </div>`;
+
+          let contactBlock = '';
+          if (dec === 'approve') {
+            const profiles = JSON.parse(localStorage.getItem('hk_profiles') || '{}');
+            const applicantProfile = profiles[a.email] || {};
+            const appEmail = a.email;
+            const appGithub = applicantProfile.github || '';
+            const appLinkedin = applicantProfile.linkedin || '';
+            
+            const emailHtml = appEmail ? `<p style="margin: 4px 0; font-size: 0.85rem; color: #fff;"><strong>Email:</strong> <a href="mailto:${appEmail}" style="color: #D9A441; text-decoration: none;">${appEmail}</a></p>` : '';
+            const githubHtml = appGithub ? `<p style="margin: 4px 0; font-size: 0.85rem; color: #fff;"><strong>GitHub:</strong> <a href="${appGithub}" target="_blank" style="color: #D9A441; text-decoration: none;">${appGithub}</a></p>` : '';
+            const linkedinHtml = appLinkedin ? `<p style="margin: 4px 0; font-size: 0.85rem; color: #fff;"><strong>LinkedIn:</strong> <a href="${appLinkedin}" target="_blank" style="color: #D9A441; text-decoration: none;">${appLinkedin}</a></p>` : '';
+
+            contactBlock = `
+              <div style="background: rgba(63, 201, 128, 0.08); border: 1px solid rgba(63, 201, 128, 0.3); border-radius: 8px; padding: 12px; margin-top: 8px; font-size: 14px;">
+                <div style="color: #3fc980; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  Contact Details Unlocked
+                </div>
+                ${emailHtml}
+                ${githubHtml}
+                ${linkedinHtml}
+              </div>
+            `;
+          }
+
           return `
             <div class="pf-applicant-row" id="app_row_${t.id}_${CSS.escape(a.email)}" style="flex-direction: column; align-items: stretch; gap: 12px;">
               <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -612,6 +638,7 @@
                 <div style="margin-bottom: 6px;"><strong>Portfolio:</strong> <a href="${esc(a.portfolio || '#')}" target="_blank" style="color:#D9A441; text-decoration:none;">${esc(a.portfolio || 'N/A')}</a></div>
                 ${a.msg ? `<div><strong>Message:</strong> <span style="color:#fff;">${esc(a.msg)}</span></div>` : ''}
               </div>
+              ${contactBlock}
             </div>`;
         }).join('');
 
